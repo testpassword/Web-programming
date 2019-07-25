@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="Лабораторная работа №1 по дисциплине веб-программирование.">
+        <meta name="author" content="Кульбако Артемий Юрьевич, P3212">
+        <link href="style.css" rel="stylesheet">
+        <link rel="icon" type="image/png"  href="images/favicon.png">
+        <title>Лабораторная №1</title>
+    </head>
+    <body>
+
+      <input type="checkbox" id="nav-toggle" hidden>
+
+      <header>
+          <h1>Веб-программирование, Лаб. 1, Вариант 212012</h1>
+          <h2>Кульбако Артемий Юрьевич, P3212</h2>
+      </header>
+      <main>
+        <table>
+          <thead><td colspan="4"><h3>Валидация введённых значений:</h3></td></thead>
+          <tbody>
+            <tr>
+              <td rowspan="2">Выберите X:</td>
+              <td><input name="X" class="illuminate" type="radio" value="-1"></td>
+              <td><input name="X" class="illuminate" type="radio" value="0"></td>
+              <td rowspan="4"><canvas></td>
+            </tr>
+            <tr>
+              <td><input name="X" class="illuminate" type="radio" value="1"></td>
+              <td><input name="X" class="illuminate" type="radio" value="2"></td>
+            </tr>
+            <tr>
+              <td>Введите Y:</td>
+              <td colspan="2"><input class="illuminate" type="text" placeholder="Здесь диапазон Y"></td>
+            </tr>
+            <tr>
+              <td>Выберите R:</td>
+              <td colspan="2">
+                <select class="illuminate">
+                  <option>Пункт 1</option>
+                  <option>Пункт 2</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot><td colspan="4"><h3>Результат:</h3></td></tfoot>
+        </table>
+      </main>
+      <footer>
+        <figure>
+          <a href="https://se.ifmo.ru"> <img class="illuminate" 
+            src="images/pulpit_logo.png" alt="Кафедра вычислительной техники НИУ ИТМО"></a>
+          <figcaption>2019</figcaption>
+        </figure>
+      </footer>
+    </body>
+</html>
