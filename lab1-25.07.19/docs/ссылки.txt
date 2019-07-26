@@ -2,3 +2,10 @@ http://htmlbook.ru/layout/fiksirovannyy-podval
 dbmast.ru/vydvigayushheesya-bokovoe-menyu-na-chistom-css
 https://developer.mozilla.org/ru
 http://ab-w.net/HTML/t_verstka.php
+http://htmlbook.ru/faq/kak-vyrovnyat-tablitsu-po-tsentru-okna-brauzera
+https://apptractor.ru/info/articles/temnyiy-ili-svetlyiy-ui-sovetyi-po-vyiboru-tsvetovoy-shemyi-dlya-vashego-interfeysa.html
+https://habr.com/ru/company/digital-ecosystems/blog/328680/
+https://freelance.today/trendy/20-stilnyh-cvetovyh-shem-powerpoint.html
+http://color.romanuke.com/tsvetovaya-palitra-3652/
+https://ru.stackoverflow.com/questions/309573/%d0%91%d0%bb%d0%be%d0%ba%d0%b8-div-%d0%bf%d0%be-%d0%b3%d0%be%d1%80%d0%b8%d0%b7%d0%be%d0%bd%d1%82%d0%b0%d0%bb%d0%b8
+http://olocoder.ru/HTML9.html

@@ -3,54 +3,83 @@
     <head>
         <meta charset="utf-8">
         <meta name="description" content="Лабораторная работа №1 по дисциплине веб-программирование.">
-        <meta name="author" content="Кульбако Артемий Юрьевич, P3212">
+        <meta name="author" content="Кульбако Артемий Юрьевич">
+        <meta name="keywords" content="ВТ, Лабораторная работа, Веб-программирование, Институт Тёплых Мужскин Отношений"/>
         <link href="style.css" rel="stylesheet">
-        <link rel="icon" type="image/png"  href="images/favicon.png">
+        <link rel="icon" type="image/png" href="images/favicon.png">
         <title>Лабораторная №1</title>
     </head>
     <body>
-
-      <input type="checkbox" id="nav-toggle" hidden>
-
-      <header>
+      <header class="shaded animated">
           <h1>Веб-программирование, Лаб. 1, Вариант 212012</h1>
-          <h2>Кульбако Артемий Юрьевич, P3212</h2>
+          <div id="credit">
+            <img src="images/avatar.png" align="middle">
+              <a href="https://github.com/testpassword" class="illuminate" title="Перейти к профилю Github разработчика">Кульбако Артемий Юрьевич, P3212</a>
+          </div>
       </header>
-      <main>
-        <table>
-          <thead><td colspan="4"><h3>Валидация введённых значений:</h3></td></thead>
+        <table class="shaded">
+          <thead><td colspan="5">
+            <h3 id="header">Валидация введённых значений:</h3>
+            <hr>
+          </td></thead>
           <tbody>
             <tr>
-              <td rowspan="2">Выберите X:</td>
-              <td><input name="X" class="illuminate" type="radio" value="-1"></td>
-              <td><input name="X" class="illuminate" type="radio" value="0"></td>
-              <td rowspan="4"><canvas></td>
+              <td rowspan="3">Выберите X:</td>
+              <td><input name="X" class="illuminate" type="button" value="-2.0"></td>
+              <td><input name="X" class="illuminate" type="button" value="-1.5"></td>
+              <td><input name="X" class="illuminate" type="button" value="-1.0"></td>
+              <td rowspan="6"><canvas class="illuminate"></canvas></td>
             </tr>
             <tr>
-              <td><input name="X" class="illuminate" type="radio" value="1"></td>
-              <td><input name="X" class="illuminate" type="radio" value="2"></td>
+              <td><input name="X" class="illuminate" type="button" value="-0.5"></td>
+              <td><input name="X" class="illuminate" type="button" value="0"></td>
+              <td><input name="X" class="illuminate" type="button" value="0.5"></td>
+            </tr>
+            <tr>
+              <td><input name="X" class="illuminate" type="button" value="1"></td>
+              <td><input name="X" class="illuminate" type="button" value="1.5"></td>
+              <td><input name="X" class="illuminate" type="button" value="2"></td>
             </tr>
             <tr>
               <td>Введите Y:</td>
-              <td colspan="2"><input class="illuminate" type="text" placeholder="Здесь диапазон Y"></td>
+              <td colspan="3"><input class="illuminate" type="text" placeholder="введите значение в промежутке (-5 до 3)"></td>
             </tr>
             <tr>
-              <td>Выберите R:</td>
-              <td colspan="2">
-                <select class="illuminate">
-                  <option>Пункт 1</option>
-                  <option>Пункт 2</option>
-                </select>
+              <td rowspan="2">Выберите R:</td>
+              <td>
+                1
+                <input name="X" class="illuminate" type="radio" value="1"></td>
+              <td>
+                2
+                <input name="X" class="illuminate" type="radio" value="2"></td>
+              <td>
+                3
+                <input name="X" class="illuminate" type="radio" value="3"></td>
               </td>
             </tr>
+            <tr>
+              <td>
+              4
+              <input name="X" class="illuminate" type="radio" value="4"></td>
+              <td>
+              5
+              <input name="X" class="illuminate" type="radio" value="5"></td>
+            </tr>
           </tbody>
-          <tfoot><td colspan="4"><h3>Результат:</h3></td></tfoot>
+          <tfoot>
+            <tr><td colspan="5">
+              <button class="illuminate"><h3>Проверить</h3></button>
+              <hr>
+            </td></tr>
+            <tr><td colspan="5"><h3 id="footer">Результат:</h3></td></tr>
+          </tfoot>
         </table>
-      </main>
-      <footer>
+      <footer class="shaded animated">
         <figure>
           <a href="https://se.ifmo.ru"> <img class="illuminate" 
-            src="images/pulpit_logo.png" alt="Кафедра вычислительной техники НИУ ИТМО"></a>
+            src="images/pulpit_logo.png" 
+            alt="Кафедра вычислительной техники НИУ ИТМО" 
+            title="Перейти на сайт кафедры вычислительной техники НИУ ИТМО"></a>
           <figcaption>2019</figcaption>
         </figure>
       </footer>
