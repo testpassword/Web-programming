@@ -25,6 +25,14 @@ header, footer {
     left: 0;
 }
 
+#header {
+    margin-top: 11%;
+}
+
+#footer {
+    margin-bottom: 11%;
+}
+
 table {
     background-color: ghostwhite;
     width: 70%;
@@ -71,7 +79,7 @@ figcaption {
     
 }
 
-.animated:hover, *[class~="illuminate"]:hover {
+.animated:hover, illuminate:hover {
     transition: 0.5s;
     transform: scale(1.05);
 }
@@ -79,12 +87,4 @@ figcaption {
 hr {
     color: #f41c52;
     width: 95%;
-}
-
-#header {
-    margin-top: 11%;
-}
-
-#footer {
-    margin-bottom: 11%;
 }

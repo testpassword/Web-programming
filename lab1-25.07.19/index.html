@@ -6,7 +6,7 @@
         <meta name="author" content="Кульбако Артемий Юрьевич">
         <meta name="keywords" content="ВТ, Лабораторная работа, Веб-программирование, Институт Тёплых Мужскин Отношений"/>
         <link href="style.css" rel="stylesheet">
-        <link rel="icon" type="image/png" href="images/favicon.png">
+        <link rel="icon" type="image/jpg" href="images/favicon.jpg">
         <title>Лабораторная №1</title>
     </head>
     <body>
@@ -25,24 +25,24 @@
           <tbody>
             <tr>
               <td rowspan="3">Выберите X:</td>
-              <td><input name="X" class="illuminate" type="button" value="-2.0"></td>
-              <td><input name="X" class="illuminate" type="button" value="-1.5"></td>
-              <td><input name="X" class="illuminate" type="button" value="-1.0"></td>
+              <td><input name="X-button" class="illuminate" type="button" value="-2.0"></td>
+              <td><input name="X-button" class="illuminate" type="button" value="-1.5"></td>
+              <td><input name="X-button" class="illuminate" type="button" value="-1.0"></td>
               <td rowspan="6"><canvas class="illuminate"></canvas></td>
             </tr>
             <tr>
-              <td><input name="X" class="illuminate" type="button" value="-0.5"></td>
-              <td><input name="X" class="illuminate" type="button" value="0"></td>
-              <td><input name="X" class="illuminate" type="button" value="0.5"></td>
+              <td><input name="X-button" class="illuminate" type="button" value="-0.5"></td>
+              <td><input name="X-button" class="illuminate" type="button" value="0"></td>
+              <td><input name="X-button" class="illuminate" type="button" value="0.5"></td>
             </tr>
             <tr>
-              <td><input name="X" class="illuminate" type="button" value="1"></td>
-              <td><input name="X" class="illuminate" type="button" value="1.5"></td>
-              <td><input name="X" class="illuminate" type="button" value="2"></td>
+              <td><input name="X-button" class="illuminate" type="button" value="1"></td>
+              <td><input name="X-button" class="illuminate" type="button" value="1.5"></td>
+              <td><input name="X-button" class="illuminate" type="button" value="2"></td>
             </tr>
             <tr>
               <td>Введите Y:</td>
-              <td colspan="3"><input class="illuminate" type="text" placeholder="введите значение в промежутке (-5 до 3)"></td>
+              <td colspan="3"><input id="Y-input-form" class="illuminate" type="text" placeholder="введите значение в промежутке (-5 до 3)"></td>
             </tr>
             <tr>
               <td rowspan="2">Выберите R:</td>
@@ -68,7 +68,7 @@
           </tbody>
           <tfoot>
             <tr><td colspan="5">
-              <button class="illuminate"><h3>Проверить</h3></button>
+              <button id="check-button" class="illuminate"><h3>Проверить</h3></button>
               <hr>
             </td></tr>
             <tr><td colspan="5"><h3 id="footer">Результат:</h3></td></tr>
@@ -83,5 +83,6 @@
           <figcaption>2019</figcaption>
         </figure>
       </footer>
+    <script src="graph.js"></script>
     </body>
 </html>
