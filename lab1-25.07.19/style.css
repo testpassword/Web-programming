@@ -1,5 +1,5 @@
 * {
-    font-family: "Avenir Next Cyr", Helvetica, "Fira Code", Arial, sans-serif;
+    font-family: "Avenir Next Cyr", Helvetica, Arial, sans-serif;
     text-align: center;
     font-weight: normal;
 }
@@ -25,11 +25,11 @@ header, footer {
     left: 0;
 }
 
-#header {
+thead h3 {
     margin-top: 11%;
 }
 
-#footer {
+tfoot h3 {
     margin-bottom: 11%;
 }
 
@@ -79,7 +79,7 @@ figcaption {
     
 }
 
-.animated:hover, illuminate:hover {
+.animated:hover, .illuminate:hover {
     transition: 0.5s;
     transform: scale(1.05);
 }
@@ -87,4 +87,8 @@ figcaption {
 hr {
     color: #f41c52;
     width: 95%;
+}
+
+input {
+    background-color: white;
 }
