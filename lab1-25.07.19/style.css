@@ -1,7 +1,12 @@
 * {
-    font-family: "Avenir Next Cyr", Helvetica, Arial, sans-serif;
+    font-family: "Avenir Next Cyr", Arial, sans-serif;
     text-align: center;
     font-weight: normal;
+}
+
+@font-face {
+    font-family: "Avenir Next Cyr";
+    src: url("fonts/AvenirNextCyr-Regular.ttf");
 }
 
 body {
@@ -79,7 +84,7 @@ figcaption {
     
 }
 
-.animated:hover, .illuminate:hover {
+.animated:hover {
     transition: 0.5s;
     transform: scale(1.05);
 }

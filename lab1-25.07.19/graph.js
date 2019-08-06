@@ -2,8 +2,14 @@
 
 var x, y, r;
 
-document.getElementById("check-button").onclick = function () {
-    if (checkX() && checkY() && checkR()) alert("НОРМАЛЬНО");
+document.getElementById("data").onsubmit = function () {
+    if (validateX() && validateY() && validateR()) {
+        let sender = new XMLHttpRequest();
+        sender.open("POST", "answer.php", false);
+        sender.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        sender.send("x=" + encodeURIComponent(x) + "&y=" + encodeURIComponent(y) + "&r=" + encodeURIComponent(r));
+        let answer = JSON.parse(sender.responseText);
+    }
 }
 
 window.onload = function () {
@@ -22,7 +28,7 @@ window.onload = function () {
     }
 }
 
-function checkX() {
+function validateX() {
     if (isNumeric(x)) return true;
     else {
         alert("x не выбран");
@@ -30,7 +36,7 @@ function checkX() {
     }
 }
 
-function checkY() {
+function validateY() {
     y = document.querySelector("input[name=Y-input-form]").value;
     if (isNumeric(y) && (y > -5) && (y < 3)) return true;
     else {
@@ -39,7 +45,7 @@ function checkY() {
     }
 }
 
-function checkR() {
+function validateR() {
     try {
         r = document.querySelector("input[type=\"radio\"]:checked").value;
         return true;

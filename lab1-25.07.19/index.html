@@ -14,9 +14,10 @@
           <h1>Веб-программирование, Лаб. 1, Вариант 212012</h1>
           <div id="credit">
             <img src="images/avatar.png" align="middle">
-              <a href="https://github.com/testpassword" class="illuminate" title="Перейти к профилю Github разработчика">Кульбако Артемий Юрьевич, P3212</a>
+              <a href="https://github.com/testpassword" class="illuminate animated" title="Перейти к профилю Github разработчика">Кульбако Артемий Юрьевич, P3212</a>
           </div>
       </header>
+      <form id="data">
         <table class="shaded">
           <thead><td colspan="5">
             <h3>Валидация введённых значений:</h3>
@@ -25,55 +26,56 @@
           <tbody>
             <tr>
               <td rowspan="3">Выберите X:</td>
-              <td><input name="X-button" class="illuminate" type="button" value="-2.0"></td>
-              <td><input name="X-button" class="illuminate" type="button" value="-1.5"></td>
-              <td><input name="X-button" class="illuminate" type="button" value="-1.0"></td>
+              <td><input name="X-button" class="illuminate animated" type="button" value="-2.0"></td>
+              <td><input name="X-button" class="illuminate animated" type="button" value="-1.5"></td>
+              <td><input name="X-button" class="illuminate animated" type="button" value="-1.0"></td>
               <td rowspan="6"><canvas class="illuminate"></canvas></td>
             </tr>
             <tr>
-              <td><input name="X-button" class="illuminate" type="button" value="-0.5"></td>
-              <td><input name="X-button" class="illuminate" type="button" value="0"></td>
-              <td><input name="X-button" class="illuminate" type="button" value="0.5"></td>
+              <td><input name="X-button" class="illuminate animated" type="button" value="-0.5"></td>
+              <td><input name="X-button" class="illuminate animated" type="button" value="0"></td>
+              <td><input name="X-button" class="illuminate animated" type="button" value="0.5"></td>
             </tr>
             <tr>
-              <td><input name="X-button" class="illuminate" type="button" value="1"></td>
-              <td><input name="X-button" class="illuminate" type="button" value="1.5"></td>
-              <td><input name="X-button" class="illuminate" type="button" value="2"></td>
+              <td><input name="X-button" class="illuminate animated" type="button" value="1"></td>
+              <td><input name="X-button" class="illuminate animated" type="button" value="1.5"></td>
+              <td><input name="X-button" class="illuminate animated" type="button" value="2"></td>
             </tr>
             <tr>
               <td>Введите Y:</td>
-              <td colspan="3"><input name="Y-input-form" class="illuminate" type="text" placeholder="введите значение в промежутке (-5 до 3)"></td>
+              <td colspan="3"><input required name="Y-input-form" class="illuminate animated" type="text" placeholder="введите значение в промежутке (-5 до 3)"></td>
             </tr>
             <tr>
               <td rowspan="2">Выберите R:</td>
               <td>
                 1
-                <input name="X" class="illuminate" type="radio" value="1"></td>
+                <input name="R-radio-group" class="illuminate animated" type="radio" value="1"></td>
               <td>
                 2
-                <input name="X" class="illuminate" type="radio" value="2"></td>
+                <input name="R-radio-group" class="illuminate animated" type="radio" value="2"></td>
               <td>
                 3
-                <input name="X" class="illuminate" type="radio" value="3"></td>
+                <input name="R-radio-group" class="illuminate animated" type="radio" value="3"></td>
               </td>
             </tr>
             <tr>
               <td>
               4
-              <input name="X" class="illuminate" type="radio" value="4"></td>
+              <input name="R-radio-group" class="illuminate animated" type="radio" value="4"></td>
               <td>
               5
-              <input name="X" class="illuminate" type="radio" value="5"></td>
+              <input name="R-radio-group" class="illuminate animated" type="radio" value="5"></td>
             </tr>
           </tbody>
           <tfoot>
             <tr><td colspan="5">
-              <button id="check-button" class="illuminate"><h3>Проверить</h3></button>
+              <button type="submit" class="illuminate animated"><h3>Проверить</h3></button>
               <hr>
             </td></tr>
             <tr><td colspan="5"><h3>Результат:</h3></td></tr>
           </tfoot>
         </table>
+      </form>
       <footer class="shaded animated">
         <figure>
           <a href="https://se.ifmo.ru"> <img class="illuminate" 
