@@ -17,19 +17,24 @@
               <a href="https://github.com/testpassword" class="illuminate animated" title="Перейти к профилю Github разработчика">Кульбако Артемий Юрьевич, P3212</a>
           </div>
       </header>
-      <form id="data">
         <table class="shaded">
           <thead><td colspan="5">
             <h3>Валидация введённых значений:</h3>
-            <hr>
           </td></thead>
           <tbody>
+          <tr><td colspan="5"><hr></td>
+          </tr>
             <tr>
               <td rowspan="3">Выберите X:</td>
               <td><input name="X-button" class="illuminate animated" type="button" value="-2.0"></td>
               <td><input name="X-button" class="illuminate animated" type="button" value="-1.5"></td>
               <td><input name="X-button" class="illuminate animated" type="button" value="-1.0"></td>
-              <td rowspan="6"><canvas class="illuminate"></canvas></td>
+              <td rowspan="6">
+
+                <svg class="illuminate animated">
+                </svg>
+
+              </td>
             </tr>
             <tr>
               <td><input name="X-button" class="illuminate animated" type="button" value="-0.5"></td>
@@ -66,16 +71,15 @@
               5
               <input name="R-radio-group" class="illuminate animated" type="radio" value="5"></td>
             </tr>
-          </tbody>
-          <tfoot>
-            <tr><td colspan="5">
-              <button type="submit" class="illuminate animated"><h3>Проверить</h3></button>
+          <tr>
+            <td colspan="5">
+              <button id="checkButton" class="illuminate animated"><h3>Проверить</h3></button>
               <hr>
-            </td></tr>
-            <tr><td colspan="5"><h3>Результат:</h3></td></tr>
-          </tfoot>
+            </td>
+          </tr>
+          </tbody>
+          <tfoot><tr><td colspan="5"><h4><span id="output">Результат отсутствует</span></h4></td></tr></tfoot>
         </table>
-      </form>
       <footer class="shaded animated">
         <figure>
           <a href="https://se.ifmo.ru"> <img class="illuminate" 

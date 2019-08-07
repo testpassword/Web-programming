@@ -34,7 +34,7 @@ thead h3 {
     margin-top: 11%;
 }
 
-tfoot h3 {
+tfoot * {
     margin-bottom: 11%;
 }
 
@@ -44,15 +44,16 @@ table {
     margin: auto;
 }
 
-input, canvas {
+input, svg {
     width: 100%;
     border: 2px solid #f41c52;
     border-radius: 20px;
+    background-color: white;
 }
 
-canvas {
-    width: 290px;
-    height: 290px;
+svg {
+    width: 300px;
+    height: 300px;
 }
 
 figure img {
@@ -81,7 +82,6 @@ figcaption {
 
 .illuminate:hover, .illuminate:focus {
     box-shadow: 0 0 40px 5px #f41c52;
-    
 }
 
 .animated:hover {
@@ -94,6 +94,8 @@ hr {
     width: 95%;
 }
 
-input {
-    background-color: white;
+#output {
+    background-color: #000720;
+    color: white;
+    padding: 1%;
 }

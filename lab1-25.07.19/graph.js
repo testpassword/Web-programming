@@ -2,13 +2,24 @@
 
 var x, y, r;
 
-document.getElementById("data").onsubmit = function () {
-    if (validateX() && validateY() && validateR()) {
-        let sender = new XMLHttpRequest();
-        sender.open("POST", "answer.php", false);
-        sender.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        sender.send("x=" + encodeURIComponent(x) + "&y=" + encodeURIComponent(y) + "&r=" + encodeURIComponent(r));
-        let answer = JSON.parse(sender.responseText);
+document.getElementById("checkButton").onclick = function () {
+    if (validateX() && validateY() && validateR()) sendRequest();
+}
+
+function sendRequest() {
+    let sender = new XMLHttpRequest();
+    sender.open("POST", "answer.php", true);
+    sender.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    sender.send("x=" + encodeURIComponent(x) + "&y=" + encodeURIComponent(y) + "&r=" + encodeURIComponent(r) +
+        "&timezone=" + encodeURIComponent(Intl.DateTimeFormat().resolvedOptions().timeZone));
+    sender.onreadystatechange = function () {
+        let answerElement = document.getElementById("output");
+        if (sender.status == 200) {
+            let answer = JSON.parse(sender.responseText);
+            answerElement.textContent = "Точка входит в ОДЗ: " + answer.coordsStatus + " / Текущее время: " +
+                answer.currentTime + " / Время работы скрипта: " + answer.benchmarkTime;
+        }
+        else answerElement.textContent = "Ошибка HTTP: " + sender.status;
     }
 }
 
@@ -59,3 +70,5 @@ function validateR() {
 function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
+
+//TODO заменить XMLHttpRequest на fetch
