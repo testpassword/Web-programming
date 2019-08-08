@@ -19,3 +19,4 @@ function checkCoordinates(float $x, float $y, float $r) {
 }
 
 //TODO svg отдельным файлом
+//TODO анимация на кнопке при клике
