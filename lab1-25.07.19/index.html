@@ -13,7 +13,7 @@
       <header class="shaded animated">
           <h1>Веб-программирование, Лаб. 1, Вариант 212012</h1>
           <div id="credit">
-            <img src="images/avatar.png" align="middle">
+            <img src="images/avatar.png" align="middle" alt="Аватар разработчика">
               <a href="https://github.com/testpassword" class="illuminate animated" title="Перейти к профилю Github разработчика">Кульбако Артемий Юрьевич, P3212</a>
           </div>
       </header>
@@ -30,8 +30,7 @@
               <td><input name="X-button" class="illuminate animated" type="button" value="-1.5"></td>
               <td><input name="X-button" class="illuminate animated" type="button" value="-1.0"></td>
               <td rowspan="6">
-
-                <svg class="illuminate animated" xmlns="http://www.w3.org/2000/svg">
+                <svg class="illuminate" xmlns="http://www.w3.org/2000/svg">
                   <line x1="0" y1="150" x2="300" y2="150" stroke="#000720"></line>
                   <line x1="150" y1="0" x2="150" y2="300" stroke="#000720"></line>
                   <line x1="270" y1="148" x2="270" y2="152" stroke="#000720"></line>
@@ -52,12 +51,11 @@
                   <text x="156" y="275">-R</text>
                   <polygon points="300,150 295,155 295, 145" fill="#000720" stroke="#000720"></polygon>
                   <polygon points="150,0 145,5 155,5" fill="#000720" stroke="#000720"></polygon>
-                  <rect x="150" y="150" width="120" height="120" fill-opacity="0.3" stroke="navy" fill="blue"></rect>
-                  <polygon points="150,150 90,150 150,90" fill-opacity="0.3" stroke="darkgreen" fill="green"></polygon>
-                  <path d="M150 150 L 270 150 C 270 80 220 30 150 30 L Z"fill-opacity="0.3" stroke="firebrick" fill="red"></path>
-                  <circle id="pointer" r="5" cx="150" cy="150" fill="red" stroke="black" visibility="hidden"></circle>
+                  <rect x="150" y="150" width="120" height="120" fill-opacity="0.4" stroke="navy" fill="blue"></rect>
+                  <polygon points="150,150 90,150 150,90" fill-opacity="0.4" stroke="navy" fill="blue"></polygon>
+                  <path d="M150 150 L 270 150 C 270 80 220 30 150 30 L Z" fill-opacity="0.4" stroke="navy" fill="blue"></path>
+                  <circle id="pointer" r="5" cx="150" cy="150" fill-opacity="0.7" fill="red" stroke="firebrick" visibility="hidden"></circle>
                 </svg>
-
               </td>
             </tr>
             <tr>
@@ -72,7 +70,7 @@
             </tr>
             <tr>
               <td>Введите Y:</td>
-              <td colspan="3"><input required name="Y-input-form" class="illuminate animated" type="text" placeholder="введите значение в промежутке (-5 до 3)"></td>
+              <td colspan="3"><input required name="Y-input-form" class="illuminate animated" type="text" placeholder="значение в промежутке (-5 до 3)"></td>
             </tr>
             <tr>
               <td rowspan="2">Выберите R:</td>
@@ -97,7 +95,7 @@
             </tr>
           <tr>
             <td colspan="5">
-              <button id="checkButton" class="illuminate animated"><h3>Проверить</h3></button>
+              <button id="checkButton" class="illuminate">Проверить</button>
               <hr>
             </td>
           </tr>
