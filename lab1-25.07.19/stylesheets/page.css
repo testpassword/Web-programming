@@ -6,7 +6,7 @@
 
 @font-face {
     font-family: "Avenir Next Cyr";
-    src: url("fonts/AvenirNextCyr-Regular.ttf");
+    src: url("../fonts/AvenirNextCyr-Regular.ttf");
 }
 
 body {
@@ -38,9 +38,9 @@ tfoot * {
     margin-bottom: 4%;
 }
 
-table {
+#mainTable {
     background-color: ghostwhite;
-    width: 70%;
+    width: 75%;
     margin: 80px auto;
 }
 
@@ -104,7 +104,7 @@ hr {
     width: 95%;
 }
 
-#output {
+#outputStub {
     background-color: #000720;
     color: white;
     padding: 1%;

@@ -5,7 +5,8 @@
         <meta name="description" content="Лабораторная работа №1 по дисциплине веб-программирование.">
         <meta name="author" content="Кульбако Артемий Юрьевич">
         <meta name="keywords" content="ВТ, Лабораторная работа, Веб-программирование, Институт Тёплых Мужскин Отношений"/>
-        <link href="style.css" rel="stylesheet">
+        <link href="stylesheets/page.css" rel="stylesheet">
+        <link href="stylesheets/output_table.css" rel="stylesheet">
         <link rel="icon" type="image/jpg" href="images/favicon.jpg">
         <title>Лабораторная №1</title>
     </head>
@@ -17,10 +18,8 @@
               <a href="https://github.com/testpassword" class="illuminate animated" title="Перейти к профилю Github разработчика">Кульбако Артемий Юрьевич, P3212</a>
           </div>
       </header>
-        <table class="shaded">
-          <thead><td colspan="5">
-            <h3>Валидация введённых значений:</h3>
-          </td></thead>
+        <table id="mainTable" class="shaded">
+          <thead><td colspan="5"><h3>Валидация введённых значений:</h3></td></thead>
           <tbody>
           <tr><td colspan="5"><hr></td>
           </tr>
@@ -100,7 +99,11 @@
             </td>
           </tr>
           </tbody>
-          <tfoot><tr><td colspan="5"><h4><span id="output">Результат отсутствует</span></h4></td></tr></tfoot>
+            <tfoot>
+            <tr>
+              <td colspan="5" id="outputContainer"><h4><span id="outputStub">Результаты отсутствуют</span></h4></td>
+            </tr>
+          </tfoot>
         </table>
       <footer class="shaded animated">
         <figure>

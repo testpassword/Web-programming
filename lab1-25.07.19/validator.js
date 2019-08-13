@@ -1,7 +1,7 @@
 "use strict";
 
 var x, y, r;
-var sender = new XMLHttpRequest();
+var pointer = document.getElementById("pointer");
 
 //Добавляет подсветку на нажатую кнопку, и убирает её для остальных кнопок.
 window.onload = function () {
@@ -25,30 +25,31 @@ document.getElementById("checkButton").onclick = function () {
 };
 
 function sendRequest() {
-    //TODO заменить XMLHttpRequest на fetch
-    sender.open("POST", "answer.php", true);
-    sender.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    sender.send("x=" + encodeURIComponent(x) + "&y=" + encodeURIComponent(y) + "&r=" + encodeURIComponent(r) +
-        "&timezone=" + encodeURIComponent(Intl.DateTimeFormat().resolvedOptions().timeZone));
-    let pointer = document.getElementById("pointer");
-    sender.onreadystatechange = function () {
-        let answerElement = document.getElementById("output");
-        if (sender.status == 200) {
-            let answer = JSON.parse(sender.responseText);
-            setPointer(pointer);
-            answerElement.textContent ="x = " + x + " / y = " + y + " / r = " + r + " / Точка входит в ОДЗ = " +
-                answer.coordsStatus + " / Текущее время = " + answer.currentTime + " / Время работы скрипта = " +
-                answer.benchmarkTime;
-        }
-        else answerElement.textContent = "Ошибка HTTP " + sender.status;
+    let response = fetch("answer.php", {
+        method: "POST",
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
+        body: "x=" + encodeURIComponent(x) + "&y=" + encodeURIComponent(y) + "&r=" + encodeURIComponent(r) +
+            "&timezone=" + encodeURIComponent(Intl.DateTimeFormat().resolvedOptions().timeZone)
+    });
+    if (response.ok) {
+        setPointer();
+        constructTable(response.text());
     }
+    else alert("Ошибка HTTP " + response.status);
 }
 
-function setPointer(pointer) {
+function setPointer() {
     //TODO понять, на что вляет r
     pointer.style.visibility = "visible";
     pointer.setAttribute("cx", x * 54 + 150);
     pointer.setAttribute("cy", y * 54 + 150);
+}
+
+function constructTable(serverAnswer) {
+    let outputContainer = document.getElementById("outputContainer");
+    if (outputContainer.contains(document.getElementById("outputStub")))
+        outputContainer.removeChild(outputContainer.firstElementChild);
+    outputContainer.innerHTML = serverAnswer;
 }
 
 function validateX() {
