@@ -28,9 +28,7 @@ echo "<table id='outputTable'>
             <th>Текущее время</th>
             <th>Время работы скрипта</th>
         </tr>";
-foreach ($_SESSION["tableRows"] as $tableRow) {
-    echo $tableRow;
-}
+foreach ($_SESSION["tableRows"] as $tableRow) echo $tableRow;
 echo "</table>";
 
 function checkCoordinates(float $x, float $y, float $r) {

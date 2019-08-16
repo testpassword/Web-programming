@@ -12,3 +12,7 @@ http://olocoder.ru/HTML9.html
 http://qaru.site/questions/1951456/call-a-function-when-the-enter-button-is-pressed-via-javascript
 https://myrusakov.ru/javascript-post.html
 https://codepen.io/anthonydugois/pen/mewdyZ
+https://freefrontend.com/css-button-click-effects/
+https://habr.com/ru/post/154211/
+https://www.tune-it.ru/web/bleizard/blog/-/blogs/priatno-poznakomit-sa-superagent
+https://www.ibm.com/developerworks/ru/library/wa-aj-ajaxhistory/index.html
