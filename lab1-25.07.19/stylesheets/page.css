@@ -27,9 +27,9 @@ header, footer {
     left: 0;
 }
 
-thead * {margin-top: 3%}
+thead * {margin-top: 4%}
 
-tfoot * {margin-bottom: 3% !important;}
+tfoot * {margin-bottom: 4% !important} /*чтобы при скроллинге оставался отступ*/
 
 #mainTable {
     background-color: ghostwhite;
@@ -49,6 +49,7 @@ input, a {cursor: pointer}
 svg {
     width: 300px;
     height: 300px;
+    box-shadow: inset 0 0 7px 1px gray;
 }
 
 figure img {
@@ -71,27 +72,27 @@ figcaption {font-size: 0.8em}
 
 .shaded {box-shadow: 0 0 10px 1px black}
 
-.shaded:hover {
-    transition: 0.5s;
-    box-shadow: 0 0 20px 2px black;
+.shaded:hover, .animated:hover {transition: 0.5s}
+
+.shaded:hover {box-shadow: 0 0 20px 2px black}
+
+.animated:hover {transform: scale(1.05)}
+
+.illuminated:hover, .illuminated:focus {
+    box-shadow: 0 0 40px 5px #f41c52;
+    outline: none; /*убирает рамку фокуса в chrome*/
 }
-
-.illuminated:hover, .illuminated:focus {box-shadow: 0 0 40px 5px #f41c52}
-
-.animated:hover {
-    transition: 0.5s;
-    transform: scale(1.05);
-}
-
-svg {box-shadow: inset 0 0 7px 1px gray}
 
 hr {
     color: #f41c52;
     width: 95%;
 }
 
-#outputStub {
-    background-color: #000720;
+.notification {
     color: white;
     padding: 1%;
 }
+
+.outputStub {background-color: #000720}
+
+.errorStub {background-color: #dc143b}

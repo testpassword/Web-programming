@@ -31,9 +31,11 @@ echo "<table id='outputTable'>
 foreach ($_SESSION["tableRows"] as $tableRow) echo $tableRow;
 echo "</table>";
 
-function checkCoordinates(float $x, float $y, float $r) {
+function checkCoordinates($x, $y, $r) {
     if ((($x >= -$r/2) && ($x <= 0) && ($y >= 0) && ($y <= $r/2)) ||
         (($x >= 0) && ($x <= $r) && ($y >= $r) && ($y >= -$r)) ||
         (($x**2 + $y**2) <= (($r**2)/2) && ($x >= 0) && ($y >= 0))) return "да";
     else return "нет";
 }
+
+//TODO валидация значений на стороне сервера; README.md

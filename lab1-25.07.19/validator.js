@@ -2,7 +2,7 @@
 
 let x, y, r;
 
-//Добавляет эффекты (подсветка и увеличение) на нажатую кнопку, убирает эффекты для остальных кнопок.
+// Обновляет значение x в соответсвии с нажатой кнопкой, добавляет ей эффекты (подсветка и увеличение), убирая их для остальных кнопок группы.
 window.onload = function () {
 
     let buttons = document.querySelectorAll("input[name=X-button]");
@@ -28,52 +28,63 @@ document.getElementById("checkButton").onclick = function () {
             headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"},
             body: "x=" + encodeURIComponent(x) + "&y=" + encodeURIComponent(y) + "&r=" + encodeURIComponent(r) +
                 "&timezone=" + encodeURIComponent(Intl.DateTimeFormat().resolvedOptions().timeZone)
-        }).then(response => response.text()).then(function (data) {
+        }).then(response => response.text()).then(function (serverAnswer) {
             setPointer();
-            constructTable(data);
-        }).catch(err => alert("Ошибка HTTP. Повторите попытку позже. " + err));
+            document.getElementById("outputContainer").innerHTML = serverAnswer;
+        }).catch(err => createNotification("Ошибка HTTP. Повторите попытку позже." + err));
     }
 };
 
 function setPointer() {
-    //TODO понять, на что вляет r
     let pointer = document.getElementById("pointer");
     pointer.style.visibility = "visible";
     pointer.setAttribute("cx", x * 54 + 150); // 1:54 - масштаб, +150 позволяет вести отсёт от 0,0
     pointer.setAttribute("cy", y * 54 + 150);
 }
 
-function constructTable(serverAnswer) {
+function createNotification(message) {
     let outputContainer = document.getElementById("outputContainer");
-    if (outputContainer.contains(document.getElementById("outputStub")))
-        outputContainer.removeChild(outputContainer.firstElementChild);
-    outputContainer.innerHTML = serverAnswer;
+    if (outputContainer.contains(document.querySelector(".notification"))) {
+        let stub = document.querySelector(".notification");
+        stub.textContent = message;
+        stub.classList.replace("outputStub", "errorStub");
+    } else {
+        let notificationTableRow = document.createElement("h4");
+        notificationTableRow.innerHTML = "<span class='notification errorStub'></span>";
+        outputContainer.prepend(notificationTableRow);
+        let span = document.querySelector(".notification");
+        span.textContent = message;
+    }
 }
 
 function validateX() {
     if (isNumeric(x)) return true;
     else {
-        alert("x не выбран");
+        createNotification("x не выбран");
         return false;
     }
 }
 
 function validateY() {
     y = document.querySelector("input[name=Y-input]").value;
-    if (isNumeric(y) && (y > -5) && (y < 3)) return true;
-    else {
-        alert("y не введён или введён некорректно");
+    if (y === undefined) {
+        createNotification("y не введён");
         return false;
-    }
+    } else if (!isNumeric(y)) {
+        createNotification("y не число");
+        return false;
+    } else if (!((y > -5) && (y < 3))) {
+        createNotification("y не входит в область допустимых значений");
+        return false;
+    } else return true;
 }
 
 function validateR() {
     try {
         r = document.querySelector("input[type=radio]:checked").value;
         return true;
-    }
-    catch (err) {
-        alert("Значение R не выбрано");
+    } catch (err) {
+        createNotification("Значение R не выбрано");
         return false;
     }
 }
