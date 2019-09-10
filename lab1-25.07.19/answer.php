@@ -8,10 +8,11 @@ if (!isset($_SESSION["tableRows"])) {
 $x = (float) $_POST["x"];
 $y = (float) $_POST["y"];
 $r = (float) $_POST["r"];
-$coordsStatus = checkCoordinates($x, $y, $r);
-$currentTime = date("H : i : s");
-$benchmarkTime = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
-array_push($_SESSION["tableRows"], "<tr>
+if (checkData($x, $y, $r)) {
+    $coordsStatus = checkCoordinates($x, $y, $r);
+    $currentTime = date("H : i : s");
+    $benchmarkTime = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
+    array_push($_SESSION["tableRows"], "<tr>
     <td>$x</td>
     <td>$y</td>
     <td>$r</td>
@@ -19,7 +20,7 @@ array_push($_SESSION["tableRows"], "<tr>
     <td>$currentTime</td>
     <td>$benchmarkTime</td>
     </tr>");
-echo "<table id='outputTable'>
+    echo "<table id='outputTable'>
         <tr>
             <th>x</th>
             <th>y</th>
@@ -28,8 +29,18 @@ echo "<table id='outputTable'>
             <th>Текущее время</th>
             <th>Время работы скрипта</th>
         </tr>";
-foreach ($_SESSION["tableRows"] as $tableRow) echo $tableRow;
-echo "</table>";
+    foreach ($_SESSION["tableRows"] as $tableRow) echo $tableRow;
+    echo "</table>";
+} else {
+    http_response_code(400);
+    return;
+}
+
+function checkData($x, $y, $r) {
+    return in_array($x, array(-2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2)) ||
+        is_numeric($y) || !($y > -5 && $y < 3) ||
+        in_array($r, array( 1, 2, 3, 4, 5));
+}
 
 function checkCoordinates($x, $y, $r) {
     if ((($x >= -$r/2) && ($x <= 0) && ($y >= 0) && ($y <= $r/2)) ||
@@ -37,5 +48,3 @@ function checkCoordinates($x, $y, $r) {
         (($x**2 + $y**2) <= (($r**2)/2) && ($x >= 0) && ($y >= 0))) return "да";
     else return "нет";
 }
-
-//TODO валидация значений на стороне сервера; README.md

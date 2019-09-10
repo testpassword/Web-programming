@@ -44,6 +44,8 @@ input, svg {
     background-color: white;
 }
 
+input[type=radio] {width: 50px}
+
 input, a {cursor: pointer}
 
 svg {
