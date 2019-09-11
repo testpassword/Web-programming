@@ -16,3 +16,4 @@ https://freefrontend.com/css-button-click-effects/
 https://habr.com/ru/post/154211/
 https://www.tune-it.ru/web/bleizard/blog/-/blogs/priatno-poznakomit-sa-superagent
 https://www.ibm.com/developerworks/ru/library/wa-aj-ajaxhistory/index.html
+https://ru.hexlet.io/blog/posts/javascript-what-the-heck-is-a-callback
