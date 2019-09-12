@@ -1,10 +1,8 @@
 <?php
 
 @session_start();
-if (!isset($_SESSION["tableRows"])) {
-    $_SESSION["tableRows"] = array();
-    date_default_timezone_set($_POST["timezone"]);
-}
+if (!isset($_SESSION["tableRows"])) $_SESSION["tableRows"] = array();
+date_default_timezone_set($_POST["timezone"]);
 $x = (float) $_POST["x"];
 $y = (float) $_POST["y"];
 $r = (float) $_POST["r"];
@@ -37,8 +35,8 @@ if (checkData($x, $y, $r)) {
 }
 
 function checkData($x, $y, $r) {
-    return in_array($x, array(-2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2)) ||
-        is_numeric($y) || !($y > -5 && $y < 3) ||
+    return in_array($x, array(-2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2)) &&
+        is_numeric($y) && ($y > -5 && $y < 3) &&
         in_array($r, array( 1, 2, 3, 4, 5));
 }
 

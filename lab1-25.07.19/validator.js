@@ -66,7 +66,7 @@ function validateX() {
 }
 
 function validateY() {
-    y = document.querySelector("input[name=Y-input]").value;
+    y = document.querySelector("input[name=Y-input]").value.replace(",", ".");
     if (y === undefined) {
         createNotification("y не введён");
         return false;
