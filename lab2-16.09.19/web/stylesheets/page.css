@@ -1,0 +1,116 @@
+@font-face {
+    font-family: "Avenir Next Cyr";
+    src: url("../fonts/AvenirNextCyr-Regular.ttf");
+}
+
+* {
+    font-family: "Avenir Next Cyr", Arial, sans-serif;
+    text-align: center;
+    font-weight: normal;
+}
+
+body {background-color: whitesmoke}
+
+header {
+    font-size: 0.6em;
+    top: 0;
+}
+
+footer {bottom: 0}
+
+header, footer {
+    z-index: 10; /*чтобы header и footer всегда всегда были сверху*/
+    width: 100%;
+    position: fixed;
+    color: white;
+    background-color: #000720;
+    left: 0;
+}
+
+thead * {margin-top: 4%}
+
+tfoot * {margin-bottom: 4% !important} /*чтобы при скроллинге оставался отступ*/
+
+#mainTable {
+    background-color: ghostwhite;
+    width: 75%;
+    margin: 80px auto;
+}
+
+input, svg {
+    width: 100%;
+    border: 2px solid #f41c52;
+    border-radius: 20px;
+    background-color: white;
+}
+
+input[type=radio] {width: 50px}
+
+input, a {cursor: pointer}
+
+svg {
+    width: 300px;
+    height: 300px;
+    box-shadow: inset 0 0 7px 1px gray;
+}
+
+figure img {
+    width: 47px;
+    height: 55px;
+}
+
+figcaption {font-size: 0.8em}
+
+#credit > img {
+    width: 40px;
+    height: 40px;
+}
+
+#credit > a {
+    font-size: 15px;
+    text-decoration: none;
+    color: white;
+}
+
+.shaded {box-shadow: 0 0 10px 1px black}
+
+.shaded:hover, .animated:hover {transition: 0.5s}
+
+.shaded:hover {box-shadow: 0 0 20px 2px black}
+
+.animated:hover {transform: scale(1.05)}
+
+.illuminated:hover, .illuminated:focus {
+    box-shadow: 0 0 40px 5px #f41c52;
+    outline: none; /*убирает рамку фокуса в chrome*/
+}
+
+hr {
+    color: #f41c52;
+    width: 95%;
+}
+
+.notification {
+    color: white;
+    padding: 1%;
+}
+
+.outputStub {background-color: #000720}
+
+.errorStub {background-color: #dc143b}
+
+#outputTable {
+    border: 1px solid #000720;
+    border-collapse: collapse;
+    margin: auto;
+    width: 90%;
+}
+
+#outputTable th {
+    background-color: #000720;
+    color: white;
+}
+
+#outputTable * {
+    padding: 25px;
+}
