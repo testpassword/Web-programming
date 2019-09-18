@@ -1,2 +1,5 @@
 https://www.youtube.com/watch?v=licQZlIenAk
 https://ru.wikipedia.org/wiki/Model-View-Controller
+https://netbeans.org/kb/docs/web/ajax-quickstart_ru.html#client1
+https://webdevblog.ru/kak-rabotaet-javascript/
+https://asbnotebook.com/2018/10/21/jquery-ajax-example-with-servlet/

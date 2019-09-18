@@ -23,7 +23,7 @@ window.onload = function () {
 
 document.getElementById("checkButton").onclick = function () {
     if (validateX() && validateY() && validateR()) {
-        fetch("/app", {
+        fetch("app", {
             method: "POST",
             headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"},
             body: "x=" + encodeURIComponent(x) + "&y=" + encodeURIComponent(y) + "&r=" + encodeURIComponent(r) +

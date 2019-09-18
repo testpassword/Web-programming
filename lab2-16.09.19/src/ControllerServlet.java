@@ -1,9 +1,7 @@
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 import javax.servlet.http.*;
 
-@WebServlet(name = "Controller", urlPatterns = {"/app"})
 public class ControllerServlet extends HttpServlet {
 
     @Override

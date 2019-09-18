@@ -2,13 +2,13 @@
 <!DOCTYPE HTML>
 <html lang="ru-RU">
 <head>
-  <meta name="description" content="Лабораторная работа №1 по дисциплине веб-программирование.">
-  <meta name="author" content="Кульбако Артемий Юрьевич">
-  <meta name="keywords" content="ВТ, Лабораторная работа, Веб-программирование, Институт Тёплых Мужскин Отношений"/>
-  <link href="stylesheets/page.css" rel="stylesheet">
-  <link href="stylesheets/check_button.css" rel="stylesheet">
-  <link rel="icon" type="image/jpg" href="images/favicon.jpg">
-  <title>Лабораторная №1</title>
+    <meta name="description" content="Лабораторная работа №1 по дисциплине веб-программирование.">
+    <meta name="author" content="Кульбако Артемий Юрьевич">
+    <meta name="keywords" content="ВТ, Лабораторная работа, Веб-программирование, Институт Тёплых Мужскин Отношений"/>
+    <link href="stylesheets/page.css" rel="stylesheet">
+    <link href="stylesheets/check_button.css" rel="stylesheet">
+    <link rel="icon" type="image/jpg" href="images/favicon.jpg">
+    <title>Лабораторная №1</title>
 </head>
 <body>
 <header class="shaded animated">
