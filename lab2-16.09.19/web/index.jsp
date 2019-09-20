@@ -2,17 +2,17 @@
 <!DOCTYPE HTML>
 <html lang="ru-RU">
 <head>
-    <meta name="description" content="Лабораторная работа №1 по дисциплине веб-программирование.">
+    <meta name="description" content="Лабораторная работа №2 по дисциплине веб-программирование.">
     <meta name="author" content="Кульбако Артемий Юрьевич">
     <meta name="keywords" content="ВТ, Лабораторная работа, Веб-программирование, Институт Тёплых Мужскин Отношений"/>
-    <link href="stylesheets/page.css" rel="stylesheet">
+    <link href="stylesheets/main_page.css" rel="stylesheet">
     <link href="stylesheets/check_button.css" rel="stylesheet">
     <link rel="icon" type="image/jpg" href="images/favicon.jpg">
     <title>Лабораторная №1</title>
 </head>
 <body>
 <header class="shaded animated">
-  <h1>Веб-программирование, Лаб. 1, Вариант 212012</h1>
+  <h1>Веб-программирование, Лаб. 2, Вариант 212301</h1>
   <div id="credit">
     <img src="images/avatar.png" align="middle" alt="Аватар разработчика">
     <a href="https://github.com/testpassword" class="illuminated animated" title="Перейти к профилю Github разработчика">Кульбако Артемий Юрьевич, P3212</a>

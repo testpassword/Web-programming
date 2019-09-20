@@ -1,0 +1,59 @@
+/* Взято и переработано с https://colorlib.com)*/
+
+@font-face {
+    font-family: "Avenir Next Cyr";
+    src: url("../fonts/AvenirNextCyr-Regular.ttf");
+}
+
+* {
+    font-family: "Avenir Next Cyr", Arial, sans-serif;
+    text-align: center;
+}
+
+body {margin: 0}
+
+#notfound {height: 100vh}
+
+#notfound, .notfound .notfound-404 {position: relative}
+
+#notfound .notfound, .notfound .notfound-404 h1 {
+    left: 50%;
+    top: 50%;
+}
+
+#notfound .notfound {
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+.notfound {width: 100%}
+
+.notfound .notfound-404 {height: 220px}
+
+.notfound .notfound-404 h1 {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    font-size: 186px;
+    font-weight: 200;
+    margin: 0;
+    background: linear-gradient(130deg, #2a48eb, #ff0018);
+    color: transparent;
+    background-clip: text;
+    text-transform: uppercase;
+}
+
+.notfound h2 {
+    font-size: 33px;
+    font-weight: 200;
+    text-transform: uppercase;
+    margin: 0;
+    letter-spacing: 3px;
+}
+
+a:hover {box-shadow: 0 0 40px 5px #f41c52}
+
+.notfound a {
+    color: #eb2a5a;
+    font-weight: 200;
+    border-radius: 2px;
+}

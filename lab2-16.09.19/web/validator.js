@@ -12,11 +12,13 @@ window.onload = function () {
         element.onclick = function () {
             x = this.value;
             buttons.forEach(function (element) {
-                element.style.boxShadow = "";
-                element.style.transform = "";
+                element.style.boxShadow = null;
+                element.style.backgroundColor = null;
+                element.style.color = null;
             });
             this.style.boxShadow = "0 0 40px 5px #f41c52";
-            this.style.transform = "scale(1.05)";
+            this.style.backgroundColor = "#f41c52";
+            this.style.color = "white";
         }
     }
 };
@@ -66,7 +68,7 @@ function validateX() {
 }
 
 function validateY() {
-    y = document.querySelector("input[name=Y-input]").value.replace(",", ".");
+    y = document.querySelector("input[name=Y-input]").value.replace(",", "."); //замена разделителя дробной части числа
     if (y === undefined) {
         createNotification("y не введён");
         return false;
@@ -94,3 +96,4 @@ function isNumeric(n) {
 }
 
 //TODO дополнить скрипт согласно варианту задания
+//TODO менять цвет кнопки, а не подсветки
