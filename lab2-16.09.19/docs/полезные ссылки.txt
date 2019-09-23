@@ -6,3 +6,4 @@ https://asbnotebook.com/2018/10/21/jquery-ajax-example-with-servlet/
 https://colorlib.com/wp/free-404-error-page-templates/
 https://www.demis.ru/articles/adaptivnyj-dizain-saita/
 http://www.websphererus.com/development/introducing-to-jsf
+https://proselyte.net/tutorials/servlets/life-cycle/#

@@ -37,11 +37,12 @@ document.getElementById("checkButton").onclick = function () {
     }
 };
 
+//FIXME: починить
 function setPointer() {
     let pointer = document.getElementById("pointer");
     pointer.style.visibility = "visible";
-    pointer.setAttribute("cx", x * 54 + 150); // 1:54 - масштаб, +150 позволяет вести отсёт от 0,0
-    pointer.setAttribute("cy", y * 54 + 150);
+    pointer.setAttribute("cx", 2 * (x * 54 / r) + 150); // 1:54 - масштаб, +150 позволяет вести отсёт от 0,0
+    pointer.setAttribute("cy", -(((y * 54 * 2) / r) - 150));
 }
 
 function createNotification(message) {

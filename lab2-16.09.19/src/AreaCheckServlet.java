@@ -9,6 +9,7 @@ public class AreaCheckServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
+        resp.setContentType("text/html;charset=UTF-8");
         List tableRows = (List) session.getAttribute("tableRows");
         if (tableRows == null) {
             tableRows = new ArrayList<String>();
@@ -37,6 +38,3 @@ public class AreaCheckServlet extends HttpServlet {
         return (Arrays.asList(xInterval).contains(x) && (y > -5 && y < 3) && Arrays.asList(rInterval).contains(r));
     }
 }
-
-//TODO ajax с json
-//TODO починить кодировку

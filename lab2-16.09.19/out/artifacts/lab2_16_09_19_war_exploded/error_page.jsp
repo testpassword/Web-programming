@@ -11,9 +11,9 @@
     <body>
         <div id="notfound">
             <div class="notfound">
-                <div class="notfound-404"><h1><%= exception%></h1></div>
+                <div class="notfound-404"><h1>404</h1></div>
                     <h2>Ничего не найдено</h2>
-                    <p><%=message%><br/>
+                    <p>Страница, которую вы запрашиваете, отсутствует, проверьте url-адрес.<br/>
                         <a href="app">Вернуться на домашную страницу</a></p>
             </div>
         </div>
