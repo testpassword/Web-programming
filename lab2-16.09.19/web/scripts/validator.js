@@ -3,10 +3,10 @@
 let x, y, r;
 
 // Обновляет значение x в соответсвии с нажатой кнопкой, добавляет ей эффекты (подсветка и увеличение), убирая их для остальных кнопок группы.
-window.onload = function () {
-
+document.addEventListener("DOMContentLoaded", () => {
     let buttons = document.querySelectorAll("input[name=X-button]");
     buttons.forEach(click);
+    drawCanvas();
 
     function click(element) {
         element.onclick = function () {
@@ -21,7 +21,67 @@ window.onload = function () {
             this.style.color = "white";
         }
     }
-};
+
+    function drawCanvas() {
+        let canvas = document.querySelector("canvas").getContext("2d");
+        canvas.font = "15px 'Avenir Next Cyr'";
+        canvas.beginPath();
+        //треугольник по OX
+        canvas.moveTo(300, 150);
+        canvas.lineTo(295, 155);
+        canvas.lineTo(295, 145);
+        canvas.closePath();
+        //треуголник по OY
+        canvas.moveTo(150, 0);
+        canvas.lineTo(145, 5);
+        canvas.lineTo(155, 5);
+        canvas.closePath();
+        //треугольник ОДЗ
+        canvas.moveTo(90, 150);
+        canvas.lineTo(150, 90);
+        canvas.lineTo(150, 150);
+        canvas.closePath();
+        //прямоугольник ОДЗ
+        canvas.fillRect(150, 150, 120, 60);
+        //окружность ОДЗ
+        canvas.moveTo(150, 150);
+        canvas.lineTo(270, 150);
+        canvas.bezierCurveTo(270, 40, 180, 30, 150, 30);
+        canvas.closePath();
+        //OX
+        canvas.moveTo(0, 150);
+        canvas.lineTo(300, 150);
+        //OY
+        canvas.moveTo(150, 300);
+        canvas.lineTo(150, 0);
+        //черты и подписи
+        canvas.moveTo(270, 146);
+        canvas.lineTo(270, 154);
+        canvas.fillText("R", 265, 140);
+        canvas.moveTo(210, 146);
+        canvas.lineTo(210, 154);
+        canvas.fillText("R/2", 200, 140);
+        canvas.moveTo(90, 146);
+        canvas.lineTo(90, 154);
+        canvas.fillText("-R/2", 75, 140);
+        canvas.moveTo(30, 146);
+        canvas.lineTo(30, 154);
+        canvas.fillText("-R", 20, 140);
+        canvas.moveTo(146, 30);
+        canvas.lineTo(154, 30);
+        canvas.fillText("R", 156, 35);
+        canvas.moveTo(146, 90);
+        canvas.lineTo(154, 90);
+        canvas.fillText("R/2", 156, 95);
+        canvas.moveTo(146, 210);
+        canvas.lineTo(154, 210);
+        canvas.fillText("-R/2", 156, 215);
+        canvas.moveTo(146, 270);
+        canvas.lineTo(154, 270);
+        canvas.fillText("-R", 156, 275);
+        canvas.stroke();
+    }
+});
 
 document.getElementById("checkButton").onclick = function () {
     if (validateX() && validateY() && validateR()) {
@@ -31,19 +91,18 @@ document.getElementById("checkButton").onclick = function () {
             body: "x=" + encodeURIComponent(x) + "&y=" + encodeURIComponent(y) + "&r=" + encodeURIComponent(r) +
                 "&timezone=" + encodeURIComponent(Intl.DateTimeFormat().resolvedOptions().timeZone)
         }).then(response => response.text()).then(function (serverAnswer) {
-            setPointer();
+            //setPointer(2 * (x * 54 / r) + 150, -(((y * 54 * 2) / r) - 150));
             document.getElementById("outputContainer").innerHTML = serverAnswer;
         }).catch(err => createNotification("Ошибка HTTP. Повторите попытку позже." + err));
     }
 };
 
-//FIXME: починить
-function setPointer() {
+/*function setPointer(x, y) {
     let pointer = document.getElementById("pointer");
     pointer.style.visibility = "visible";
-    pointer.setAttribute("cx", 2 * (x * 54 / r) + 150); // 1:54 - масштаб, +150 позволяет вести отсёт от 0,0
-    pointer.setAttribute("cy", -(((y * 54 * 2) / r) - 150));
-}
+    pointer.setAttribute("cx", x); // 1:54 - масштаб, +150 позволяет вести отсёт от 0,0
+    pointer.setAttribute("cy", y);
+}*/
 
 function createNotification(message) {
     let outputContainer = document.getElementById("outputContainer");
@@ -97,4 +156,3 @@ function isNumeric(n) {
 }
 
 //TODO дополнить скрипт согласно варианту задания
-//TODO менять цвет кнопки, а не подсветки

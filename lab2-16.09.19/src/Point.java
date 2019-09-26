@@ -42,7 +42,7 @@ public class Point {
         return "<tr><td>" + x + "</td>" +
                 "<td>" + y + "</td>" +
                 "<td>" + r + "</td>" +
-                "<td>" + coordsStatus + "</td>" +
+                "<td style='color: " + ((coordsStatus) ? "green" : "red") + "'>" + coordsStatus + "</td>" +
                 "<td>" + currentTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm:ss")) + "</td></tr>";
     }
 }

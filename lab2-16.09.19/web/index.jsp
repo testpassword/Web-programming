@@ -2,13 +2,13 @@
 <!DOCTYPE HTML>
 <html lang="ru-RU">
 <head>
-    <meta name="description" content="Лабораторная работа №2 по дисциплине веб-программирование.">
-    <meta name="author" content="Кульбако Артемий Юрьевич">
-    <meta name="keywords" content="ВТ, Лабораторная работа, Веб-программирование, Институт Тёплых Мужскин Отношений"/>
-    <link href="stylesheets/main_page.css" rel="stylesheet">
-    <link href="stylesheets/check_button.css" rel="stylesheet">
-    <link rel="icon" type="image/jpg" href="images/favicon.jpg">
-    <title>Лабораторная №1</title>
+  <meta name="description" content="Лабораторная работа №2 по дисциплине веб-программирование.">
+  <meta name="author" content="Кульбако Артемий Юрьевич">
+  <meta name="keywords" content="ВТ, Лабораторная работа, Веб-программирование, Институт Тёплых Мужскин Отношений"/>
+  <link href="stylesheets/main_page.css" rel="stylesheet">
+  <link href="stylesheets/check_button.css" rel="stylesheet">
+  <link rel="icon" type="image/jpg" href="images/favicon.jpg">
+  <title>Лабораторная №1</title>
 </head>
 <body>
 <header class="shaded animated">
@@ -28,32 +28,10 @@
     <td><input name="X-button" class="illuminated animated" type="button" value="-1.5"></td>
     <td><input name="X-button" class="illuminated animated" type="button" value="-1.0"></td>
     <td rowspan="6">
-      <svg xmlns="http://www.w3.org/2000/svg">
-        <line x1="0" y1="150" x2="300" y2="150" stroke="#000720"></line>
-        <line x1="150" y1="0" x2="150" y2="300" stroke="#000720"></line>
-        <line x1="270" y1="148" x2="270" y2="152" stroke="#000720"></line>
-        <text x="265" y="140">R</text>
-        <line x1="210" y1="148" x2="210" y2="152" stroke="#000720"></line>
-        <text x="200" y="140">R/2</text>
-        <line x1="90" y1="148" x2="90" y2="152" stroke="#000720"></line>
-        <text x="75" y="140">-R/2</text>
-        <line x1="30" y1="148" x2="30" y2="152" stroke="#000720"></line>
-        <text x="20" y="140">-R</text>
-        <line x1="148" y1="30" x2="152" y2="30" stroke="#000720"></line>
-        <text x="156" y="35">R</text>
-        <line x1="148" y1="90" x2="152" y2="90" stroke="#000720"></line>
-        <text x="156" y="95">R/2</text>
-        <line x1="148" y1="210" x2="152" y2="210" stroke="#000720"></line>
-        <text x="156" y="215">-R/2</text>
-        <line x1="148" y1="270" x2="152" y2="270" stroke="#000720"></line>
-        <text x="156" y="275">-R</text>
-        <polygon points="300,150 295,155 295, 145" fill="#000720" stroke="#000720"></polygon>
-        <polygon points="150,0 145,5 155,5" fill="#000720" stroke="#000720"></polygon>
-        <rect x="150" y="150" width="120" height="60" fill-opacity="0.4" stroke="navy" fill="blue"></rect>
-        <polygon points="150,150 90,150 150,90" fill-opacity="0.4" stroke="navy" fill="blue"></polygon>
-        <path d="M150 150 L 270 150 C 270 80 220 30 150 30 L Z" fill-opacity="0.4" stroke="navy" fill="blue"></path>
+      <canvas class="illuminated" width="300" height="300"></canvas>
+      <%--<svg xmlns="http://www.w3.org/2000/svg">
         <circle id="pointer" r="5" cx="150" cy="150" fill-opacity="0.7" fill="red" stroke="firebrick" visibility="hidden"></circle>
-      </svg>
+      </svg>--%>
     </td>
   </tr>
   <tr>
@@ -115,6 +93,7 @@
     <figcaption>2019</figcaption>
   </figure>
 </footer>
-<script src="validator.js"></script>
+<script src="scripts/validator.js"></script>
+<script src="scripts/easter_egg.js"></script>
 </body>
 </html>
