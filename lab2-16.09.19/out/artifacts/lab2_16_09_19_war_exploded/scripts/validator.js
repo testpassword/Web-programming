@@ -7,12 +7,9 @@ let canvas = document.querySelector("canvas");
 document.addEventListener("DOMContentLoaded", () => {
     let buttons = document.querySelectorAll("input[name=X-button]");
     buttons.forEach(click);
-    canvas.addEventListener("click", (event) => {
+    canvas.addEventListener("click", () => {
         if (validateR()) {
-            let field = canvas.getBoundingClientRect();
-            let x = event.clientX - field.left;
-            let y = event.clientY - field.top;
-            setPointer(/*получение и расчёт координат*/);
+            //здесь получить координаты с canvas
             sendRequest();
         }
     });
@@ -62,6 +59,7 @@ function setPointer(x, y) {
     let context = canvas.getContext("2d");
     context.clearRect(0, 0, canvas.width, canvas.height);
     loadCanvasBackground();
+    context.globalAlpha = 1;
     context.beginPath();
     context.arc(x, y, 5, 0, 2* Math.PI);
     context.closePath();
