@@ -4,13 +4,18 @@ import javax.xml.ws.http.HTTPException;
 import java.util.*;
 import java.io.*;
 
+/*
+Здесь используется код, совместимый с Java 6, т.к. Glassfish на гелиосе настроен на него.
+ */
 public class AreaCheckServlet extends HttpServlet {
+
+    PrintWriter writer;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         resp.setContentType("text/html;charset=UTF-8");
-        List tableRows = (List) session.getAttribute("tableRows");
+        List<String> tableRows = (List) session.getAttribute("tableRows");
         if (tableRows == null) {
             tableRows = new ArrayList<String>();
             session.setAttribute("tableRows", tableRows);
@@ -24,11 +29,14 @@ public class AreaCheckServlet extends HttpServlet {
         double x = Double.parseDouble(req.getParameter("x"));
         double y = Double.parseDouble(req.getParameter("y"));
         double r = Double.parseDouble(req.getParameter("r"));
-        try (PrintWriter writer = resp.getWriter()) {
+        try {
+            writer = resp.getWriter();
             if (checkData(x, y, r)) {
                 tableRows.add(new Point(x, y, r, req.getParameter("timezone")).toString());
-                tableRows.forEach(writer::println);
+                for (String tableRow: tableRows) writer.println(tableRow);
             } else throw new HTTPException(400);
+        } finally {
+            if (writer != null) writer.close();
         }
     }
 
