@@ -2,7 +2,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     keyMapper(1000, () => document.querySelectorAll("*").forEach(function (node) {
-        node.classList.add("rotated")}), "rotate");
+        node.classList.add("rotated")}), "fleeeex");
 });
 
 function keyMapper(keystrokeDelay, callback, keySequence) {

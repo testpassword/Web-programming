@@ -29,9 +29,6 @@
     <td><input name="X-button" class="illuminated animated" type="button" value="-1.0"></td>
     <td rowspan="6">
       <canvas class="illuminated" width="300" height="300"></canvas>
-      <%--<svg xmlns="http://www.w3.org/2000/svg">
-        <circle id="pointer" r="5" cx="150" cy="150" fill-opacity="0.7" fill="red" stroke="firebrick" visibility="hidden"></circle>
-      </svg>--%>
     </td>
   </tr>
   <tr>

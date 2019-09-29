@@ -1,21 +1,15 @@
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Objects;
+import java.util.Date;
 
 public class Point {
 
     private double x, y, r;
     private boolean coordsStatus;
-    private ZonedDateTime currentTime;
 
-    Point(double x, double y, double r, String timezone) {
+    Point(double x, double y, double r) {
         this.x = x;
         this.y = y;
         this.r = r;
         coordsStatus = checkCoordinates(x, y, r);
-        this.currentTime = ZonedDateTime.ofInstant(Instant.now(), ZoneId.of(timezone));
     }
 
     private boolean checkCoordinates(double x, double y, double r) {
@@ -29,12 +23,10 @@ public class Point {
         if (this == o) return true;
         if (!(o instanceof Point)) return false;
         Point point = (Point) o;
-        return Double.compare(point.x, x) == 0 && Double.compare(point.y, y) == 0 && Double.compare(point.r, r) == 0;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(x, y, r);
+        return Double.compare(point.x, x) == 0 &&
+                Double.compare(point.y, y) == 0 &&
+                Double.compare(point.r, r) == 0 &&
+                coordsStatus == point.coordsStatus;
     }
 
     @Override
@@ -43,6 +35,6 @@ public class Point {
                 "<td>" + y + "</td>" +
                 "<td>" + r + "</td>" +
                 "<td style='color: " + ((coordsStatus) ? "green" : "red") + "'>" + coordsStatus + "</td>" +
-                "<td>" + currentTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm:ss")) + "</td></tr>";
+                "<td>" + new Date().toString() + "</td></tr>";
     }
 }

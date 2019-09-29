@@ -3,17 +3,23 @@
 let x, y, r;
 let canvas = document.querySelector("canvas");
 
-// Обновляет значение x в соответсвии с нажатой кнопкой, добавляет ей эффекты (подсветка и увеличение), убирая их для остальных кнопок группы.
+/*
+Обновляет значение x в соответсвии с нажатой кнопкой, добавляет ей эффекты (подсветка и увеличение), убирая их для остальных кнопок группы.
+Рисует canvas и добавляет ему обработчики.
+*/
 document.addEventListener("DOMContentLoaded", () => {
     let buttons = document.querySelectorAll("input[name=X-button]");
     buttons.forEach(click);
     canvas.addEventListener("click", (event) => {
         if (validateR()) {
+            //TODO норм координаты
             let field = canvas.getBoundingClientRect();
-            let x = event.clientX - field.left;
-            let y = event.clientY - field.top;
-            setPointer(/*получение и расчёт координат*/);
-            sendRequest();
+            x = event.clientX - field.left;
+            y = event.clientY - field.top;
+            setPointer(x, y);
+            x = (x / 54 / r).toFixed(1);
+            y = (y / 54 / r).toFixed(1);
+            sendRequest("canvas");
         }
     });
     loadCanvasBackground();
@@ -43,19 +49,26 @@ function loadCanvasBackground() {
 }
 
 document.getElementById("checkButton").onclick = function () {
-    if (validateX() && validateY() && validateR()) sendRequest();
+    if (validateX() && validateY() && validateR()) {
+        setPointer((x * 54 / r) + 150, ((y * 54) / r) + 150);
+        sendRequest("button");
+    }
 };
 
-function sendRequest() {
-    setPointer(2 * (x * 54 / r) + 150, -(((y * 54 * 2) / r) - 150));
-    fetch("app", {
-        method: "POST",
-        headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"},
-        body: "x=" + encodeURIComponent(x) + "&y=" + encodeURIComponent(y) + "&r=" + encodeURIComponent(r) +
-            "&timezone=" + encodeURIComponent(Intl.DateTimeFormat().resolvedOptions().timeZone)
-    }).then(response => response.text()).then(function (serverAnswer) {
-        document.getElementById("outputContainer").innerHTML = serverAnswer;
-    }).catch(err => createNotification("Ошибка HTTP. Повторите попытку позже." + err));
+//Параметр key установливает, тип запроса обработки точки на сервере: "button" - для клика по кнопке, "canvas" - для клика по канвасу.
+function sendRequest(key) {
+    console.log(x + " " + y + " " + r);
+    const keys = ["button", "canvas"];
+    if (keys.includes(key)) {
+        fetch("app", {
+            method: "POST",
+            headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"},
+            body: "x=" + encodeURIComponent(x) + "&y=" + encodeURIComponent(y) + "&r=" + encodeURIComponent(r) +
+                "&key=" + encodeURIComponent(key)
+        }).then(response => response.text()).then(function (serverAnswer) {
+            document.getElementById("outputContainer").innerHTML = serverAnswer;
+        }).catch(err => createNotification("Ошибка HTTP. Повторите попытку позже." + err));
+    } else throw new Error("Не указан ключ отправки");
 }
 
 function setPointer(x, y) {
