@@ -1,6 +1,5 @@
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
-import javax.xml.ws.http.HTTPException;
 import java.util.*;
 import java.io.*;
 
@@ -30,19 +29,25 @@ public class AreaCheckServlet extends HttpServlet {
             if (checkData(x, y, r, key)) {
                 tableRows.add(new Point(x, y, r).toString());
                 for (String tableRow: tableRows) writer.println(tableRow);
-            } else writer.println("<h4><span class='errorStub notification'>Сервер получил неккоректные данные</span></h4>");
+            } else resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
         } finally {
             if (writer != null) writer.close();
         }
     }
 
     private boolean checkData(double x, double y, double r, String key) {
+        Double[] xInterval = {-2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5, 2.0};
         Double[] rInterval = {1.0, 2.0, 3.0, 4.0, 5.0};
-        if (key.equals("button")) {
-            Double[] xInterval = {-2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5, 2.0};
+        if (key.equals("button"))
             return (Arrays.asList(xInterval).contains(x) && (y > -5 && y < 3) && Arrays.asList(rInterval).contains(r));
-        } else if (key.equals("canvas")) {
-          return ((x >= -2 && x <= 2) && (y > -5 && y < 3) && (Arrays.asList(rInterval).contains(r)));
-        } else throw new HTTPException(400);
+        else if (key.equals("canvas")) return (Arrays.asList(rInterval).contains(r));
+        else return false;
+    }
+
+    @Override
+    public String getServletInfo() {
+        return "AreaCheckServlet - осуществляет проверку попадания точки в область на координатной плоскости и " +
+                "формирует HTML-страницу с результатами проверки. Должен обрабатывать все запросы, " +
+                "содержащие сведения о координатах точки и радиусе области.";
     }
 }

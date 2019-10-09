@@ -18,6 +18,22 @@ public class Point {
                 ((Math.pow(x, 2) + Math.pow(y, 2)) <= ((Math.pow(r, 2))) && (x >= 0) && (y >= 0)));
     }
 
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public double getR() {
+        return r;
+    }
+
+    public boolean coordsStatus() {
+        return coordsStatus;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

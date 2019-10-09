@@ -11,31 +11,31 @@ P.S. Ваша домашняя директории также должна им
 # Как задеплоить лабу 2 на гелиос? #
 
 1. Создаём домен для лабы:
-`$ asadmin create-domain --domaindir ~/glass --portbase 10000 lab2`
+`$ asadmin create-domain --domaindir ~/glass --portbase 41414 lab2`
 где:
 * `~/glass` — путь до каталога, где вы хотите разместить свою лабу;
-* `10000` - число, от которого будут отсчитываться номера портов созданного домена. Проявите фантазию в выборе, чтоб не пересечься с другими студентами;
+* `41414` - число, от которого будут отсчитываться номера портов созданного домена. Проявите фантазию в выборе, чтоб не пересечься с другими студентами;
 * `lab2` - название католога для веб-приложения (лабы) (будет создан автоматически).
-Сервер будет сконфигурирован, примерный вывод:
+Сервер будет сконфигурирован. Заскриньте терминал: эти данные вам ещё понадобятся. Примерный вывод:
 ```
-Using port 10848 for Admin.
-Using port 10880 for HTTP Instance.
-Using port 10076 for JMS.
-Using port 10037 for IIOP.
-Using port 10081 for HTTP_SSL.
-Using port 10038 for IIOP_SSL.
-Using port 10039 for IIOP_MUTUALAUTH.
-Using port 10086 for JMX_ADMIN.
-Using port 10066 for OSGI_SHELL.
-Using port 10009 for JAVA_DEBUGGER.
+Using port 41462 for Admin.
+Using port 41494 for HTTP Instance.
+Using port 41490 for JMS.
+Using port 41451 for IIOP.
+Using port 41495 for HTTP_SSL.
+Using port 41452 for IIOP_SSL.
+Using port 41453 for IIOP_MUTUALAUTH.
+Using port 41500 for JMX_ADMIN.
+Using port 41480 for OSGI_SHELL.
+Using port 41423 for JAVA_DEBUGGER.
 ```
 2. Запускаем созданный домен:
 `$ asadmin start-domain --domaindir ~/glass lab2`
 (проверить его статус можно командой: `$ asadmin list-domains --domaindir ~/glass`)
 3. Так-как домены Glassfish недоступны снаружи, то необходимо пробросить порты через SSH-туннель. Заходим в консоль с своей машины и вводим:
-`ssh -f -N -L 10080:127.0.0.1:10080 sвашНомер@helios.cs.ifmo.ru -p 2222`
-После этого заходим на 127.0.0.1:10080 в браузере - должна отобразиться страница с приветствием Glassfish.
-4. Логинимся, деплоим приложение на вкладке **application** и пробрасывет порт для него.
+`ssh -f -N -L 41462:127.0.0.1:41462 имяПользователяр@se.ifmo.ru -p 2222`
+После этого заходим на [127.0.0.1:41462] в браузере - должна отобразиться страница с приветствием Glassfish.
+4. Логинимся, деплоим приложение на вкладке **application** и пробрасывет порт для него (повторить пункт 3 с другим портом).
 
 Другие команды:
 `$ asadmin stop-domain --domaindir ~/glass lab2` - остановить домен

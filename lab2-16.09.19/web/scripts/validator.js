@@ -17,8 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
             x = event.clientX - field.left;
             y = event.clientY - field.top;
             setPointer(x, y);
-            x = (x / 54 / r).toFixed(1);
-            y = (y / 54 / r).toFixed(1);
+            let k = 270 / r; //отношение радиуса и плоскости
+            x = (x / k).toFixed(1);
+            y = (y / k).toFixed(1);
+            console.log(x + " " + y + " " + r);
             sendRequest("canvas");
         }
     });
@@ -57,17 +59,16 @@ document.getElementById("checkButton").onclick = function () {
 
 //Параметр key установливает, тип запроса обработки точки на сервере: "button" - для клика по кнопке, "canvas" - для клика по канвасу.
 function sendRequest(key) {
-    console.log(x + " " + y + " " + r);
     const keys = ["button", "canvas"];
     if (keys.includes(key)) {
-        fetch("app", {
+        let response = fetch("app", {
             method: "POST",
             headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"},
             body: "x=" + encodeURIComponent(x) + "&y=" + encodeURIComponent(y) + "&r=" + encodeURIComponent(r) +
                 "&key=" + encodeURIComponent(key)
         }).then(response => response.text()).then(function (serverAnswer) {
             document.getElementById("outputContainer").innerHTML = serverAnswer;
-        }).catch(err => createNotification("Ошибка HTTP. Повторите попытку позже." + err));
+        }).catch(err => createNotification(`Ошибка HTTP ${err.textContent}. Повторите попытку позже.`));
     } else throw new Error("Не указан ключ отправки");
 }
 
