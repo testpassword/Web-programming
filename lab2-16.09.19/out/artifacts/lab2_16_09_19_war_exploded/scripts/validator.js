@@ -1,30 +1,11 @@
 "use strict";
 
 let x, y, r;
-let canvas = document.querySelector("canvas");
 
-/*
-Обновляет значение x в соответсвии с нажатой кнопкой, добавляет ей эффекты (подсветка и увеличение), убирая их для остальных кнопок группы.
-Рисует canvas и добавляет ему обработчики.
-*/
+//Обновляет значение x в соответсвии с нажатой кнопкой, добавляет ей эффекты (подсветка и увеличение), убирая их для остальных кнопок группы.
 document.addEventListener("DOMContentLoaded", () => {
     let buttons = document.querySelectorAll("input[name=X-button]");
     buttons.forEach(click);
-    canvas.addEventListener("click", (event) => {
-        if (validateR()) {
-            //TODO норм координаты
-            let field = canvas.getBoundingClientRect();
-            x = event.clientX - field.left;
-            y = event.clientY - field.top;
-            setPointer(x, y);
-            let k = 270 / r; //отношение радиуса и плоскости
-            x = (x / k).toFixed(1);
-            y = (y / k).toFixed(1);
-            console.log(x + " " + y + " " + r);
-            sendRequest("canvas");
-        }
-    });
-    loadCanvasBackground();
 
     function click(element) {
         element.onclick = function () {
@@ -41,47 +22,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-function loadCanvasBackground() {
-    let context = canvas.getContext("2d");
-    let image = new Image();
-    image.src = "images/graph.svg";
-    image.onload = function() {
-        context.drawImage(image, 0, 0);
-    };
-}
-
 document.getElementById("checkButton").onclick = function () {
-    if (validateX() && validateY() && validateR()) {
-        setPointer((x * 54 / r) + 150, ((y * 54) / r) + 150);
-        sendRequest("button");
-    }
+    if (validateX() && validateY() && validateR()) sendRequest("button");
 };
 
-//Параметр key установливает, тип запроса обработки точки на сервере: "button" - для клика по кнопке, "canvas" - для клика по канвасу.
+//Параметр key установливает, тип запроса обработки точки на сервере: "button" - для клика по кнопке, "svg" - для клика по канвасу.
 function sendRequest(key) {
-    const keys = ["button", "canvas"];
+    const keys = ["button", "svg"];
     if (keys.includes(key)) {
-        let response = fetch("app", {
+        let request = "x=" + encodeURIComponent(x) + "&y=" + encodeURIComponent(y) + "&r=" + encodeURIComponent(r) +
+            "&key=" + encodeURIComponent(key);
+        fetch("app", {
             method: "POST",
             headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"},
-            body: "x=" + encodeURIComponent(x) + "&y=" + encodeURIComponent(y) + "&r=" + encodeURIComponent(r) +
-                "&key=" + encodeURIComponent(key)
+            body: request
         }).then(response => response.text()).then(function (serverAnswer) {
             document.getElementById("outputContainer").innerHTML = serverAnswer;
         }).catch(err => createNotification(`Ошибка HTTP ${err.textContent}. Повторите попытку позже.`));
     } else throw new Error("Не указан ключ отправки");
-}
-
-function setPointer(x, y) {
-    let context = canvas.getContext("2d");
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    loadCanvasBackground();
-    context.beginPath();
-    context.arc(x, y, 5, 0, 2* Math.PI);
-    context.closePath();
-    context.stroke();
-    context.fillStyle = "red";
-    context.fill();
 }
 
 function createNotification(message) {

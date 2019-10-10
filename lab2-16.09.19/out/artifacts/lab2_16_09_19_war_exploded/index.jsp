@@ -28,7 +28,24 @@
     <td><input name="X-button" class="illuminated animated" type="button" value="-1.5"></td>
     <td><input name="X-button" class="illuminated animated" type="button" value="-1.0"></td>
     <td rowspan="6">
-      <canvas class="illuminated" width="300" height="300"></canvas>
+        <svg xmlns="http://www.w3.org/2000/svg">
+            <line x1="0" y1="150" x2="300" y2="150" stroke="#000720"></line>
+            <line x1="150" y1="0" x2="150" y2="300" stroke="#000720"></line>
+            <line x1="270" y1="148" x2="270" y2="152" stroke="#000720"></line>
+            <text x="265" y="140">R</text>
+            <text x="200" y="140">R/2</text>
+            <text x="75" y="140">-R/2</text>
+            <text x="20" y="140">-R</text>
+            <text x="156" y="35">R</text>
+            <text x="156" y="95">R/2</text>
+            <text x="156" y="215">-R/2</text>
+            <text x="156" y="275">-R</text>
+            <polygon points="300,150 295,155 295, 145" fill="#000720" stroke="#000720"></polygon>
+            <polygon points="150,0 145,5 155,5" fill="#000720" stroke="#000720"></polygon>
+            <rect x="150" y="150" width="120" height="60" fill-opacity="0.4" stroke="navy" fill="blue"></rect>
+            <polygon points="150,150 90,150 150,90" fill-opacity="0.4" stroke="navy" fill="blue"></polygon>
+            <path d="M150 150 L 270 150 C 270 80 220 30 150 30 L Z" fill-opacity="0.4" stroke="navy" fill="blue"></path>
+        </svg>
     </td>
   </tr>
   <tr>
@@ -92,5 +109,6 @@
 </footer>
 <script src="scripts/validator.js"></script>
 <script src="scripts/easter_egg.js"></script>
+<script src="scripts/graph_drawer.js"></script>
 </body>
 </html>
