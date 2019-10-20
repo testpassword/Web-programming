@@ -1,11 +1,13 @@
+import java.io.Serializable;
 import java.util.Date;
 
-public class Point {
+public class Point implements Serializable {
 
     private double x, y, r;
     private boolean coordsStatus;
+    public static final long serialVersionUID = 4L;
 
-    Point(double x, double y, double r) {
+    public Point(double x, double y, double r) {
         this.x = x;
         this.y = y;
         this.r = r;

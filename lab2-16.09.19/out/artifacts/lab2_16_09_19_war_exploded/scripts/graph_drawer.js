@@ -27,5 +27,5 @@ function getMousePosition(svg, event) {
 
 function setPointer(x, y) {
     console.log(x + " " + y);
-    svg.insertAdjacentHTML("beforeend", `<circle class=".pointer" r="5" cx="${x}" cy="${y}" fill-opacity="0.7" fill="red" stroke="firebrick"></circle>`);
+    svg.insertAdjacentHTML("beforeend", `<circle r="5" cx="${x}" cy="${y}" fill-opacity="0.7" fill="red" stroke="firebrick"></circle>`);
 }
