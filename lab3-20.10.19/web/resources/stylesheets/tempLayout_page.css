@@ -1,0 +1,76 @@
+@font-face {
+    font-family: "Avenir Next Cyr";
+    src: url("#{resource['fonts/AvenirNextCyr-Regular.ttf']}");
+}
+
+* {
+    font-family: "Avenir Next Cyr", Arial, sans-serif;
+    text-align: center;
+    font-weight: normal;
+}
+
+body {background-color: whitesmoke}
+
+#header {
+    font-size: 0.6em;
+    top: 0;
+}
+
+#footer {bottom: 0}
+
+#header, #footer {
+    z-index: 10; /*чтобы header и footer всегда всегда были сверху*/
+    width: 100%;
+    position: fixed;
+    color: white;
+    background-color: #000720;
+    left: 0;
+}
+
+input, a {cursor: pointer}
+
+#figure img {
+    width: 47px;
+    height: 55px;
+}
+
+#figure > span {
+    font-size: 0.8em;
+    display: block;
+}
+
+#figure {padding: 1.5%}
+
+#credit {margin: auto}
+
+#credit img {
+    width: 40px;
+    height: 40px;
+}
+
+#credit a {
+    font-size: 15px;
+    text-decoration: none;
+    color: white;
+}
+
+#content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+.shaded {box-shadow: 0 0 10px 1px black}
+
+.shaded:hover, .animated:hover {transition: 0.5s}
+
+.shaded:hover {box-shadow: 0 0 20px 2px black}
+
+.animated:hover {transform: scale(1.05)}
+
+.illuminated:hover, .illuminated:focus {
+    box-shadow: 0 0 40px 5px #f41c52;
+    outline: none; /*убирает рамку фокуса в chrome*/
+}

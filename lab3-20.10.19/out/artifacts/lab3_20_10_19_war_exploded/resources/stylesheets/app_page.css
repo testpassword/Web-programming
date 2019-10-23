@@ -1,0 +1,69 @@
+thead * {margin-top: 4%}
+
+tfoot * {margin-bottom: 4% !important} /*чтобы при скроллинге оставался отступ*/
+
+#mainTable {
+    background-color: ghostwhite;
+    width: 75%;
+    margin: 80px auto;
+}
+
+input, svg {
+    width: 100%;
+    border: 2px solid #f41c52;
+    border-radius: 20px;
+    background-color: white;
+}
+
+input[type=radio] {width: 50px}
+
+svg {
+    width: 300px;
+    height: 300px;
+    box-shadow: inset 0 0 7px 1px gray;
+}
+
+hr {
+    color: #f41c52;
+    width: 95%;
+}
+
+.notification {
+    color: white;
+    padding: 1%;
+}
+
+.outputStub {background-color: #000720}
+
+.errorStub {background-color: #dc143b}
+
+#outputTable {
+    border: 1px solid #000720;
+    border-collapse: collapse;
+    margin: auto;
+    width: 90%;
+}
+
+#outputTable th {
+    background-color: #000720;
+    color: white;
+}
+
+#outputTable * {
+    padding: 25px;
+}
+
+.rotated {
+    animation: rotation 5s infinite linear;
+    background: rgb(2,0,36);
+    background: radial-gradient(circle, rgba(2,0,36,1) 11%, rgba(115,2,9,1) 74%, rgba(138,3,3,1) 83%, rgba(138,3,3,1) 96%);
+}
+
+@-webkit-keyframes rotation {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}

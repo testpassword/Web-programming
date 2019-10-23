@@ -5,7 +5,19 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
-</f:view>
+
+<ui:composition template="templates/tempLayout.xhtml">
+
+    <ui:define name="head">
+        <title>Лабораторная №3 - график</title>
+        <meta name="description" content="Лабораторная работа №3 по дисциплине веб-программирование - график"/>
+        <h:outputStylesheet library="stylesheets" name="app_page.css"/>
+    </ui:define>
+
+    <ui:define name="content">
+        <h1>Приложение</h1>
+    </ui:define>
+
+</ui:composition>
+
 </html>

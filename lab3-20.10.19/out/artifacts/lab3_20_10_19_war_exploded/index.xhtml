@@ -6,13 +6,18 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-<h:body>
-   <ui:composition template="templates/tempLayout.xhtml">
-      <ui:define name="content">
-         <h1>Часы</h1>
-         <a href="app.xhtml">Перейти на главную страницу</a>
-      </ui:define>
-   </ui:composition>
-</h:body>
+<ui:composition template="templates/tempLayout.xhtml">
+
+   <ui:define name="head">
+      <title>Лабораторная №3 - часы</title>
+      <meta name="description" content="Лабораторная работа №3 по дисциплине веб-программирование - страница с часами"/>
+      <h:outputStylesheet library="stylesheets" name="index_page.css"/>
+   </ui:define>
+
+   <ui:define name="content">
+      <h1>Часы</h1>
+      <a href="app.xhtml">Перейти на главную страницу</a>
+   </ui:define>
+</ui:composition>
 
 </html>
