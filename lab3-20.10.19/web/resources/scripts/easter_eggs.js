@@ -1,11 +1,17 @@
 "use strict";
 
 document.addEventListener("DOMContentLoaded", () => {
-    keyMapper(1000, () => document.querySelectorAll("*").forEach(function (node) {
-        node.classList.add("rotated")}), "flex");
+    keyMapper(1000, "joke", function () {
+        document.querySelectorAll("*").forEach((node) => node.classList.add("rotated"));
+        const parent = document.getElementById("content");
+        while (parent.firstChild) parent.firstChild.remove();
+        const img = document.createElement("img");
+        img.src = "resources/images/joker.jpg";
+        parent.appendChild(img);
+    });
 });
 
-function keyMapper(keystrokeDelay, callback, keySequence) {
+function keyMapper(keystrokeDelay, keySequence, callback) {
     let buffer = [];
     let lastKeyTime = Date.now();
     document.addEventListener("keydown", event => {

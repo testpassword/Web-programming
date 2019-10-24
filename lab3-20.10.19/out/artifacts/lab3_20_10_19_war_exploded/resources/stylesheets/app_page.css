@@ -52,18 +52,3 @@ hr {
 #outputTable * {
     padding: 25px;
 }
-
-.rotated {
-    animation: rotation 5s infinite linear;
-    background: rgb(2,0,36);
-    background: radial-gradient(circle, rgba(2,0,36,1) 11%, rgba(115,2,9,1) 74%, rgba(138,3,3,1) 83%, rgba(138,3,3,1) 96%);
-}
-
-@-webkit-keyframes rotation {
-    from {
-        -webkit-transform: rotate(0deg);
-    }
-    to {
-        -webkit-transform: rotate(360deg);
-    }
-}

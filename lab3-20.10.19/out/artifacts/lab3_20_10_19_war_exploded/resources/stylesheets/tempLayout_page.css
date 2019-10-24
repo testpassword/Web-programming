@@ -9,6 +9,14 @@
     font-weight: normal;
 }
 
+a {
+    color: #eb2a5a;
+    font-weight: 200;
+    border-radius: 2px;
+}
+
+a:hover {box-shadow: 0 0 40px 5px #f41c52}
+
 body {background-color: whitesmoke}
 
 #header {
@@ -73,4 +81,28 @@ input, a {cursor: pointer}
 .illuminated:hover, .illuminated:focus {
     box-shadow: 0 0 40px 5px #f41c52;
     outline: none; /*убирает рамку фокуса в chrome*/
+}
+
+.rotated {
+    animation: rotation 5s infinite linear;
+    background: rgb(2,0,36);
+    background: radial-gradient(circle, rgba(2,0,36,1) 11%, rgba(115,2,9,1) 74%, rgba(138,3,3,1) 83%, rgba(138,3,3,1) 96%);
+}
+
+#content h1 {
+    font-size: 8em;
+    margin: 0;
+    background: linear-gradient(130deg, #2a48eb, #ff0018);
+    color: transparent;
+    background-clip: text;
+    text-transform: uppercase;
+}
+
+@-webkit-keyframes rotation {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
 }
