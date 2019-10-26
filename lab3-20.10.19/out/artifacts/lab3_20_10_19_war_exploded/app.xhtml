@@ -6,16 +6,89 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-<ui:composition template="templates/tempLayout.xhtml">
+<ui:composition template="templates/temp_layout.xhtml">
 
     <ui:define name="head">
         <title>Лабораторная №3 - график</title>
         <meta name="description" content="Лабораторная работа №3 по дисциплине веб-программирование - график"/>
         <h:outputStylesheet library="stylesheets" name="app_page.css"/>
+        <h:outputStylesheet library="stylesheets" name="check_button.css"/>
     </ui:define>
 
     <ui:define name="content">
-        <h1>Приложение</h1>
+        <table id="mainTable" class="shaded">
+            <thead>
+            <tr><td colspan="6"><h3>Валидация введённых значений:</h3></td></tr>
+            </thead>
+            <tbody>
+            <tr><td colspan="6"><hr/></td></tr>
+            <tr>
+                <td rowspan="3">Выберите X:</td>
+                <td>-5<input name="X" class="illuminated animated" type="radio" value="-5"/></td>
+                <td>-4<input name="X" class="illuminated animated" type="radio" value="-4"/></td>
+                <td>-3<input name="X" class="illuminated animated" type="radio" value="-3"/></td>
+                <td>-2<input name="X" class="illuminated animated" type="radio" value="-2"/></td>
+                <td rowspan="4">
+                    <svg xmlns="http://www.w3.org/2000/svg">
+                        <line x1="0" y1="150" x2="300" y2="150" stroke="#000720"/>
+                        <line x1="150" y1="0" x2="150" y2="300" stroke="#000720"/>
+                        <polygon points="300,150 295,155 295, 145" fill="#000720" stroke="#000720"/>
+                        <polygon points="150,0 145,5 155,5" fill="#000720" stroke="#000720"/>
+                        <text x="265" y="140">R</text>
+                        <text x="200" y="140">R/2</text>
+                        <text x="75" y="140">-R/2</text>
+                        <text x="20" y="140">-R</text>
+                        <text x="156" y="35">R</text>
+                        <text x="156" y="95">R/2</text>
+                        <text x="156" y="215">-R/2</text>
+                        <text x="156" y="275">-R</text>
+                        <rect x="30" y="90" width="120" height="60" fill-opacity="0.4" stroke="navy" fill="blue"/>
+                        <polygon points="150,150 150,30 210,150" fill-opacity="0.4" stroke="navy" fill="blue"/>
+                        <path d="M 150 150 L 270 150 C 270 200 210 270 150 270 Z" fill-opacity="0.4" stroke="navy" fill="blue"/>
+                    </svg>
+                </td>
+            </tr>
+            <tr>
+                <td>-1<input name="X" class="illuminated animated" type="radio" value="-1"/></td>
+                <td>0<input name="X" class="illuminated animated" type="radio" value="0"/></td>
+                <td>1<input name="X" class="illuminated animated" type="radio" value="1"/></td>
+                <td>2<input name="X" class="illuminated animated" type="radio" value="2"/></td>
+            </tr>
+            <tr>
+                <td>3<input name="X" class="illuminated animated" type="radio" value="3"/></td>
+                <td>4<input name="X" class="illuminated animated" type="radio" value="4"/></td>
+                <td>5<input name="X" class="illuminated animated" type="radio" value="5"/></td>
+            </tr>
+            <tr>
+                <td>Введите Y:</td>
+                <td colspan="4"><input name="Y-input" class="illuminated animated" type="text" placeholder="значение в промежутке (-5 до 3)" maxlength="6"/></td>
+            </tr>
+            <tr>
+                <td rowspan="2">Выберите R:</td>
+                <td><h:commandButton styleClass="illuminated animated" value="1"/></td>
+                <td><h:commandButton styleClass="animated illuminated" value="2"/></td>
+                <td><h:commandButton styleClass="illuminated animated" value="3"/></td>
+                <td><h:commandButton styleClass="illuminated animated" value="4"/></td>
+            </tr>
+            <tr>
+                <td><h:commandButton value="5"/></td>
+                <td colspan="3"><!--Пустые клетки--></td>
+                <td><h:link  value="Вернуться на домашную страницу" outcome="index.xhtml"/></td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <button id="checkButton">Проверить</button>
+                    <hr/>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="6" id="outputContainer"><h4><span class="outputStub notification">Результаты отсутствуют</span></h4></td>
+            </tr>
+            </tfoot>
+        </table>
+        <h:outputScript library="scripts" name="validator.js"/>
     </ui:define>
 
 </ui:composition>

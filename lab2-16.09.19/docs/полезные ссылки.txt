@@ -9,3 +9,4 @@ http://www.websphererus.com/development/introducing-to-jsf
 https://proselyte.net/tutorials/servlets/life-cycle/#
 https://medium.com/javascript-in-plain-english/how-to-detect-a-sequence-of-keystrokes-in-javascript-83ec6ffd8e93
 https://stackoverflow.com/questions/43172115/get-the-mouse-coordinates-when-clicking-on-canvas
+http://javastudy.ru/interview/jee-jsp-questions-answers/

@@ -1,11 +1,16 @@
-thead * {margin-top: 4%}
+thead h3 {
+    margin-top: 2%;
+    margin-bottom: 0;
+}
 
-tfoot * {margin-bottom: 4% !important} /*чтобы при скроллинге оставался отступ*/
+tfoot * {
+    margin-top: 1%;
+    margin-bottom: 5% !important; /*чтобы при скроллинге оставался отступ*/
+}
 
 #mainTable {
     background-color: ghostwhite;
-    width: 75%;
-    margin: 80px auto;
+    width: 1000px;
 }
 
 input, svg {

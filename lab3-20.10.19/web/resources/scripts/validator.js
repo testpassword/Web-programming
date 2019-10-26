@@ -4,7 +4,7 @@ let x, y, r;
 
 //Обновляет значение x в соответсвии с нажатой кнопкой, добавляет ей эффекты (подсветка и увеличение), убирая их для остальных кнопок группы.
 document.addEventListener("DOMContentLoaded", () => {
-    let buttons = document.querySelectorAll("input[name=X-button]");
+    let buttons = document.querySelectorAll("input[type=submit]");
     buttons.forEach(click);
 
     function click(element) {
