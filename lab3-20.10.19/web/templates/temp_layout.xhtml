@@ -6,43 +6,45 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-<h:head>
-    <meta name="author" content="Кульбако Артемий Юрьевич"/>
-    <meta name="keywords" content="ВТ, Лабораторная работа, Веб-программирование, Институт Тёплых Мужскин Отношений"/>
-    <h:outputStylesheet library="stylesheets" name="temp_layout_page.css"/>
-    <link rel="icon" type="image/jpg" href="#{resource['images/favicon.jpg']}"/>
-    <ui:insert name="head">
-        Побочные meta-теги
-    </ui:insert>
-</h:head>
-
-<h:body>
-    <div id="header" class="shaded animated">
-        <h1>Веб-программирование, Лаб. 3, Вариант 13213</h1>
-        <table id="credit">
-            <tbody><tr>
-                <td><h:graphicImage library="images" name="avatar.png" align="middle" alt="Аватар разработчика"/></td>
-                <td><a href="https://github.com/testpassword" title="Перейти к профилю Github разработчика">Кульбако Артемий Юрьевич, P3212</a></td>
-            </tr></tbody>
-        </table>
-    </div>
-    
-    <div id="content">
-        <ui:insert name="content">
-            Содержимое страницы
+<f:view>
+    <h:head>
+        <meta name="author" content="Кульбако Артемий Юрьевич"/>
+        <meta name="keywords" content="ВТ, Лабораторная работа, Веб-программирование, Институт Тёплых Мужскин Отношений"/>
+        <h:outputStylesheet library="stylesheets" name="temp_layout_page.css"/>
+        <link rel="icon" type="image/jpg" href="#{resource['images/favicon.jpg']}"/>
+        <ui:insert name="head">
+            Побочные meta-теги
         </ui:insert>
-    </div>
-    
-    <div id="footer" class="shaded animated">
-        <div id="figure">
-            <a href="https://se.ifmo.ru">
-                <h:graphicImage title="Перейти на сайт кафедры вычислительной техники НИУ ИТМО" class="illuminated"
-                                library="images" name="pulpit_logo.png"/>
-            </a>
-            <span>2019</span>
+    </h:head>
+
+    <h:body>
+        <div id="header" class="shaded animated">
+            <h1>Веб-программирование, Лаб. 3, Вариант 13213</h1>
+            <table id="credit">
+                <tbody><tr>
+                    <td><h:graphicImage library="images" name="avatar.png" align="middle" alt="Аватар разработчика"/></td>
+                    <td><a href="https://github.com/testpassword" title="Перейти к профилю Github разработчика">Кульбако Артемий Юрьевич, P3212</a></td>
+                </tr></tbody>
+            </table>
         </div>
-    </div>
-    <h:outputScript library="scripts" name="easter_eggs.js"/>
-</h:body>
+
+        <div id="content">
+            <ui:insert name="content">
+                Содержимое страницы
+            </ui:insert>
+        </div>
+
+        <div id="footer" class="shaded animated">
+            <div id="figure">
+                <a href="https://se.ifmo.ru">
+                    <h:graphicImage title="Перейти на сайт кафедры вычислительной техники НИУ ИТМО" class="illuminated"
+                                    library="images" name="pulpit_logo.png"/>
+                </a>
+                <span>2019</span>
+            </div>
+        </div>
+        <h:outputScript library="js" name="easter_eggs.js"/>
+    </h:body>
+</f:view>
 
 </html>

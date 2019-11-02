@@ -7,6 +7,10 @@
         <element id="directory" name="classes">
           <element id="module-output" name="lab3-20.10.19" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Primefaces" />
+          <element id="library" level="project" name="JPA 2.0-2.0" />
+        </element>
       </element>
     </root>
   </artifact>

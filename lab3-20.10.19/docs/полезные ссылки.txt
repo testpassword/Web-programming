@@ -3,3 +3,8 @@ https://www.w3.org/Style/Examples/007/center.ru.html
 https://javabeat.net/jsf-custom-error-pages/
 https://codepen.io/anthonydugois/pen/mewdyZ - svg path-builder
 https://www.primefaces.org/showcase/ui/input/oneRadio.xhtml
+https://www.primefaces.org/showcase/getstarted.xhtml
+https://stackoverflow.com/questions/36738763/primefaces-in-intellij-do-not-show
+http://qaru.site/questions/1864587/how-to-get-the-selected-option-from-pselectoneradio-using-javascript
+https://webformyself.com/chasy-na-javascript/
+http://javaonlineguide.net/2015/09/how-to-call-jsf-managed-bean-method-using-javascript-premotecommand-example.html

@@ -27,9 +27,15 @@ header, footer {
     left: 0;
 }
 
-thead * {margin-top: 4%}
+thead * {
+    margin-top: 4%;
+    margin-bottom: 1%;
+}
 
-tfoot * {margin-bottom: 4% !important} /*чтобы при скроллинге оставался отступ*/
+tfoot * {
+    margin-top: 1%;
+    margin-bottom: 4% !important;
+} /*чтобы при скроллинге оставался отступ*/
 
 #mainTable {
     background-color: ghostwhite;
