@@ -67,16 +67,16 @@
                 </tr>
                 <tr>
                     <td>Выберите R:</td>
-                    <td><input type="button" name="R-button" class="illuminated animated commandButtonsGroup" value="1"/></td>
-                    <td><input type="button" name="R-button" class="illuminated animated commandButtonsGroup" value="2"/></td>
-                    <td><input type="button" name="R-button" class="illuminated animated commandButtonsGroup" value="3"/></td>
-                    <td><input type="button" name="R-button" class="illuminated animated commandButtonsGroup" value="4"/></td>
-                    <td><input type="button" name="R-button" class="illuminated animated commandButtonsGroup" value="5"/></td>
+                    <td><h:commandButton type="button" styleClass="illuminated animated commandButtonsGroup" value="1"/></td>
+                    <td><h:commandButton type="button" styleClass="illuminated animated commandButtonsGroup" value="2"/></td>
+                    <td><h:commandButton type="button" styleClass="illuminated animated commandButtonsGroup" value="3"/></td>
+                    <td><h:commandButton type="button" styleClass="illuminated animated commandButtonsGroup" value="4"/></td>
+                    <td><h:commandButton type="button" styleClass="illuminated animated commandButtonsGroup" value="5"/></td>
                     <td><h:link value="Вернуться на домашную страницу" outcome="index.xhtml"/></td>
                 </tr>
                 <tr>
                     <td colspan="7">
-                        <p:remoteCommand name="sendRequest" action="#{main.test}"/>
+                        <p:remoteCommand name="sendRequest" action="#{main.validate}"/>
                         <button id="checkButton" type="button" onclick="verify()">Проверить</button>
                         <hr/>
                     </td>

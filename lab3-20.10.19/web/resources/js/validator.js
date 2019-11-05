@@ -4,7 +4,7 @@ let x, y, r;
 
 //Обновляет значение x в соответсвии с нажатой кнопкой, добавляет ей эффекты (подсветка и увеличение), убирая их для остальных кнопок группы.
 document.addEventListener("DOMContentLoaded", () => {
-    let buttons = document.querySelectorAll("input[name=R-button]");
+    let buttons = document.querySelectorAll("input[type=button]");
     buttons.forEach(click);
 
     function click(element) {
@@ -23,9 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function verify() {
-    if (validateX() & validateY() & validateR()) {
-        //TODO: правильно считать координаты точки
-        document.querySelector("svg").insertAdjacentHTML("beforeend", `<circle r="5" cx="${x}" cy="${y}" fill-opacity="0.7" fill="red" stroke="firebrick"></circle>`);
+    if (validateX() && validateY() && validateR()) {
         console.log(`x=${x} y=${y} r=${r}`);
         sendRequest([{name:"X-value", value:x}, {name:"Y-value", value:y}, {name:"R-value", value:r}]);
     }
@@ -48,6 +46,7 @@ function createNotification(message) {
 
 function validateX() {
     if (isNumeric(x)) return true;
+    else createNotification("X не выбран");
 }
 
 //Позволяет получить значение x из нестандартного элемента p:oneSelectRadio

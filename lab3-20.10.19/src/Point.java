@@ -1,14 +1,21 @@
-import java.io.Serializable;
+import com.sun.istack.internal.NotNull;
+
+import javax.persistence.*;
 import java.util.Date;
 
-public class Point implements Serializable {
+@Entity
+@Table(name = "points")
+public class Point {
 
-    private double x, y, r;
-    private boolean coordsStatus;
+    @SequenceGenerator(name = "seqGen", sequenceName = "gen_seq", allocationSize = 1)
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqGen") private int id;
+    @NotNull private String owner;
+    @NotNull private double x, y, r;
+    @NotNull private boolean coordsStatus;
     private Date bornDate;
-    public static final long serialVersionUID = 4L;
 
-    public Point(double x, double y, double r) {
+    public Point(String owner, double x, double y, double r) {
+        this.owner = owner;
         this.x = x;
         this.y = y;
         this.r = r;
@@ -16,42 +23,11 @@ public class Point implements Serializable {
         bornDate = new Date();
     }
 
+    public Point() {}
+
     private boolean checkCoordinates(double x, double y, double r) {
-        return  (((x >= -r/2) && (x <= 0) && (y >= 0) && (y <= r/2)) && (y <= x + r/2) ||
-                ((x >= 0) && (x <= r) && (y <= 0) && (y >= -r/2)) ||
-                ((Math.pow(x, 2) + Math.pow(y, 2)) <= ((Math.pow(r, 2))) && (x >= 0) && (y >= 0)));
-    }
-
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public double getR() {
-        return r;
-    }
-
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public void setY(double y) {
-        this.y = y;
-    }
-
-    public void setR(double r) {
-        this.r = r;
-    }
-
-    public boolean coordsStatus() {
-        return coordsStatus;
-    }
-
-    public Date getBornDate() {
-        return bornDate;
+        return (x <= 0 && y >= 0 && x >= -r && y <= r/2) || (x >= 0 && y >= 0 && y <= (x - r/2) * (-2)) ||
+                (x >= 0 && y <= 0 && x * x + y * y <= Math.pow(r, 2));
     }
 
     @Override
@@ -72,5 +48,53 @@ public class Point implements Serializable {
                 "<td>" + r + "</td>" +
                 "<td style='color: " + ((coordsStatus) ? "green" : "red") + "'>" + coordsStatus + "</td>" +
                 "<td>" + bornDate + "</td></tr>";
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
+    public double getR() {
+        return r;
+    }
+
+    public void setR(double r) {
+        this.r = r;
+    }
+
+    public boolean isCoordsStatus() {
+        return coordsStatus;
+    }
+
+    public void setCoordsStatus(boolean coordsStatus) {
+        this.coordsStatus = coordsStatus;
     }
 }

@@ -7,5 +7,5 @@ function clock() {
      seconds = (date.getSeconds() < 10) ? "0" + date.getSeconds() : date.getSeconds();
  document.getElementById("clock").innerHTML = `${hours}:${minutes}:${seconds}`;
 }
-setInterval(clock, 10000); //TODO: интервал согласно варианту
+setInterval(clock, 10000);
 clock();

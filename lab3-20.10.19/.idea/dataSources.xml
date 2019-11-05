@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="web3@localhost" uuid="4ced1fd0-7acb-480b-bb6d-fa4983066705">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/web3</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="db_con/EclipseLink" uuid="83afdd42-2cb9-4343-bb54-2afc15d80904">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>EclipseLink
+
+V:/ITMO/2 course/web-programming/lab3-20.10.19/src/META-INF/persistence.xml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/web3</jdbc-url>
+    </data-source>
+  </component>
+</project>

@@ -1,45 +1,31 @@
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+import java.io.Serializable;
 import java.util.Map;
 
 @ManagedBean(name = "main")
 @SessionScoped
-public class MainBean {
+public class MainBean implements Serializable {
 
-    private double x, y, r;
+    private static final long serialVersionUID = 4L;
 
-    public void test() {
-        System.out.println("TEST SUCCESS");
-        System.out.println("GETTING PARAMS");
-        Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        this.x = Double.parseDouble(params.get("X-value"));
-        this.y = Double.parseDouble(params.get("Y-value"));
-        this.r = Double.parseDouble(params.get("R-value"));
-        System.out.println("X = " + this.x + " Y = " + y + " R= " + r);
-    }
-
-    public double getX() {
-        return x;
-    }
-
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
-    }
-
-    public double getR() {
-        return r;
-    }
-
-    public void setR(double r) {
-        this.r = r;
+    public void validate() {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        Map<String, String> params = facesContext.getExternalContext().getRequestParameterMap();
+        Point point = new Point(facesContext.getExternalContext().getSessionId(true), Double.parseDouble(params.get("X-value")),
+                Double.parseDouble(params.get("Y-value")), Double.parseDouble(params.get("R-value")));
+        EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("db_con");
+        EntityManager manager = managerFactory.createEntityManager();
+        EntityTransaction transaction =  manager.getTransaction();
+        transaction.begin();
+        manager.persist(point);
+        transaction.commit();
+        manager.close();
+        managerFactory.close();
     }
 }
