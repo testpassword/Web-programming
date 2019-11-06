@@ -5,8 +5,8 @@
     http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 
     <managed-bean>
-        <managed-bean-name>main</managed-bean-name>
-        <managed-bean-class>MainBean</managed-bean-class>
+        <managed-bean-name>realHuman</managed-bean-name>
+        <managed-bean-class>RealHumanBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
 </faces-config>

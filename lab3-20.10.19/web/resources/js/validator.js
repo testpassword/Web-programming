@@ -24,8 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function verify() {
     if (validateX() && validateY() && validateR()) {
-        console.log(`x=${x} y=${y} r=${r}`);
         sendRequest([{name:"X-value", value:x}, {name:"Y-value", value:y}, {name:"R-value", value:r}]);
+        document.getElementById("outputContainer").remove();
     }
 }
 

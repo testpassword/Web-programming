@@ -1,5 +1,3 @@
-import com.sun.istack.internal.NotNull;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -9,9 +7,9 @@ public class Point {
 
     @SequenceGenerator(name = "seqGen", sequenceName = "gen_seq", allocationSize = 1)
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqGen") private int id;
-    @NotNull private String owner;
-    @NotNull private double x, y, r;
-    @NotNull private boolean coordsStatus;
+    private String owner;
+    private double x, y, r;
+    private boolean coordsStatus;
     private Date bornDate;
 
     public Point(String owner, double x, double y, double r) {
@@ -96,5 +94,13 @@ public class Point {
 
     public void setCoordsStatus(boolean coordsStatus) {
         this.coordsStatus = coordsStatus;
+    }
+
+    public Date getBornDate() {
+        return bornDate;
+    }
+
+    public void setBornDate(Date bornDate) {
+        this.bornDate = bornDate;
     }
 }

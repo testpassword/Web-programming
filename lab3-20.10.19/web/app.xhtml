@@ -42,12 +42,12 @@
                         </p:selectOneRadio>
                     </td>
                     <td rowspan="2">
-                        <svg xmlns="http://www.w3.org/2000/svg">
+                        <svg id="graph" xmlns="http://www.w3.org/2000/svg">
                             <line x1="0" y1="150" x2="300" y2="150" stroke="#000720"/>
                             <line x1="150" y1="0" x2="150" y2="300" stroke="#000720"/>
                             <polygon points="300,150 295,155 295, 145" fill="#000720" stroke="#000720"/>
                             <polygon points="150,0 145,5 155,5" fill="#000720" stroke="#000720"/>
-                            <text x="265" y="140">R</text>
+                           <text x="265" y="140">R</text>
                             <text x="200" y="140">R/2</text>
                             <text x="75" y="140">-R/2</text>
                             <text x="20" y="140">-R</text>
@@ -55,9 +55,10 @@
                             <text x="156" y="95">R/2</text>
                             <text x="156" y="215">-R/2</text>
                             <text x="156" y="275">-R</text>
-                            <rect x="30" y="90" width="120" height="60" fill-opacity="0.4" stroke="navy" fill="blue"/>
-                            <polygon points="150,150 150,30 210,150" fill-opacity="0.4" stroke="navy" fill="blue"/>
-                            <path d="M 150 150 L 270 150 C 270 200 210 270 150 270 Z" fill-opacity="0.4" stroke="navy" fill="blue"/>
+                            <rect id="rect" x="30" y="90" width="120" height="60" fill-opacity="0.4" stroke="navy" fill="blue"/>
+                            <polygon id="triangle" points="150,150 150,30 210,150" fill-opacity="0.4" stroke="navy" fill="blue"/>
+                            <path id="circle" d="M 150 150 L 270 150 C 270 200 210 270 150 270 Z" fill-opacity="0.4" stroke="navy" fill="blue"/>
+                            <circle id="target" r="5" cx="0" cy="0" fill-opacity="0.7" fill="red" visibility="hidden"/>
                         </svg>
                     </td>
                 </tr>
@@ -76,7 +77,7 @@
                 </tr>
                 <tr>
                     <td colspan="7">
-                        <p:remoteCommand name="sendRequest" action="#{main.validate}"/>
+                        <p:remoteCommand name="sendRequest" update="resTab" action="#{realHuman.validate}"/>
                         <button id="checkButton" type="button" onclick="verify()">Проверить</button>
                         <hr/>
                     </td>
@@ -84,12 +85,37 @@
                 </h:form>
                 </tbody>
                 <tfoot>
+                <tr id="outputContainer"><td colspan="7"><h4><span class="outputStub notification">Результаты отсутствуют</span></h4></td></tr>
                 <tr>
-                    <td colspan="7" id="outputContainer"><h4><span class="outputStub notification">Результаты отсутствуют</span></h4></td>
+                    <td colspan="7">
+                            <h:dataTable value="#{realHuman.points}" var="p" id="resTab">
+                                <h:column>
+                                    <f:facet name="header">x</f:facet>
+                                    #{p.x}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">y</f:facet>
+                                    #{p.y}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">r</f:facet>
+                                    #{p.r}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Точка входит в ОДЗ</f:facet>
+                                    #{p.coordsStatus}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Дата запроса</f:facet>
+                                    #{p.bornDate}
+                                </h:column>
+                            </h:dataTable>
+                    </td>
                 </tr>
                 </tfoot>
             </table>
         <h:outputScript library="js" name="validator.js"/>
+        <h:outputScript library="js" name="graph_drawer.js"/>
     </ui:define>
 
 </ui:composition>
