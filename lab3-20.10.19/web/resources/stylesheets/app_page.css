@@ -44,3 +44,8 @@ hr {
     margin-bottom: 3%;
     width: 90%;
 }
+
+#resTab th {
+    color: white;
+    background-color: #000720;
+}

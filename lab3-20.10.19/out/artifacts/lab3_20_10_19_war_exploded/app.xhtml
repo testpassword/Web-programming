@@ -22,7 +22,7 @@
                 <tr><td colspan="7"><h3>Валидация введённых значений:</h3></td></tr>
                 </thead>
                 <tbody>
-                <h:form id="form">
+                <h:form id="form" prependId="false">
                 <tr><td colspan="7"><hr/></td></tr>
                 <tr>
                     <td>Выберите X:</td>
@@ -47,17 +47,9 @@
                             <line x1="150" y1="0" x2="150" y2="300" stroke="#000720"/>
                             <polygon points="300,150 295,155 295, 145" fill="#000720" stroke="#000720"/>
                             <polygon points="150,0 145,5 155,5" fill="#000720" stroke="#000720"/>
-                           <!-- <text x="265" y="140">R</text>
-                            <text x="200" y="140">R/2</text>
-                            <text x="75" y="140">-R/2</text>
-                            <text x="20" y="140">-R</text>
-                            <text x="156" y="35">R</text>
-                            <text x="156" y="95">R/2</text>
-                            <text x="156" y="215">-R/2</text>
-                            <text x="156" y="275">-R</text>-->
                             <rect id="rect" x="30" y="90" width="120" height="60" fill-opacity="0.4" stroke="navy" fill="blue"/>
                             <polygon id="triangle" points="150,150 150,30 210,150" fill-opacity="0.4" stroke="navy" fill="blue"/>
-                            <path id="circle" d="M 150 150 L 270 150 C 270 200 210 270 150 270 Z" fill-opacity="0.4" stroke="navy" fill="blue"/>
+                            <path id="circle" d="M 150 150 L 270 150 C 270 210 210 270 150 270 Z" fill-opacity="0.4" stroke="navy" fill="blue"/>
                             <circle id="target" r="5" cx="0" cy="0" fill-opacity="0.7" fill="red" visibility="hidden"/>
                         </svg>
                     </td>
@@ -78,7 +70,7 @@
                 <tr>
                     <td colspan="7">
                         <p:remoteCommand name="sendRequest" update="resTab" action="#{realHuman.validate}"/>
-                        <button id="checkButton" type="button" onclick="verify()">Проверить</button>
+                        <button id="checkButton" type="button">Проверить</button>
                         <hr/>
                     </td>
                 </tr>

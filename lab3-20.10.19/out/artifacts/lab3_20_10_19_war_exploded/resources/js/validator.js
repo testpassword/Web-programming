@@ -18,16 +18,17 @@ document.addEventListener("DOMContentLoaded", () => {
             this.style.boxShadow = "0 0 40px 5px #f41c52";
             this.style.backgroundColor = "#f41c52";
             this.style.color = "white";
+            redrawGraph();
         }
     }
 });
 
-function verify() {
+document.getElementById("checkButton").onclick = function () {
     if (validateX() && validateY() && validateR()) {
         sendRequest([{name:"X-value", value:x}, {name:"Y-value", value:y}, {name:"R-value", value:r}]);
         document.getElementById("outputContainer").remove();
     }
-}
+};
 
 function createNotification(message) {
     let outputContainer = document.getElementById("outputContainer");

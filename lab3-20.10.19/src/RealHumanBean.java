@@ -1,4 +1,3 @@
-import javax.faces.component.html.HtmlDataTable;
 import javax.faces.context.FacesContext;
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,14 +7,17 @@ import java.util.Map;
 public class RealHumanBean implements Serializable {
 
     private static final long serialVersionUID = 4L;
-    private EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("db_con");
-    private EntityManager manager = managerFactory.createEntityManager();
-    private EntityTransaction transaction = manager.getTransaction();
+    private EntityManagerFactory managerFactory;
+    private EntityManager manager;
+    private EntityTransaction transaction;
     private List<Point> points;
 
     public void validate() {
         try {
             FacesContext facesContext = FacesContext.getCurrentInstance();
+            managerFactory = Persistence.createEntityManagerFactory("db_con");
+            manager = managerFactory.createEntityManager();
+            transaction = manager.getTransaction();
             Map<String, String> params = facesContext.getExternalContext().getRequestParameterMap();
             Point point = new Point(facesContext.getExternalContext().getSessionId(true), Double.parseDouble(params.get("X-value")),
                     Double.parseDouble(params.get("Y-value")), Double.parseDouble(params.get("R-value")));
