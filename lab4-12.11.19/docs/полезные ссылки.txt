@@ -1,0 +1,4 @@
+https://www.youtube.com/watch?v=4O1twLpg-7A&t=1138s
+https://www.jetbrains.com/help/idea/vue-js.html
+https://www.npmjs.com/package/vue-fixed-header
+https://stackoverflow.com/questions/52082968/vue-js-2-vue-cannot-find-files-from-assets-folder-v-for
