@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-      <Header v-bind:title="title" v-bind:author-name="authorName" v-bind:author-url="authorUrl" v-bind:author-logo="authorLogo"/>
-      <Validator/>
-      <Footer v-bind:pulpit-logo="pulpitLogo" v-bind:pulput-url="pulpitUrl" v-bind:dev-year="devYear"/>
+      <Header :title="title" :author-name="authorName" :author-url="authorUrl" :author-logo="authorLogo"/>
+      <Validator :content-title="contentTitle"/>
+      <Footer :pulpit-logo="pulpitLogo" :pulput-url="pulpitUrl" :dev-year="devYear"/>
   </div>
 </template>
 
@@ -24,7 +24,8 @@ export default {
           authorLogo: "/assets/img/avatar.png",
           pulpitLogo: "/assets/img/pulpit.png",
           pulpitUrl: "https://se.ifmo.ru",
-          devYear: "2019"
+          devYear: "2019",
+          contentTitle: "Валидация введёных значений"
       }
   }
 }
