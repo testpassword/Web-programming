@@ -1,7 +1,7 @@
 <template>
     <div id="footer" class="shaded animated">
         <figure>
-            <a v-bind:href="pulpitUrl">
+            <a class="illuminated" v-bind:href="pulpitUrl">
                 <img v-bind:src="pulpitLogo" alt="Лого сайта кафедры" title="Перейти на сайт кафедры" class="illuminated">
             </a>
             <figcaption>{{ devYear }}</figcaption>
@@ -12,12 +12,17 @@
 <script>
     export default {
         name: "Footer",
-        props: ["pulpitLogo", "pulpitUrl", "devYear"]
+        data: function () {
+            return {
+                pulpitLogo: "/assets/img/pulpit.png",
+                pulpitUrl: "https://se.ifmo.ru",
+                devYear: "2019"
+            }
+        }
     }
 </script>
 
 <style scoped>
-
     #footer {
         bottom: 0;
         z-index: 10; /*чтобы footer всегда был сверху*/
@@ -39,5 +44,4 @@
     }
 
     figure {padding: 0.5%}
-
 </style>

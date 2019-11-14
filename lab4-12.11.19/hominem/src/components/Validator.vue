@@ -1,53 +1,39 @@
 <template>
-    <div id="content" class="shaded">
+    <div id="content">
         <div id="headContainer">
-            <h3 id="title">{{ contentTitle }}</h3>
+            <Notification :message="contentTitle" :is-error="false"/>
             <hr/>
         </div>
         <div id="appContainer">
             <a href="" title="Вернуться на домашную страницу">Домой</a> <!--ссылка-->
-            <CheckButton/>
+            <CheckButton :label="label"/>
             <hr/>
         </div>
         <div id="outputContainer">
-            <h4><span class="outputStub notification">Результаты отсутствуют</span></h4>
+            <Notification :message="message" :is-error="isError"/>
         </div>
     </div>
 </template>
 
 <script>
     import CheckButton from "@/components/CheckButton";
+    import Notification from "@/components/Notification";
 
     export default {
         name: "Content",
-        components: {CheckButton},
-        props: ["contentTitle"]
+        components: {Notification, CheckButton},
+        data: function () {
+            return {
+                contentTitle: "Валидация введёных значений",
+                label: "Проверить",
+                message: "Результаты отсутствуют",
+                isError: false
+            }
+        }
     }
 </script>
 
 <style scoped>
-
-    body {background-color: whitesmoke}
-
-    #content {
-        background-color: ghostwhite;
-        width: 80%;
-        margin: 100px auto;
-    }
-
-    hr {
-        color: #f41c52;
-        width: 95%;
-    }
-
-    .notification {
-        color: white;
-        padding: 10px;
-    }
-
-    .outputStub {background-color: #000720}
-
-    .errorStub {background-color: #dc143b}
 
     /*input, svg {
         width: 100%;
@@ -81,5 +67,4 @@
     #outputTable * {
         padding: 25px;
     }*/
-
 </style>
