@@ -2,7 +2,7 @@
   <div id="app">
       <Header/>
       <div id="contentContainer" class="shaded">
-          <Accessor/>
+          <Validator/>
       </div>
       <Footer/>
   </div>
@@ -10,13 +10,37 @@
 
 <script>
 import Header from "@/components/Header";
-import Accessor from "@/components/Accessor";
+import Validator from "@/components/Validator";
 import Footer from "@/components/Footer";
 
 export default {
   name: 'app',
-  components: {
-      Footer, Accessor, Header
+  components: {Footer, Validator, Header},
+  methods: {
+      keyMapper: function (keystrokeDelay, keySequence, callback) {
+          let buffer = [];
+          let lastKeyTime = Date.now();
+          document.addEventListener("keydown", event => {
+              let charList = "abcdefghijklmnopqrstuvwxyz0123456789";
+              const key = event.key.toLowerCase();
+              if (charList.indexOf(key) === -1) return;
+              let currentTime = Date.now();
+              if (currentTime - lastKeyTime > 1000) buffer = [];
+              buffer.push(key);
+              lastKeyTime = currentTime;
+              if (buffer.join("") === keySequence) callback();
+          })
+      }
+  },
+  created: function () {
+      this.keyMapper(1000, "joke", function () {
+          document.querySelectorAll("*").forEach((node) => node.classList.add("rotated"));
+          const parent = document.getElementById("content");
+          while (parent.firstChild) parent.firstChild.remove();
+          const img = document.createElement("img");
+          img.src = "/assets/img/joker.jpg";
+          parent.appendChild(img);
+      });
   }
 }
 </script>
@@ -43,11 +67,6 @@ export default {
         background-color: ghostwhite;
     }
 
-    #contentContainer * {
-        position: relative;
-        top: 15%;
-    }
-
     a {
         color: #eb2a5a;
         font-weight: 200;
@@ -56,7 +75,6 @@ export default {
 
     hr {
         color: #f41c52;
-        width: 95%;
     }
 
     .shaded {box-shadow: 0 0 10px 1px black} /* постоянная тень*/
@@ -70,6 +88,11 @@ export default {
     .illuminated:hover, .illuminated:focus { /*подстветка элемента при наведении на него*/
         box-shadow: 0 0 40px 5px #f41c52;
         outline: none; /*убирает рамку фокуса в chrome*/
+    }
+
+    .colored:focus { /*меняет цвет элемента в фокусе*/
+        background-color: #f41c52;
+        color: white;
     }
 
     .rounded { /*скруглённые края*/

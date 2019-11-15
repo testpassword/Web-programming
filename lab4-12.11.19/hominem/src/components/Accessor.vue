@@ -2,8 +2,16 @@
     <div id="content">
         <Notification :message="'(' + time + ') ' + message" :is-error="isError"/>
         <hr/>
-        <label for="loginInput">Введите почту:</label><input id="loginInput" class="illuminated animated rounded" type="text" placeholder="email"/>
-        <label for="passwordInput">Введите пароль:</label><input id="passwordInput" class="illuminated animated rounded" type="password" placeholder="secret_word"/>
+        <table>
+            <tr>
+                <td><label for="loginInput">Введите почту:</label></td>
+                <td><input id="loginInput" class="illuminated animated rounded colored" type="text" placeholder="email"/></td>
+            </tr>
+            <tr>
+                <td><label for="passwordInput">Введите пароль:</label></td>
+                <td><input id="passwordInput" class="illuminated animated rounded colored" type="password" placeholder="secret_word"/></td>
+            </tr>
+        </table>
         <hr/>
         <CheckButton :label="label"/>
     </div>
@@ -41,11 +49,16 @@
 </script>
 
 <style scoped>
-
     #content {
         margin-left: 10%;
         margin-right: 10%;
+        position: relative;
+        top: 30%;
     }
 
     #content * {margin: 2%}
+
+    table {
+        width: 100%
+    }
 </style>
