@@ -1,12 +1,13 @@
 <template>
-    <button id="checkButton">{{ label }}</button>
+    <button @click="action" id="checkButton">{{ label }}</button>
 </template>
 
 <script>
     export default {
         name: "CheckButton",
         props: {
-            label: String
+            label: String,
+            action: Function
         }
     }
 </script>

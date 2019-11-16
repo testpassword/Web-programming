@@ -3,7 +3,7 @@
         <h1>{{ title }}</h1>
         <table id="credit">
             <tbody><tr>
-                <td><img v-bind:src="authorLogo" alt="Аватар разработчика"></td>
+                <td><img v-bind:src="authorLogoPath" alt="Аватар разработчика"></td>
                 <td><a class="illuminated" v-bind:href="authorUrl" title="Перейти на сайт разработчика">{{ authorName }}</a></td>
             </tr></tbody>
         </table>
@@ -13,30 +13,11 @@
 <script>
     export default {
         name: "Header",
-        data: function () {
-            return {
-                title: "Веб-программирование, Лаб. 4, Вариант XXX",
-                authorName: "Кульбако Артемий Юрьевич, P3212",
-                authorUrl: "https://github.com/testpassword",
-                authorLogo: "/assets/img/avatar.png"
-            }
-        },
-        created: function () {
-            let buttons = document.querySelectorAll("input");
-            buttons.forEach(click);
-
-            function click(element) {
-                element.onclick = function () {
-                    buttons.forEach(function (element) {
-                        element.style.boxShadow = null;
-                        element.style.backgroundColor = null;
-                        element.style.color = null;
-                    });
-                    this.style.boxShadow = "0 0 40px 5px #f41c52";
-                    this.style.backgroundColor = "#f41c52";
-                    this.style.color = "white";
-                }
-            }
+        props: {
+            title: String,
+            authorName: String,
+            authorUrl: String,
+            authorLogoPath: String
         }
     }
 </script>

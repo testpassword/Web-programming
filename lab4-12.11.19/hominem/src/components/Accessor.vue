@@ -12,7 +12,6 @@
                 <td><input id="passwordInput" class="illuminated animated rounded colored" type="password" placeholder="secret_word"/></td>
             </tr>
         </table>
-        <hr/>
         <CheckButton :label="label"/>
     </div>
 </template>
@@ -29,7 +28,10 @@
                 label: "Войти",
                 message: "Вход в систему",
                 time: undefined,
-                isError: false
+                isError: false,
+                action: function () {
+                    alert("Здесь будет вход");
+                }
             }
         },
         methods: {

@@ -2,9 +2,9 @@
     <div id="footer" class="shaded animated">
         <figure>
             <a class="illuminated" v-bind:href="pulpitUrl">
-                <img v-bind:src="pulpitLogo" alt="Лого сайта кафедры" title="Перейти на сайт кафедры" class="illuminated">
+                <img v-bind:src="pulpitLogoPath" alt="Лого сайта кафедры" title="Перейти на сайт кафедры" class="illuminated">
             </a>
-            <figcaption>{{ devYear }}</figcaption>
+            <figcaption>{{ devYear.getFullYear() }}</figcaption>
         </figure>
     </div>
 </template>
@@ -12,12 +12,10 @@
 <script>
     export default {
         name: "Footer",
-        data: function () {
-            return {
-                pulpitLogo: "/assets/img/pulpit.png",
-                pulpitUrl: "https://se.ifmo.ru",
-                devYear: "2019"
-            }
+        props: {
+            pulpitLogoPath: String,
+            pulpitUrl: String,
+            devYear: Date
         }
     }
 </script>

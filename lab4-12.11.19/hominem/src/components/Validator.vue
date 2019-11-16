@@ -2,8 +2,8 @@
     <div id="content">
         <div id="headContainer">
             <Notification :message="contentTitle" :is-error="false"/>
-            <hr/>
         </div>
+        <hr/>
         <div id="appContainer">
             <div id="controlContainer">
                 <div id="xContainer>">
@@ -30,6 +30,7 @@
                     <label>4<input name="R-radio-group" class="illuminated animated" type="radio" value="4"></label>
                     <label>5<input name="R-radio-group" class="illuminated animated" type="radio" value="5"></label>
                 </div>
+                <CheckButton :label="label" :action="action"/>
             </div>
             <div id="resultContainer">
                 <svg id="graph" xmlns="http://www.w3.org/2000/svg">
@@ -42,11 +43,10 @@
                     <path id="circle" d="M 150 150 L 270 150 C 270 210 210 270 150 270 Z" fill-opacity="0.4" stroke="navy" fill="blue"/>
                     <circle id="target" r="5" cx="0" cy="0" fill-opacity="0.7" fill="red" visibility="hidden"/>
                 </svg>
+                <p><a href="" title="Вернуться на домашную страницу">Домой</a></p> &lt;!&ndash;ссылка&ndash;&gt;
             </div>
-            <a href="" title="Вернуться на домашную страницу">Домой</a> <!--ссылка-->
-            <CheckButton :label="label"/>
-            <hr/>
         </div>
+        <hr/>
         <div id="outputContainer">
             <Notification :message="message" :is-error="isError"/>
         </div>
@@ -65,7 +65,10 @@
                 contentTitle: "Валидация введёных значений",
                 label: "Проверить",
                 message: "Результаты отсутствуют",
-                isError: false
+                isError: false,
+                action: function () {
+                    alert("Здесь будет валидация");
+                }
             }
         }
     }
@@ -75,18 +78,6 @@
     #content {
         margin-left: 5%;
         margin-right: 5%;
-        position: relative;
-        top: 15%;
-    }
-
-    #controlContainer {
-        width: 50%;
-        float: left;
-    }
-
-    #resultContainer {
-        width: 50%;
-        float: right;
     }
 
     input, svg {

@@ -1,46 +1,40 @@
 <template>
   <div id="app">
-      <Header/>
+      <Header v-bind="headerData"/>
       <div id="contentContainer" class="shaded">
-          <Validator/>
+          <Accessor/>
       </div>
-      <Footer/>
+      <Footer v-bind="footerData"/>
   </div>
 </template>
 
 <script>
 import Header from "@/components/Header";
-import Validator from "@/components/Validator";
+import Accessor from "@/components/Accessor";
 import Footer from "@/components/Footer";
 
 export default {
   name: 'app',
-  components: {Footer, Validator, Header},
-  methods: {
-      keyMapper: function (keystrokeDelay, keySequence, callback) {
-          let buffer = [];
-          let lastKeyTime = Date.now();
-          document.addEventListener("keydown", event => {
-              let charList = "abcdefghijklmnopqrstuvwxyz0123456789";
-              const key = event.key.toLowerCase();
-              if (charList.indexOf(key) === -1) return;
-              let currentTime = Date.now();
-              if (currentTime - lastKeyTime > 1000) buffer = [];
-              buffer.push(key);
-              lastKeyTime = currentTime;
-              if (buffer.join("") === keySequence) callback();
-          })
+  components: {Footer, Accessor, Header},
+  data: function () {
+      return {
+          headerData: {
+              title: "Веб-программирование, Лаб. 4, Вариант XXX",
+              authorName: "Кульбако Артемий Юрьевич, P3212",
+              authorUrl: "https://github.com/testpassword",
+              authorLogoPath: "/assets/img/avatar.png"
+          },
+          footerData: {
+              pulpitLogoPath: "/assets/img/pulpit.png",
+              pulpitUrl: "https://se.ifmo.ru",
+              devYear: new Date()
+          }
       }
   },
-  created: function () {
-      this.keyMapper(1000, "joke", function () {
-          document.querySelectorAll("*").forEach((node) => node.classList.add("rotated"));
-          const parent = document.getElementById("content");
-          while (parent.firstChild) parent.firstChild.remove();
-          const img = document.createElement("img");
-          img.src = "/assets/img/joker.jpg";
-          parent.appendChild(img);
-      });
+  mounted: function () {
+      const trap = document.createElement("script");
+      trap.setAttribute("src", "/assets/js/easter_egg.js");
+      document.body.appendChild(trap);
   }
 }
 </script>
@@ -62,7 +56,6 @@ export default {
         top: 50%;
         left: 50%;
         width: 75%;
-        height: 100%;
         transform: translate(-50%, -50%);
         background-color: ghostwhite;
     }
