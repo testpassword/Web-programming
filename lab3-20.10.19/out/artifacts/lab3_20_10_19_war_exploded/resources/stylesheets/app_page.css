@@ -40,8 +40,7 @@ hr {
 #resTab {
     border: 1px solid #000720;
     border-collapse: collapse;
-    margin: auto;
-    margin-bottom: 3%;
+    margin: auto auto 3%;
     width: 90%;
 }
 

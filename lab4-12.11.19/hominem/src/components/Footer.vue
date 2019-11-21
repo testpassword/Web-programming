@@ -1,5 +1,5 @@
 <template>
-    <div id="footer" class="shaded animated">
+    <div v-on:scroll="hide" id="footer" class="shaded animated">
         <figure>
             <a class="illuminated" v-bind:href="pulpitUrl">
                 <img v-bind:src="pulpitLogoPath" alt="Лого сайта кафедры" title="Перейти на сайт кафедры" class="illuminated">
@@ -16,6 +16,11 @@
             pulpitLogoPath: String,
             pulpitUrl: String,
             devYear: Date
+        },
+        methods: {
+            hide: function () {
+                document.getElementById("footer").style.visibility = "hidden";
+            }
         }
     }
 </script>

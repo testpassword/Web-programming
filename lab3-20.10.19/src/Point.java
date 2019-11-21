@@ -1,12 +1,14 @@
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "points")
-public class Point {
+public class Point implements Serializable {
 
     @SequenceGenerator(name = "seqGen", sequenceName = "gen_seq", allocationSize = 1)
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqGen") private int id;
+    @Transient private static final long serialVersionUID = 4L;
     private String owner;
     private double x, y, r;
     private boolean coordsStatus;

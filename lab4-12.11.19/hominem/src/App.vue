@@ -52,12 +52,13 @@ export default {
     }
 
     #contentContainer {
+        margin-top: 90px;
         position: absolute;
-        top: 50%;
         left: 50%;
-        width: 75%;
-        transform: translate(-50%, -50%);
+        width: 80%;
+        transform: translate(-50%, 0);
         background-color: ghostwhite;
+        min-height: 100%;
     }
 
     a {
