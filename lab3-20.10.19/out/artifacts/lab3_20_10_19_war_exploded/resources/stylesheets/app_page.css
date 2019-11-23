@@ -8,6 +8,7 @@ tfoot * {margin-top: 1%}
 #mainTable {
     background-color: ghostwhite;
     width: 1000px;
+    margin-bottom: 90px;
 }
 
 input, svg, #Y-input {
@@ -37,14 +38,14 @@ hr {
 
 .errorStub {background-color: #dc143b}
 
-#resTab {
+#resTable {
     border: 1px solid #000720;
     border-collapse: collapse;
     margin: auto auto 3%;
     width: 90%;
 }
 
-#resTab th {
+#resTable th {
     color: white;
     background-color: #000720;
 }

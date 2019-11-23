@@ -8,3 +8,10 @@ Vue.config.productionTip = false;
 new Vue({
   render: h => h(App),
 }).$mount('#app');
+
+/*
+TODO скрывать бары при скроллинге;
+TODO кнопка очистки графика от точек
+TODO цвет true/false в таблице
+TODO анимация при клике на график
+ */

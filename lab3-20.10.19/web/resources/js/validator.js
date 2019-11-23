@@ -25,10 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.getElementById("checkButton").onclick = function () {
     if (validateX() && validateY() && validateR()) {
-        setTarget("button");
         sendRequest([{name:"X-value", value:x}, {name:"Y-value", value:y}, {name:"R-value", value:r}]);
-        document.getElementById("outputContainer").remove();
-        document.getElementById("footer").style.visibility = "hidden";
+        redrawGraph();
     }
 };
 

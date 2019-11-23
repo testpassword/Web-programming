@@ -49,8 +49,7 @@
                             <polygon points="150,0 145,5 155,5" fill="#000720" stroke="#000720"/>
                             <rect id="rect" x="30" y="90" width="120" height="60" fill-opacity="0.4" stroke="navy" fill="blue"/>
                             <polygon id="triangle" points="150,150 150,30 210,150" fill-opacity="0.4" stroke="navy" fill="blue"/>
-                            <path id="circle" d="M 150 150 L 270 150 C 270 210 210 270 150 270 Z" fill-opacity="0.4" stroke="navy" fill="blue"/>
-                            <circle id="target" r="5" cx="0" cy="0" fill-opacity="0.7" fill="red" visibility="hidden"/>
+                            <path id="path" d="M 150 150 L 270 150 C 270 210 210 270 150 270 Z" fill-opacity="0.4" stroke="navy" fill="blue"/>
                         </svg>
                     </td>
                 </tr>
@@ -69,7 +68,7 @@
                 </tr>
                 <tr>
                     <td colspan="7">
-                        <p:remoteCommand name="sendRequest" update="resTab" action="#{realHuman.validate}"/>
+                        <p:remoteCommand name="sendRequest" update="resTable" action="#{realHuman.validate}"/>
                         <button id="checkButton" type="button">Проверить</button>
                         <hr/>
                     </td>
@@ -80,7 +79,7 @@
                 <tr id="outputContainer"><td colspan="7"><h4><span class="outputStub notification">Результаты отсутствуют</span></h4></td></tr>
                 <tr>
                     <td colspan="7">
-                            <h:dataTable value="#{realHuman.points}" var="p" id="resTab">
+                            <h:dataTable value="#{realHuman.points}" var="p" id="resTable">
                                 <h:column>
                                     <f:facet name="header">x</f:facet>
                                     #{p.x}

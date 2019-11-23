@@ -3,18 +3,16 @@
 const svg = document.getElementById("graph");
 const rect = document.getElementById("rect");
 const triangle = document.getElementById("triangle");
-const circle = document.getElementById("circle");
-const target = document.getElementById("target");
+const path = document.getElementById("path");
 
 document.addEventListener("DOMContentLoaded", () => {
-    svg.addEventListener("click", (event) => {
+    svg.addEventListener("click", event => {
         if (validateR()) {
             let position = getMousePosition(svg, event);
-            x = position.x;
-            y = position.y;
-            setTarget("graph");
+            x = ((position.x - 150) / 125 * r).toFixed(6);
+            y = ((150 - position.y) / 125 * r).toFixed(6);
             sendRequest([{name:"X-value", value:x}, {name:"Y-value", value:y}, {name:"R-value", value:r}]);
-            document.getElementById("footer").style.visibility = "hidden";
+            redrawGraph();
         }
     });
 });
@@ -28,33 +26,33 @@ function getMousePosition(svg, event) {
 }
 
 function redrawGraph() {
+    let outputContainer = document.getElementById("outputContainer");
+    if (outputContainer !== null) outputContainer.parentNode.removeChild(outputContainer);
     rect.setAttribute("width", `${r * 24}`);
     rect.setAttribute("height", `${r * 12}`);
     rect.setAttribute("x", `${150 - r * 24}`);
     rect.setAttribute("y", `${150 - r * 12}`);
     triangle.setAttribute("points", `150,150 150,${150 - 24 * r} ${150 + 12 * r},150`);
     let k = (r !== 5) ? ((5 - r) * 12) : 0;
-    circle.setAttribute("d", `M 150 150 L ${150 + r * 24} 150 C ${150 + r * 24} ${210 - k} ${210 - k} ${150 + r * 24} 150 ${150 + r * 24} Z`);
+    path.setAttribute("d", `M 150 150 L ${150 + r * 24} 150 C ${150 + r * 24} ${210 - k} ${210 - k} ${150 + r * 24} 150 ${150 + r * 24} Z`);
+    setTimeout(loadDots, 300); //нужно чтобы jsf успел построить dom с обновлённой таблицей, иначе новая точка не появляется на графике - МЕГАКОСТЫЛЬ
 }
 
-function setTarget(key) {
-    const keys = ["button", "graph"];
-    if (keys.includes(key)) {
-        switch (key) {
-            case "button":
-                target.setAttribute("cx", `${x * 24 * r}`);
-                target.setAttribute("cy", `${y * 12 * r}`);
-                break;
-            case "graph":
-                target.setAttribute("cx", `${x}`);
-                target.setAttribute("cy", `${y}`);
-                x = (x / 24 / r).toFixed(1);
-                y = (y / 12 / r).toFixed(1);
-                break;
-        }
-        target.style.visibility = "visible";
-        if ((x <= 0 && y >= 0 && x >= -r && y <= r/2) || (x >= 0 && y >= 0 && y <= (x - r/2) * (-2)) ||
-            (x >= 0 && y <= 0 && x * x + y * y <= Math.pow(r, 2))) target.setAttribute("fill", "green");
-        else target.setAttribute("fill", "red");
-    } else throw new Error("Не передан ключ функции");
+function loadDots() {
+    let oldDots = document.querySelectorAll("circle");
+    oldDots.forEach(dot => dot.parentNode.removeChild(dot));
+    let table = document.getElementById("resTable");
+    for (let i = 1; table.rows.length; ++i) {
+        let cells = table.rows.item(i).cells;
+        let dotCoords = {
+            x: parseFloat(cells.item(0).innerHTML.trim()) / r * 125 + 150,
+            y: 150 - parseFloat(cells.item(1).innerHTML.trim()) / r * 125
+        };
+        let dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        dot.setAttribute("r", "5");
+        dot.setAttribute("cx", `${dotCoords.x}`);
+        dot.setAttribute("cy", `${dotCoords.y}`);
+        dot.setAttribute("fill", cells.item(3).innerHTML.trim() === "true" ? "green" : "red");
+        svg.appendChild(dot);
+    }
 }

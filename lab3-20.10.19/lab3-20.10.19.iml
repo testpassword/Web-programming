@@ -16,6 +16,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="EclipseLink" />
         <datasource-mapping>
+          <factory-entry name="Entities" />
           <factory-entry name="NewPersistenceUnit" />
           <factory-entry name="db_con" value="4ced1fd0-7acb-480b-bb6d-fa4983066705" />
         </datasource-mapping>
