@@ -1,18 +1,19 @@
 <template>
     <div id="content">
-        <Notification :message="'(' + time + ') ' + message" :is-error="isError"/>
+        <Notification id="title" :message="'(' + time + ') ' + message" :is-error="false" :is-hidden="false"/>
         <hr/>
-        <table>
-            <tr>
-                <td><label for="loginInput">Введите почту:</label></td>
-                <td><input id="loginInput" class="illuminated animated rounded colored" type="text" placeholder="email"/></td>
-            </tr>
-            <tr>
-                <td><label for="passwordInput">Введите пароль:</label></td>
-                <td><input id="passwordInput" class="illuminated animated rounded colored" type="password" placeholder="secret_word"/></td>
-            </tr>
-        </table>
+        <div id="controlContainer">
+            <div id="login">
+                <label for="loginInput">Введите почту:</label>
+                <input id="loginInput" class="illuminated animated rounded colored" type="text" placeholder="email"/>
+            </div>
+            <div id="password">
+                <label for="passwordInput">Введите пароль:</label>
+                <input id="passwordInput" class="illuminated animated rounded colored" type="password" placeholder="secret_word"/>
+            </div>
+        </div>
         <CheckButton :label="label"/>
+        <hr/>
     </div>
 </template>
 
@@ -28,7 +29,6 @@
                 label: "Войти",
                 message: "Вход в систему",
                 time: undefined,
-                isError: false,
                 action: function () {
                     alert("Здесь будет вход");
                 }
@@ -54,13 +54,14 @@
     #content {
         margin-left: 10%;
         margin-right: 10%;
-        position: relative;
-        top: 30%;
     }
 
-    #content * {margin: 2%}
+    #controlContainer * {margin: 1.5%}
 
-    table {
-        width: 100%
+    #controlContainer {
+        display: flex;
+        flex-direction: column;
     }
 </style>
+
+<!--метка залезает на hr при изменении размера окна-->

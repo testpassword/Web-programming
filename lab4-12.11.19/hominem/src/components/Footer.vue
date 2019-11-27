@@ -16,11 +16,6 @@
             pulpitLogoPath: String,
             pulpitUrl: String,
             devYear: Date
-        },
-        methods: {
-            hide: function () {
-                document.getElementById("footer").style.visibility = "hidden";
-            }
         }
     }
 </script>

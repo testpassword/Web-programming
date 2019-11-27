@@ -1,5 +1,5 @@
 <template>
-    <h3><span class="notification stub" :class="{ errorStub: isError }">{{ message }}</span></h3>
+    <h3><span class="notification stub" :class="{ errorStub: isError, hidden: isHidden }">{{ message }}</span></h3>
 </template>
 
 <script>
@@ -7,6 +7,7 @@
         name: "Notification",
         props: {
             isError: Boolean,
+            isHidden: Boolean,
             message: String
         }
     }
@@ -21,4 +22,8 @@
     .stub {background-color: #000720}
 
     .errorStub {background-color: #dc143b}
+
+    .hidden {
+        visibility: hidden;
+    }
 </style>

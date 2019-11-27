@@ -1,6 +1,7 @@
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "points")
@@ -39,6 +40,11 @@ public class Point implements Serializable {
                 Double.compare(point.y, y) == 0 &&
                 Double.compare(point.r, r) == 0 &&
                 coordsStatus == point.coordsStatus;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, owner, x, y, r, coordsStatus, bornDate);
     }
 
     @Override

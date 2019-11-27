@@ -3,6 +3,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class RealHumanBean implements Serializable {
 
@@ -47,5 +48,31 @@ public class RealHumanBean implements Serializable {
 
     public void setPoints(List<Point> points) {
         this.points = points;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof RealHumanBean)) return false;
+        RealHumanBean that = (RealHumanBean) o;
+        return Objects.equals(managerFactory, that.managerFactory) &&
+                Objects.equals(manager, that.manager) &&
+                Objects.equals(transaction, that.transaction) &&
+                Objects.equals(points, that.points);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(managerFactory, manager, transaction, points);
+    }
+
+    @Override
+    public String toString() {
+        return "RealHumanBean{" +
+                "managerFactory=" + managerFactory +
+                ", manager=" + manager +
+                ", transaction=" + transaction +
+                ", points=" + points +
+                '}';
     }
 }

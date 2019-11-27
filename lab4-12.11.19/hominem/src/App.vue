@@ -1,30 +1,29 @@
 <template>
   <div id="app">
-      <Header v-bind="headerData"/>
+      <Header v-bind="headerParams"/>
       <div id="contentContainer" class="shaded">
-          <Accessor/>
+          <router-view/>
       </div>
-      <Footer v-bind="footerData"/>
+      <Footer v-bind="footerParams"/>
   </div>
 </template>
 
 <script>
 import Header from "@/components/Header";
-import Accessor from "@/components/Accessor";
 import Footer from "@/components/Footer";
 
 export default {
   name: 'app',
-  components: {Footer, Accessor, Header},
+  components: {Header, Footer},
   data: function () {
       return {
-          headerData: {
+          headerParams: {
               title: "Веб-программирование, Лаб. 4, Вариант XXX",
               authorName: "Кульбако Артемий Юрьевич, P3212",
               authorUrl: "https://github.com/testpassword",
               authorLogoPath: "/assets/img/avatar.png"
           },
-          footerData: {
+          footerParams: {
               pulpitLogoPath: "/assets/img/pulpit.png",
               pulpitUrl: "https://se.ifmo.ru",
               devYear: new Date()
@@ -51,14 +50,20 @@ export default {
         font-weight: normal;
     }
 
+    body {
+        background-color: whitesmoke;
+    }
+
     #contentContainer {
         margin-top: 90px;
         position: absolute;
+        padding: 10px;
         left: 50%;
-        width: 80%;
+        width: 75%;
         transform: translate(-50%, 0);
         background-color: ghostwhite;
-        min-height: 100%;
+        min-height: 630px; /*FWVGA - минимальное разрешение макета*/
+        min-width: 480px;
     }
 
     a {
