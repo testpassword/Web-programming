@@ -84,7 +84,7 @@ export default {
 
     .animated:hover {transform: scale(1.05)} /*увеличение элемента при наведении*/
 
-    .illuminated:hover, .illuminated:focus { /*подстветка элемента при наведении на него*/
+    .illuminated:hover, .illuminated:focus { /*подстветка элемента при наведении*/
         box-shadow: 0 0 40px 5px #f41c52;
         outline: none; /*убирает рамку фокуса в chrome*/
     }

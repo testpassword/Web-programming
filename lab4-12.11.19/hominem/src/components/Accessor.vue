@@ -5,15 +5,16 @@
         <div id="controlContainer">
             <div id="login">
                 <label for="loginInput">Введите почту:</label>
-                <input id="loginInput" class="illuminated animated rounded colored" type="text" placeholder="email"/>
+                <input id="loginInput" required class="illuminated animated rounded colored" type="text" placeholder="email" v-model.trim="email"/>
             </div>
             <div id="password">
                 <label for="passwordInput">Введите пароль:</label>
-                <input id="passwordInput" class="illuminated animated rounded colored" type="password" placeholder="secret_word"/>
+                <input id="passwordInput" required class="illuminated animated rounded colored" type="password" placeholder="secret_word" v-model.trim="password"/>
             </div>
         </div>
-        <CheckButton :label="label"/>
+        <CheckButton :label="label" :action="submitHandler"/>
         <hr/>
+        <Notification v-bind="notificationParams"/>
     </div>
 </template>
 
@@ -28,9 +29,13 @@
             return {
                 label: "Войти",
                 message: "Вход в систему",
-                time: undefined,
-                action: function () {
-                    alert("Здесь будет вход");
+                time: null,
+                email: "",
+                password: "",
+                notificationParams: {
+                    isHidden: true,
+                    isError: true,
+                    message: null
                 }
             }
         },
@@ -41,6 +46,28 @@
                   minutes = (date.getMinutes() < 10) ? "0" + date.getMinutes() : date.getMinutes(),
                   seconds = (date.getSeconds() < 10) ? "0" + date.getSeconds() : date.getSeconds();
               this.time = `${hours}:${minutes}:${seconds}`;
+          },
+          submitHandler: function () {
+              if (this.email.length > 0 && this.password.length > 0) {
+                  this.$axios.post("http://localhost:8080/auth", {
+                      email: this.email,
+                      password: this.password
+                  }).then(response => {
+                      localStorage.setItem("user", JSON.stringify(response.data.user));
+                      localStorage.setItem("jwt", response.data.token);
+                  }).catch(error => {
+                      this.notificationParams.message = error.response;
+                      this.notificationParams.isHidden = false;
+                  });
+                  /*
+                  1. Отправить данные
+                  2. Получен ответ - установить данные или вывести инфу об отсутсвии пользователя
+                  3. Если плохой код ответа - вывести это
+                   */
+              } else {
+                  this.notificationParams.message = "Данные не введены";
+                  this.notificationParams.isHidden = false;
+              }
           }
         },
         created: function () {
@@ -63,5 +90,3 @@
         flex-direction: column;
     }
 </style>
-
-<!--метка залезает на hr при изменении размера окна-->

@@ -1,5 +1,5 @@
 <template>
-    <button @click="action" id="checkButton">{{ label }}</button>
+    <button @click="action">{{ label }}</button>
 </template>
 
 <script>
@@ -7,14 +7,14 @@
         name: "CheckButton",
         props: {
             label: String,
-            action: Function
+            action: Function,
         }
     }
 </script>
 
 <style scoped>
     /* Взято и переработано с https://codepen.io/rauldronca/pen/mARYEm*/
-    #checkButton {
+    button {
         text-align: center;
         text-transform: uppercase;
         cursor: pointer;
@@ -31,13 +31,13 @@
         border-radius: 4px;
     }
 
-    #checkButton:hover {
+    button:hover {
         background: white;
         box-shadow: 0 2px 10px 5px #eb2a5a;
         color: black;
     }
 
-    #checkButton::after {
+    button::after {
         content: "";
         background: #eb2a5a;
         display: block;
@@ -50,12 +50,12 @@
         transition: all 0.8s
     }
 
-    #checkButton:active::after {
+    button:active::after {
         padding: 0;
         margin: 0;
         opacity: 1;
         transition: 0s
     }
 
-    #checkButton:focus {outline: 0}
+    button:focus {outline: 0}
 </style>

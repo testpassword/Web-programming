@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from "vue-router";
 import Accessor from "@/components/Accessor";
 import Validator from "@/components/Validator";
-import ClientError from "@/components/ClientError";
+import NotFoundError from "@/components/NotFoundError";
 
 Vue.use(VueRouter);
 
@@ -15,11 +15,18 @@ export default new VueRouter({
         },
         {
             path: "/app",
-            component: Validator
+            component: Validator,
+            beforeEnter: (to, from, next) => {
+                if (localStorage.getItem("jwt") !== null) next();
+                else {
+                    alert("Доступ неавторизованным пользователям запрещён");
+                    next({path: "/login"});
+                }
+            }
         },
         {
             path: "/*",
-            component: ClientError
+            component: NotFoundError
         }
     ]
-})
+});

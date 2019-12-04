@@ -4,3 +4,5 @@ https://www.npmjs.com/package/vue-fixed-header
 https://stackoverflow.com/questions/52082968/vue-js-2-vue-cannot-find-files-from-assets-folder-v-for
 https://medium.com/@jariwalamahek/how-to-pass-function-as-a-prop-in-vue-b7b0040260ba
 https://html5book.ru/kak-sdelat-kolonki-odinakovoy-vysoti/
+https://webformyself.com/autentifikaciya-vue-i-obrabotka-marshruta-vue-router/
+https://habr.com/ru/company/ruvds/blog/476292/
