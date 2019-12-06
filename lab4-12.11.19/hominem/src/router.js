@@ -16,13 +16,13 @@ export default new VueRouter({
         {
             path: "/app",
             component: Validator,
-            beforeEnter: (to, from, next) => {
+            /*beforeEnter: (to, from, next) => {
                 if (localStorage.getItem("jwt") !== null) next();
                 else {
                     alert("Доступ неавторизованным пользователям запрещён");
                     next({path: "/login"});
                 }
-            }
+            } мешает во время отладки*/
         },
         {
             path: "/*",

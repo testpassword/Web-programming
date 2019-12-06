@@ -18,7 +18,7 @@ export default {
   data: function () {
       return {
           headerParams: {
-              title: "Веб-программирование, Лаб. 4, Вариант XXX",
+              title: "Веб-программирование, Лаб. 4, Вариант 22",
               authorName: "Кульбако Артемий Юрьевич, P3212",
               authorUrl: "https://github.com/testpassword",
               authorLogoPath: "/assets/img/avatar.png"
@@ -94,8 +94,9 @@ export default {
         color: white;
     }
 
+    .bordered {border: 2px solid #f41c52} /*красные края*/
+
     .rounded { /*скруглённые края*/
-        border: 2px solid #f41c52;
         border-radius: 20px;
         background-color: white;
     }

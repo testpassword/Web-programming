@@ -5,11 +5,11 @@
         <div id="controlContainer">
             <div id="login">
                 <label for="loginInput">Введите почту:</label>
-                <input id="loginInput" required class="illuminated animated rounded colored" type="text" placeholder="email" v-model.trim="email"/>
+                <input id="loginInput" required class="illuminated animated bordered rounded colored" type="text" placeholder="email" v-model.trim="email"/>
             </div>
             <div id="password">
                 <label for="passwordInput">Введите пароль:</label>
-                <input id="passwordInput" required class="illuminated animated rounded colored" type="password" placeholder="secret_word" v-model.trim="password"/>
+                <input id="passwordInput" required class="illuminated animated bordered rounded colored" type="password" placeholder="secret_word" v-model.trim="password"/>
             </div>
         </div>
         <CheckButton :label="label" :action="submitHandler"/>
@@ -23,7 +23,7 @@
     import Notification from "@/components/Notification";
 
     export default {
-        name: "Filter",
+        name: "Accessor",
         components: {Notification, CheckButton},
         data: function () {
             return {
@@ -56,14 +56,9 @@
                       localStorage.setItem("user", JSON.stringify(response.data.user));
                       localStorage.setItem("jwt", response.data.token);
                   }).catch(error => {
-                      this.notificationParams.message = error.response;
+                      this.notificationParams.message = error.response.status + ": " + error.response.statusText;
                       this.notificationParams.isHidden = false;
                   });
-                  /*
-                  1. Отправить данные
-                  2. Получен ответ - установить данные или вывести инфу об отсутсвии пользователя
-                  3. Если плохой код ответа - вывести это
-                   */
               } else {
                   this.notificationParams.message = "Данные не введены";
                   this.notificationParams.isHidden = false;
