@@ -56,7 +56,7 @@
                       localStorage.setItem("user", JSON.stringify(response.data.user));
                       localStorage.setItem("jwt", response.data.token);
                   }).catch(error => {
-                      this.notificationParams.message = error.response.status + ": " + error.response.statusText;
+                      this.notificationParams.message = `${error.response.status}: ${error.response.statusText}`
                       this.notificationParams.isHidden = false;
                   });
               } else {

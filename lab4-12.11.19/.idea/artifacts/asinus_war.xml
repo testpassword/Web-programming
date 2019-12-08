@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="asinus:war">
+    <output-path>$PROJECT_DIR$/asinus/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>asinus</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="asinus-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="asinus:war exploded" />
+    </root>
+  </artifact>
+</component>

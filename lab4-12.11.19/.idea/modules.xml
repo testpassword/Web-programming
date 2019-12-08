@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/hominem/hominem.iml" filepath="$PROJECT_DIR$/hominem/hominem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rursus/rursus.iml" filepath="$PROJECT_DIR$/rursus/rursus.iml" />
     </modules>
   </component>
 </project>
