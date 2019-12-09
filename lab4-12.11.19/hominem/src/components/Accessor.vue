@@ -1,6 +1,6 @@
 <template>
     <div id="content">
-        <Notification id="title" :message="'(' + time + ') ' + message" :is-error="false" :is-hidden="false"/>
+        <Notification id="title" :message="`(${time}) Вход в систему`" :is-error="false" :is-hidden="false"/>
         <hr/>
         <div id="controlContainer">
             <div id="login">
@@ -11,8 +11,11 @@
                 <label for="passwordInput">Введите пароль:</label>
                 <input id="passwordInput" required class="illuminated animated bordered rounded colored" type="password" placeholder="secret_word" v-model.trim="password"/>
             </div>
+            <div>
+                <CheckButton color="blue" :label="regButtonLabel" :action="register"/>
+                <CheckButton color="red" :label="logButtonLabel" :action="login"/>
+            </div>
         </div>
-        <CheckButton :label="label" :action="submitHandler"/>
         <hr/>
         <Notification v-bind="notificationParams"/>
     </div>
@@ -27,15 +30,15 @@
         components: {Notification, CheckButton},
         data: function () {
             return {
-                label: "Войти",
-                message: "Вход в систему",
+                regButtonLabel: "Зарегистрироваться",
+                logButtonLabel: "Войти",
                 time: null,
                 email: "",
                 password: "",
                 notificationParams: {
                     isHidden: true,
                     isError: true,
-                    message: null
+                    message: "Данные не введены"
                 }
             }
         },
@@ -47,22 +50,33 @@
                   seconds = (date.getSeconds() < 10) ? "0" + date.getSeconds() : date.getSeconds();
               this.time = `${hours}:${minutes}:${seconds}`;
           },
-          submitHandler: function () {
+          login: function () {
               if (this.email.length > 0 && this.password.length > 0) {
-                  this.$axios.post("http://localhost:8080/auth", {
+                  this.$axios.post("login", {
                       email: this.email,
                       password: this.password
                   }).then(response => {
                       localStorage.setItem("user", JSON.stringify(response.data.user));
-                      localStorage.setItem("jwt", response.data.token);
+                      localStorage.setItem("password", response.data.token);
+                      this.$router.push({path: "/app"});
                   }).catch(error => {
-                      this.notificationParams.message = `${error.response.status}: ${error.response.statusText}`
+                      this.notificationParams.message = `${error.response.status}: ${error.response.statusText}`;
                       this.notificationParams.isHidden = false;
                   });
-              } else {
-                  this.notificationParams.message = "Данные не введены";
-                  this.notificationParams.isHidden = false;
-              }
+              } else this.notificationParams.isHidden = false;
+          },
+          register: function () {
+              if (this.email.length > 0 && this.password.length > 0) {
+                  this.$axios.post("register", {
+                      email: this.email,
+                      password: this.password
+                  }).then(() => {
+                      this.login();
+                  }).catch(error => {
+                      this.notificationParams.message = `${error.response.status}: ${error.response.statusText}`;
+                      this.notificationParams.isHidden = false;
+                  });
+              } else this.notificationParams.isHidden = false;
           }
         },
         created: function () {

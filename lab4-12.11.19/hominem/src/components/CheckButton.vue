@@ -1,5 +1,5 @@
 <template>
-    <button @click="action">{{ label }}</button>
+    <button :class="color" @click="action">{{ label }}</button>
 </template>
 
 <script>
@@ -8,6 +8,7 @@
         props: {
             label: String,
             action: Function,
+            color: String
         }
     }
 </script>
@@ -20,11 +21,10 @@
         cursor: pointer;
         letter-spacing: 2px;
         position: relative;
-        background-color: #eb2a5a;
         border: none;
         color: white;
         padding: 15px;
-        width: 150px;
+        min-width: 150px;
         transition-duration: 0.4s;
         overflow: hidden;
         box-shadow: 0 5px 15px #193047;
@@ -33,13 +33,11 @@
 
     button:hover {
         background: white;
-        box-shadow: 0 2px 10px 5px #eb2a5a;
         color: black;
     }
 
     button::after {
         content: "";
-        background: #eb2a5a;
         display: block;
         position: absolute;
         padding-top: 300%;
@@ -58,4 +56,22 @@
     }
 
     button:focus {outline: 0}
+
+    .red {background-color: #eb2a5a}
+
+    .red:hover {box-shadow: 0 2px 10px 5px #eb2a5a}
+
+    .red::after {background: #eb2a5a}
+
+    .yellow {background-color: #ead541}
+
+    .yellow:hover {box-shadow: 0 2px 10px 5px #ead541}
+
+    .yellow::after {background: #ead541}
+
+    .blue {background-color: #0a72b0}
+
+    .blue:hover {box-shadow: 0 2px 10px 5px #0a72b0}
+
+    .blue::after {background: #0a72b0}
 </style>

@@ -9,7 +9,7 @@
                     <tr>
                         <td colspan="4">
                             <label> Выберите X:
-                                <select required class="animated illuminated bordered" v-model="values.x">
+                                <select required class="animated illuminated bordered" v-model="point.x">
                                     <option>-4</option>
                                     <option>-3</option>
                                     <option>-2</option>
@@ -27,27 +27,27 @@
                         <td colspan="4">
                             <label>
                                 Введите Y:
-                                <input id="Y-input" required class="illuminated animated bordered rounded colored" type="text" placeholder="(-5 до 3)" maxlength="6" v-model="values.y">
+                                <input id="Y-input" required class="illuminated animated bordered rounded colored" type="text" placeholder="(-5 до 3)" maxlength="6" v-model="point.y">
                             </label>
                         </td>
                     </tr>
                     <tr><td colspan="4">Выберите R:</td></tr>
                     <tr>
-                        <td><label>1<input type="radio" class="illuminated animated" value="1" v-model="values.r" v-on:click="redrawGraph"></label></td>
-                        <td><label>2<input type="radio" class="illuminated animated" value="2" v-model="values.r" v-on:click="redrawGraph"></label></td>
-                        <td><label>3<input type="radio" class="illuminated animated" value="3" v-model="values.r" v-on:click="redrawGraph"></label></td>
-                        <td><label>4<input type="radio" class="illuminated animated" value="4" v-model="values.r" v-on:click="redrawGraph"></label></td>
+                        <td><label>1<input type="radio" class="illuminated animated" value="1" v-model="point.r" @change="redrawGraph"></label></td>
+                        <td><label>2<input type="radio" class="illuminated animated" value="2" v-model="point.r" @change="redrawGraph"></label></td>
+                        <td><label>3<input type="radio" class="illuminated animated" value="3" v-model="point.r" @change="redrawGraph"></label></td>
+                        <td><label>4<input type="radio" class="illuminated animated" value="4" v-model="point.r" @change="redrawGraph"></label></td>
                     </tr>
-                    <tr><td colspan="3"><CheckButton :label="label" :action="validate"/></td></tr>
+                    <tr><td colspan="3"><CheckButton color="red" :label="label" :action="validateByButton"/></td></tr>
                     <tr>
-                        <td><button v-on:click="deleteDots" title="Удалить все точки из базы данных и с графика" class="animated illuminated system-button">Удалить все точки</button></td>
+                        <td><button v-on:click="deletePoints" title="Удалить все точки из базы данных и с графика" class="animated illuminated system-button">Удалить все точки</button></td>
                         <td><button v-on:click="logout" title="Завершить сеанс и вернуться на домашную страницу" class="animated illuminated system-button">Выйти</button></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
             <div id="svgContainer">
-                <svg id="graph" xmlns="http://www.w3.org/2000/svg" class="bordered rounded">
+                <svg id="graph" xmlns="http://www.w3.org/2000/svg" class="bordered rounded" @click="validateByGraph">
                     <line x1="0" y1="150" x2="300" y2="150" stroke="#000720"/>
                     <line x1="150" y1="0" x2="150" y2="300" stroke="#000720"/>
                     <polygon points="300,150 295,155 295, 145" fill="#000720" stroke="#000720"/>
@@ -79,34 +79,49 @@
                 tableNotification: {
                     message: "Результаты отсутствуют",
                     isError: false,
-                    isHidden: false,
+                    isHidden: true,
                 },
-                values: {
+                point: {
                     x: null,
                     y: null,
-                    r: null
+                    r: 4 //Изначально задано макс. значение для отрисовки графика в макс. масштабе
                 },
-                dots: null
+                points: null
             }
         },
         methods: {
-            validate: function () {
-                if ((this.values.x !== null) && (this.values.y !== null) && (this.values.r !== null)) {
-                    this.sendDot();
-                    this.loadDots();
+            validateByButton: function () {
+                if ((this.point.x !== null) && (this.point.y !== null) && (this.point.r !== null)) {
+                    this.sendPoint();
+                    this.loadPoints();
                     this.redrawGraph();
                 } else {
                     this.tableNotification.message = "Не все поля заполнены";
                     this.tableNotification.isError = true;
                 }
             },
-            sendDot: function() {
-                this.$axios.post("http://localhost:8080/add", {
+            validateByGraph: function (event) {
+
+                function getMousePosition(element, event) {
+                    let rect = element.getBoundingClientRect();
+                    return {
+                        x: event.clientX - rect.left,
+                        y: event.clientY - rect.top
+                    };
+                }
+
+                let position = getMousePosition(document.getElementById("graph"), event);
+                this.point.x = ((position.x - 150) / 125 * this.point.r).toFixed(6);
+                this.point.y = ((150 - position.y) / 125 * this.point.r).toFixed(6);
+                this.sendPoint();
+                this.loadPoints();
+                this.redrawGraph();
+            },
+            sendPoint: function() {
+                this.$axios.post("add", {
                     user: localStorage.getItem("user"),
                     jwt: localStorage.getItem("jwt"),
-                    x: this.values.x,
-                    y: this.values.y,
-                    r: this.values.r
+                    point: this.point
                 }).catch(error => {
                     this.tableNotification.message = `${error.response.status}: ${error.response.statusText}`;
                     this.tableNotification.isError = true;
@@ -114,37 +129,49 @@
                 });
             },
             redrawGraph: function () {
-                let r = this.values.r;
-                const rect = document.getElementById("rect");
-                const triangle = document.getElementById("triangle");
-                const path = document.getElementById("path");
-                rect.setAttribute("width", `${r * 24}`);
-                rect.setAttribute("height", `${r * 12}`);
-                rect.setAttribute("x", `${150 - r * 24}`);
-                rect.setAttribute("y", `${150 - r * 12}`);
-                triangle.setAttribute("points", `150,150 150,${150 - 24 * r} ${150 + 12 * r},150`);
-                let k = (r !== 5) ? ((5 - r) * 12) : 0;
-                path.setAttribute("d", `M 150 150 L ${150 + r * 24} 150 C ${150 + r * 24} ${210 - k} ${210 - k} ${150 + r * 24} 150 ${150 + r * 24} Z`);
-                //TODO рисовать точки: если === null, то не рисовать
+                let r = this.point.r;
+                const svg = document.getElementById("graph");
+                const rect = svg.getElementById("rect");
+                const triangle = svg.getElementById("triangle");
+                const path = svg.getElementById("path");
+                rect.setAttribute("width", `${r * 30}`);
+                rect.setAttribute("height", `${r * 15}`);
+                rect.setAttribute("x", `${150 - r * 30}`);
+                rect.setAttribute("y", `${150 - r * 15}`);
+                triangle.setAttribute("points", `150,150 150,${150 + 30 * r} ${150 - 30 * r},150`);
+                let k = (r !== 4) ? ((4 - r) * 14) : 0;
+                path.setAttribute("d", `M 150 150 L ${150 + r * 30} 150 C ${150 + r * 30} ${210 - k} ${210 - k} ${150 + r * 30} 150 ${150 + r * 30} Z`);
+                if (this.points !== null) {
+                    let oldPoints = document.querySelectorAll("circle");
+                    oldPoints.forEach(oldPoint => oldPoint.parentNode.removeChild(oldPoint));
+                    this.points.forEach(function (item) {
+                        let newPoint = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                        newPoint.setAttribute("r", "5");
+                        newPoint.setAttribute("cx", `${item.x / r * 125 + 150}`);
+                        newPoint.setAttribute("cy", `${150 - item.y / r * 125}`);
+                        newPoint.setAttribute("fill", item.status === "true" ? "green" : "red");
+                        svg.appendChild(newPoint);
+                    })
+                }
             },
-            loadDots: function () {
-                this.$axios.post("http://localhost:8080/load", {
+            loadPoints: function () {
+                this.$axios.post("load", {
                     user: localStorage.getItem("user"),
                     jwt: localStorage.getItem("jwt")
                 }).then(response => {
-                    this.dots = JSON.stringify(response.data.dots);
+                    this.points = JSON.stringify(response.data.points);
                 }).catch(error => {
                     this.tableNotification.message = `${error.response.status}: ${error.response.statusText}`;
                     this.tableNotification.isError = true;
                     this.tableNotification.isHidden = false;
                 });
             },
-            deleteDots: function () {
-                this.$axios.post("http://localhost:8080/clear", {
+            deletePoints: function () {
+                this.$axios.post("clear", {
                     user: localStorage.getItem("user"),
                     jwt: localStorage.getItem("jwt")
                 }).then(response => {
-                    this.tableNotification.message = JSON.stringify(response.data.operationResult);
+                    this.tableNotification.message = JSON.stringify(response.data.result);
                     this.tableNotification.isHidden = false;
                     this.tableNotification.isError = false;
                 }).catch(error => {
@@ -155,11 +182,11 @@
             },
             logout: function () {
                 this.$router.push({path: "/login"}, () => localStorage.clear());
-            },
+            }
         },
-        created: function () {
-            const svg = document.getElementById("graph");
-            //TODO отправка по нажатию на граф
+        mounted: function () {
+            this.loadPoints();
+            this.redrawGraph();
         }
     }
 </script>

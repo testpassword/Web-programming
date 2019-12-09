@@ -9,5 +9,4 @@ public class RursusApplication {
     public static void main(String[] args) {
         SpringApplication.run(RursusApplication.class, args);
     }
-
 }
