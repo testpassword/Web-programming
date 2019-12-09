@@ -6,3 +6,5 @@ https://medium.com/@jariwalamahek/how-to-pass-function-as-a-prop-in-vue-b7b00402
 https://html5book.ru/kak-sdelat-kolonki-odinakovoy-vysoti/
 https://webformyself.com/autentifikaciya-vue-i-obrabotka-marshruta-vue-router/
 https://habr.com/ru/company/ruvds/blog/476292/
+https://stackoverflow.com/questions/47877728/vue-execute-click-after-v-model
+https://github.com/jonashackt/spring-boot-vuejs/blob/master/README.md
