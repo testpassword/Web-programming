@@ -4,13 +4,14 @@ import router from "@/router";
 import Axios from "axios";
 
 Vue.config.productionTip = false;
-Vue.prototype.$axios = Axios.create({baseURL: "http://localhost:8080"});
+Vue.prototype.$axios = Axios.create({baseURL: "http://localhost:8088"});
 
 new Vue({
   router, render: h => h(App),
 }).$mount('#app');
 
 /*
+TODO логин и пароль - только латиница и цифры
 TODO цвет true/false в таблице
 TODO анимация при клике на график
  */

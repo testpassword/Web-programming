@@ -38,7 +38,7 @@
                         <td><label>3<input type="radio" class="illuminated animated" value="3" v-model="point.r" @change="redrawGraph"></label></td>
                         <td><label>4<input type="radio" class="illuminated animated" value="4" v-model="point.r" @change="redrawGraph"></label></td>
                     </tr>
-                    <tr><td colspan="3"><CheckButton color="red" :label="label" :action="validateByButton"/></td></tr>
+                    <tr><td colspan="3"><CheckButton color="red" :label="label" @click.native="validate(null)"/></td></tr>
                     <tr>
                         <td><button v-on:click="deletePoints" title="Удалить все точки из базы данных и с графика" class="animated illuminated system-button">Удалить все точки</button></td>
                         <td><button v-on:click="logout" title="Завершить сеанс и вернуться на домашную страницу" class="animated illuminated system-button">Выйти</button></td>
@@ -47,7 +47,7 @@
                 </table>
             </div>
             <div id="svgContainer">
-                <svg id="graph" xmlns="http://www.w3.org/2000/svg" class="bordered rounded" @click="validateByGraph">
+                <svg id="graph" xmlns="http://www.w3.org/2000/svg" class="bordered rounded" @click="validate($event)">
                     <line x1="0" y1="150" x2="300" y2="150" stroke="#000720"/>
                     <line x1="150" y1="0" x2="150" y2="300" stroke="#000720"/>
                     <polygon points="300,150 295,155 295, 145" fill="#000720" stroke="#000720"/>
@@ -90,17 +90,21 @@
             }
         },
         methods: {
-            validateByButton: function () {
-                if ((this.point.x !== null) && (this.point.y !== null) && (this.point.r !== null)) {
-                    this.sendPoint();
-                    this.loadPoints();
-                    this.redrawGraph();
+            validate: function (event) {
+                if (event === null) {
+                    if (this.point.x === null || this.point.y === null || this.point.r === null) {
+                        this.tableNotification.message = "Не все поля заполнены";
+                        this.tableNotification.isError = true;
+                        return;
+                    }
                 } else {
-                    this.tableNotification.message = "Не все поля заполнены";
-                    this.tableNotification.isError = true;
+                    let position = getMousePosition(document.getElementById("graph"), event);
+                    this.point.x = ((position.x - 150) / 125 * this.point.r).toFixed(6);
+                    this.point.y = ((150 - position.y) / 125 * this.point.r).toFixed(6);
                 }
-            },
-            validateByGraph: function (event) {
+                this.sendPoint();
+                this.loadPoints();
+                this.redrawGraph();
 
                 function getMousePosition(element, event) {
                     let rect = element.getBoundingClientRect();
@@ -109,16 +113,9 @@
                         y: event.clientY - rect.top
                     };
                 }
-
-                let position = getMousePosition(document.getElementById("graph"), event);
-                this.point.x = ((position.x - 150) / 125 * this.point.r).toFixed(6);
-                this.point.y = ((150 - position.y) / 125 * this.point.r).toFixed(6);
-                this.sendPoint();
-                this.loadPoints();
-                this.redrawGraph();
             },
             sendPoint: function() {
-                this.$axios.post("add", {
+                this.$axios.put("point", {
                     user: localStorage.getItem("user"),
                     jwt: localStorage.getItem("jwt"),
                     point: this.point
@@ -155,7 +152,7 @@
                 }
             },
             loadPoints: function () {
-                this.$axios.post("load", {
+                this.$axios.post("point", {
                     user: localStorage.getItem("user"),
                     jwt: localStorage.getItem("jwt")
                 }).then(response => {
@@ -167,7 +164,7 @@
                 });
             },
             deletePoints: function () {
-                this.$axios.post("clear", {
+                this.$axios.delete("point", {
                     user: localStorage.getItem("user"),
                     jwt: localStorage.getItem("jwt")
                 }).then(response => {

@@ -1,5 +1,5 @@
 <template>
-    <button :class="color" @click="action">{{ label }}</button>
+    <button :class="color">{{ label }}</button>
 </template>
 
 <script>
@@ -7,7 +7,6 @@
         name: "CheckButton",
         props: {
             label: String,
-            action: Function,
             color: String
         }
     }

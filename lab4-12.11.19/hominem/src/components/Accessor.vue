@@ -12,8 +12,8 @@
                 <input id="passwordInput" required class="illuminated animated bordered rounded colored" type="password" placeholder="secret_word" v-model.trim="password"/>
             </div>
             <div>
-                <CheckButton color="blue" :label="regButtonLabel" :action="register"/>
-                <CheckButton color="red" :label="logButtonLabel" :action="login"/>
+                <CheckButton color="blue" :label="regButtonLabel" @click="register"/>
+                <CheckButton color="red" :label="logButtonLabel" @click="login"/>
             </div>
         </div>
         <hr/>
@@ -52,7 +52,7 @@
           },
           login: function () {
               if (this.email.length > 0 && this.password.length > 0) {
-                  this.$axios.post("login", {
+                  this.$axios.post("user", {
                       email: this.email,
                       password: this.password
                   }).then(response => {
@@ -67,7 +67,7 @@
           },
           register: function () {
               if (this.email.length > 0 && this.password.length > 0) {
-                  this.$axios.post("register", {
+                  this.$axios.put("user", {
                       email: this.email,
                       password: this.password
                   }).then(() => {

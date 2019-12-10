@@ -8,3 +8,9 @@ https://webformyself.com/autentifikaciya-vue-i-obrabotka-marshruta-vue-router/
 https://habr.com/ru/company/ruvds/blog/476292/
 https://stackoverflow.com/questions/47877728/vue-execute-click-after-v-model
 https://github.com/jonashackt/spring-boot-vuejs/blob/master/README.md
+https://stackoverflow.com/questions/43242322/vue-js-simple-click-function-not-firing
+https://www.baeldung.com/spring-boot-change-port
+https://spring-projects.ru/guides/rest-service-cors/
+https://dzone.com/articles/using-the-spring-requestmapping-annotation
+https://www.logicbig.com/tutorials/java-ee-tutorial/jpa/embedded-element-collection.html
+https://www.dotnetperls.com/rot13-java

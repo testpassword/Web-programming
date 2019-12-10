@@ -1,23 +1,19 @@
-package server;
+package Entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-@Entity
-@Table(name = "points")
+@Embeddable
 public class Point implements Serializable {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO) private int id;
     @Transient private static final long serialVersionUID = 4L;
-    private String owner;
     private double x, y, r;
     private boolean coordsStatus;
     private Date bornDate;
 
-    public Point(String owner, double x, double y, double r) {
-        this.owner = owner;
+    public Point(double x, double y, double r) {
         this.x = x;
         this.y = y;
         this.r = r;
@@ -45,7 +41,7 @@ public class Point implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, owner, x, y, r, coordsStatus, bornDate);
+        return Objects.hash(x, y, r, coordsStatus, bornDate);
     }
 
     @Override
@@ -55,22 +51,6 @@ public class Point implements Serializable {
                 "<td>" + r + "</td>" +
                 "<td style='color: " + ((coordsStatus) ? "green" : "red") + "'>" + coordsStatus + "</td>" +
                 "<td>" + bornDate + "</td></tr>";
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
     }
 
     public double getX() {
