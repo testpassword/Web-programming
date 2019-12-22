@@ -1,35 +1,39 @@
 package server.Controllers;
-
+import entities.User;
+import entities.UserRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import server.PasswordManager;
+
+import javax.mail.internet.AddressException;
+import java.util.Map;
 
 @Controller
 @RequestMapping(path = "user")
 public class UserController {
 
-    @RequestMapping(method = RequestMethod.POST)
-    private @ResponseBody String login() {
-        /*
-        TODO: обращаемся к базе данных и ищем пользователя
-         если нашли вернуть true
-         если не нашли вернуть http-код 401
-         */
-        return "лог";
+    private UserRepository userRepo;
+
+    @PostMapping
+    private ResponseEntity login(@RequestBody Map<String, String> data) {
+        User verifiableUser = userRepo.findByEmailAndPassword(data.get("email"), PasswordManager.getHash(data.get("password"), "SHA1"));
+        if (verifiableUser != null) return new ResponseEntity(HttpStatus.ACCEPTED);
+        else return new ResponseEntity(HttpStatus.UNAUTHORIZED);
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
-    private @ResponseBody String register() {
-        /*
-        TODO: проверить логин на уникальность в бд
-            если +:
-                создать пользователя new User(params)
-                если при создании выкинул exception , то обработать его и вернуть отрицательный ответ клиенту
-                если пользователь создался вернуть положительный ответ
-            если -:
-                вернуть отрицательный ответ
-         */
-        return "рег";
+    @PutMapping
+    private ResponseEntity register(@RequestBody Map<String, String> data) {
+        if (!userRepo.existsByEmail(data.get("email"))) {
+            try {
+                User newbie = new User(data.get("email"), data.get("password"));
+                userRepo.save(newbie);
+                //TODO: отправка email
+                return new ResponseEntity(HttpStatus.OK);
+            } catch (AddressException e) {
+                return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            }
+        } else return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 }

@@ -1,25 +1,23 @@
 package server.Controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(path = "point")
 public class PointController {
 
-    @RequestMapping(method = RequestMethod.PUT)
+    @PutMapping
     private @ResponseBody String addPoint() {
         return "добавлено";
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping
     private @ResponseBody String loadPoints() {
         return "загружено";
     }
 
-    @RequestMapping(method = RequestMethod.DELETE)
+    @DeleteMapping
     private @ResponseBody String deletePoints() {
         return "удалено";
     }
