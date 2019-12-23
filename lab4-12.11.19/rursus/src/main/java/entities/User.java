@@ -1,9 +1,6 @@
 package entities;
 
-import server.PasswordManager;
-
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
+import logic.PasswordManager;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,24 +12,23 @@ import java.util.Objects;
 public class User implements Serializable {
 
     @Transient private static final long serialVersionUID = 4L;
-    @Id @Column(nullable = false) private InternetAddress email; //так-как пользователи не могут менять почту, то можно использовать как Id
+    @Id @Column(nullable = false) private String email; //так-как пользователи не могут менять почту, то можно использовать как Id
     @Column(nullable = false) private String password;
-    @ElementCollection(fetch = FetchType.EAGER) @CollectionTable(name = "points") private List<Point> points;
+    @ElementCollection(fetch = FetchType.LAZY) @CollectionTable(name = "points") private List<Point> points;
 
     public User() {}
 
-    public User(String email, String password) throws AddressException {
-        this.email = new InternetAddress(email);
-        this.email.validate();
+    public User(String email, String password) {
+        this.email = PasswordManager.getHash(email, "MD5");
         this.password = PasswordManager.getHash(password, "SHA1");
         points = new ArrayList<>();
     }
 
-    public InternetAddress getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(InternetAddress email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 

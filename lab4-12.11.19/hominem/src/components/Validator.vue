@@ -116,9 +116,11 @@
             },
             sendPoint: function() {
                 this.$axios.put("point", {
-                    user: localStorage.getItem("user"),
-                    jwt: localStorage.getItem("jwt"),
-                    point: this.point
+                    user: localStorage.getItem("email"),
+                    password: localStorage.getItem("password"),
+                    x: this.point.x,
+                    y: this.point.y,
+                    r: this.point.r
                 }).catch(error => {
                     this.tableNotification.message = `${error.response.status}: ${error.response.statusText}`;
                     this.tableNotification.isError = true;
@@ -154,7 +156,7 @@
             loadPoints: function () {
                 this.$axios.post("point", {
                     user: localStorage.getItem("user"),
-                    jwt: localStorage.getItem("jwt")
+                    password: localStorage.getItem("password")
                 }).then(response => {
                     this.points = JSON.stringify(response.data.points);
                 }).catch(error => {
@@ -166,7 +168,7 @@
             deletePoints: function () {
                 this.$axios.delete("point", {
                     user: localStorage.getItem("user"),
-                    jwt: localStorage.getItem("jwt")
+                    password: localStorage.getItem("password")
                 }).then(response => {
                     this.tableNotification.message = JSON.stringify(response.data.result);
                     this.tableNotification.isHidden = false;

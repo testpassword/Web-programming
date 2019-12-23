@@ -5,15 +5,15 @@
         <div id="controlContainer">
             <div id="login">
                 <label for="loginInput">Введите почту:</label>
-                <input id="loginInput" required class="illuminated animated bordered rounded colored" type="text" placeholder="email" v-model.trim="email"/>
+                <input id="loginInput" required class="illuminated animated bordered rounded colored" type="text" placeholder="email" v-model.trim="user.email"/>
             </div>
             <div id="password">
                 <label for="passwordInput">Введите пароль:</label>
-                <input id="passwordInput" required class="illuminated animated bordered rounded colored" type="password" placeholder="secret_word" v-model.trim="password"/>
+                <input id="passwordInput" required class="illuminated animated bordered rounded colored" type="password" placeholder="secret_word" v-model.trim="user.password"/>
             </div>
             <div>
-                <CheckButton color="blue" :label="regButtonLabel" @click="register"/>
-                <CheckButton color="red" :label="logButtonLabel" @click="login"/>
+                <CheckButton color="blue" :label="regButtonLabel" @click.native="register"/>
+                <CheckButton color="red" :label="logButtonLabel" @click.native="login"/>
             </div>
         </div>
         <hr/>
@@ -33,8 +33,10 @@
                 regButtonLabel: "Зарегистрироваться",
                 logButtonLabel: "Войти",
                 time: null,
-                email: "",
-                password: "",
+                user: {
+                    email: "",
+                    password: ""
+                },
                 notificationParams: {
                     isHidden: true,
                     isError: true,
@@ -51,14 +53,16 @@
               this.time = `${hours}:${minutes}:${seconds}`;
           },
           login: function () {
-              if (this.email.length > 0 && this.password.length > 0) {
+              if (this.user.email.length > 0 && this.user.password.length > 0) {
                   this.$axios.post("user", {
-                      email: this.email,
-                      password: this.password
+                      email: this.user.email,
+                      password: this.user.password
                   }).then(response => {
-                      localStorage.setItem("user", JSON.stringify(response.data.user));
-                      localStorage.setItem("password", response.data.token);
-                      this.$router.push({path: "/app"});
+                      if (response.status === 200) {
+                          localStorage.setItem("email", this.user.email);
+                          localStorage.setItem("password", this.user.password);
+                          this.$router.push({path: "/app"});
+                      }
                   }).catch(error => {
                       this.notificationParams.message = `${error.response.status}: ${error.response.statusText}`;
                       this.notificationParams.isHidden = false;
@@ -66,12 +70,11 @@
               } else this.notificationParams.isHidden = false;
           },
           register: function () {
-              if (this.email.length > 0 && this.password.length > 0) {
+              if (this.user.email.length > 0 && this.user.password.length > 0) {
                   this.$axios.put("user", {
-                      email: this.email,
-                      password: this.password
-                  }).then(() => {
-                      this.login();
+                      email: this.user.email,
+                      password: this.user.password
+                  }).then((response) => {if (response.status === 200) this.login();
                   }).catch(error => {
                       this.notificationParams.message = `${error.response.status}: ${error.response.statusText}`;
                       this.notificationParams.isHidden = false;

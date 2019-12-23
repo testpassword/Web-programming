@@ -4,7 +4,7 @@ import router from "@/router";
 import Axios from "axios";
 
 Vue.config.productionTip = false;
-Vue.prototype.$axios = Axios.create({baseURL: "http://localhost:8088"});
+Vue.prototype.$axios = Axios;
 
 new Vue({
   router, render: h => h(App),

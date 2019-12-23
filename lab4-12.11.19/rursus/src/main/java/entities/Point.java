@@ -17,14 +17,15 @@ public class Point implements Serializable {
         this.x = x;
         this.y = y;
         this.r = r;
-        coordsStatus = checkCoordinates(x, y, r);
+        checkCoordinates();
         bornDate = new Date();
     }
 
     public Point() {}
 
-    private boolean checkCoordinates(double x, double y, double r) {
-        return (x <= 0 && y >= 0 && x >= -r && y <= r/2) || (x >= 0 && y >= 0 && y <= (x - r/2) * (-2)) ||
+    private void checkCoordinates() {
+        //TODO: условие для треугольника
+        this.coordsStatus = (x <= 0 && y >= 0 && x >= -r && y <= r/2) || (x >= 0 && y >= 0 && y <= (x - r/2) * (-2)) ||
                 (x >= 0 && y <= 0 && x * x + y * y <= Math.pow(r, 2));
     }
 

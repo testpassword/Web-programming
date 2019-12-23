@@ -18,3 +18,6 @@ https://easyjava.ru/data/jpa/pervichnye-klyuchi-v-jpa/
 https://docs.spring.io/spring-data/data-commons/docs/1.6.1.RELEASE/reference/html/repositories.html
 https://spring-projects.ru/understanding/cors/
 https://stackoverflow.com/questions/50548335/javamail-maven-error
+http://dolszewski.com/spring/spring-boot-application-properties-file/
+https://o7planning.org/ru/11145/spring-email-tutorial
+https://www.youtube.com/watch?v=WsYrDu7xkEw
