@@ -1,8 +1,5 @@
 package logic.controllers;
 
-import entities.Point;
-import entities.User;
-import logic.PasswordManager;
 import logic.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,20 +17,20 @@ public class PointController {
     private UserRepository userRepo;
 
     @PutMapping
-    private ResponseEntity addPoint(@RequestBody Map<String, String> data) {
+    private ResponseEntity<String> addPoint(@RequestBody Map<String, String> data) {
         //Получить пользователя и добавить точку
-        return new ResponseEntity(HttpStatus.CHECKPOINT);
+        return new ResponseEntity<>(HttpStatus.CHECKPOINT);
     }
 
     @PostMapping
-    private ResponseEntity loadPoints(@RequestBody Map<String, String> data) {
+    private ResponseEntity<String> loadPoints(@RequestBody Map<String, String> data) {
         //Получить пользователя и вернуть точки
-        return new ResponseEntity(HttpStatus.CHECKPOINT);
+        return new ResponseEntity<>(HttpStatus.CHECKPOINT);
     }
 
     @DeleteMapping
-    private ResponseEntity deletePoints(@RequestBody Map<String, String> data) {
+    private ResponseEntity<String> deletePoints(@RequestBody Map<String, String> data) {
         //Получить пользователя и удалить все точки
-        return new ResponseEntity(HttpStatus.CHECKPOINT);
+        return new ResponseEntity<>(HttpStatus.CHECKPOINT);
     }
 }

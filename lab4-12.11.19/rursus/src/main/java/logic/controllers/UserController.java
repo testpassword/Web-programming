@@ -1,11 +1,14 @@
 package logic.controllers;
 
-import entities.User;
+import models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import logic.UserRepository;
 import org.springframework.http.*;
 import org.springframework.mail.*;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import logic.PasswordManager;
@@ -17,12 +20,19 @@ import java.util.Map;
 public class UserController {
 
     //TODO: валидация запросов
-    @Autowired private UserRepository userRepo;
-    @Autowired private JavaMailSender postman;
+    private final UserRepository userRepo;
+    private final JavaMailSender postman;
+    /*private final AuthenticationManager authManager;*/
+
+    @Autowired public UserController(UserRepository userRepo, JavaMailSender postman/*, AuthenticationManager authManager*/) {
+        this.userRepo = userRepo;
+        this.postman = postman;
+        /*this.authManager = authManager;*/
+    }
 
     @PostMapping
     private ResponseEntity<String> login(@RequestBody Map<String, String> data) {
-        User verifiableUser = userRepo.findByEmailAndPassword(PasswordManager.getHash(data.get("email"), "MD5"),
+        User verifiableUser = userRepo.getByEmailAndPassword(PasswordManager.getHash(data.get("email"), "MD5"),
                 PasswordManager.getHash(data.get("password"), "SHA1"));
         if (verifiableUser != null) return new ResponseEntity<>(HttpStatus.OK);
         else return new ResponseEntity<>("Указанного сочетания почты и пароля не существует", HttpStatus.UNAUTHORIZED);
@@ -35,7 +45,7 @@ public class UserController {
         try {
             new InternetAddress(email).validate();
             if (!userRepo.existsByEmail(PasswordManager.getHash(email, "MD5"))) {
-                User newbie = new User(email, password);
+                User newbie = new User(PasswordManager.getHash(email, "MD5"), PasswordManager.getHash(data.get("password"), "SHA1"));
                 userRepo.save(newbie);
                 try {
                     SimpleMailMessage msg = new SimpleMailMessage();
