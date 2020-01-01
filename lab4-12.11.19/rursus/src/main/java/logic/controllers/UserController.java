@@ -1,41 +1,44 @@
 package logic.controllers;
 
-import models.User;
+import logic.models.User;
+import logic.security.JwtUtil;
+import logic.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import logic.UserRepository;
 import org.springframework.http.*;
-import org.springframework.mail.*;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import logic.PasswordManager;
-import javax.mail.internet.*;
+
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import java.util.ArrayList;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping(path = "user")
 public class UserController {
 
     //TODO: валидация запросов
-    private final UserRepository userRepo;
-    private final JavaMailSender postman;
-    /*private final AuthenticationManager authManager;*/
+    private final AuthenticationManager authManager;
+    private final JwtUtil jwtUtil;
+    private final UserService userService;
 
-    @Autowired public UserController(UserRepository userRepo, JavaMailSender postman/*, AuthenticationManager authManager*/) {
-        this.userRepo = userRepo;
-        this.postman = postman;
-        /*this.authManager = authManager;*/
+    @Autowired public UserController(AuthenticationManager authManager, JwtUtil jwtUtil, UserService userService) {
+        this.authManager = authManager;
+        this.userService = userService;
+        this.jwtUtil = jwtUtil;
     }
 
     @PostMapping
     private ResponseEntity<String> login(@RequestBody Map<String, String> data) {
-        User verifiableUser = userRepo.getByEmailAndPassword(PasswordManager.getHash(data.get("email"), "MD5"),
-                PasswordManager.getHash(data.get("password"), "SHA1"));
-        if (verifiableUser != null) return new ResponseEntity<>(HttpStatus.OK);
-        else return new ResponseEntity<>("Указанного сочетания почты и пароля не существует", HttpStatus.UNAUTHORIZED);
+            String email = data.get("email");
+            String password = data.get("password");
+            authManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
+            User user = userService.findByEmail(email);
+            if (user != null) {
+                String token = jwtUtil.generateToken(email, new ArrayList<String>(){{add("USER");}});
+                return new ResponseEntity<>(token, HttpStatus.ACCEPTED);
+            } else return new ResponseEntity<>("Указанного сочетания почты и пароля не существует", HttpStatus.UNAUTHORIZED);
     }
 
     @PutMapping
@@ -44,20 +47,12 @@ public class UserController {
         String password = data.get("password");
         try {
             new InternetAddress(email).validate();
-            if (!userRepo.existsByEmail(PasswordManager.getHash(email, "MD5"))) {
-                User newbie = new User(PasswordManager.getHash(email, "MD5"), PasswordManager.getHash(data.get("password"), "SHA1"));
-                userRepo.save(newbie);
-                try {
-                    SimpleMailMessage msg = new SimpleMailMessage();
-                    msg.setTo(email);
-                    msg.setSubject("Успешная регистрация");
-                    msg.setText("Вы зарегистрировались на сайте web4. Ваш пароль: " + password);
-                    postman.send(msg);
-                } catch (MailSendException e) {
-                    System.out.println("Не удалось отправить email; время попытки истекло");
-                }
-                return new ResponseEntity<>(HttpStatus.OK);
-            } else return new ResponseEntity<>("Почта уже занята", HttpStatus.BAD_REQUEST);
+            User user = userService.findByEmail(email);
+            if (user != null) return new ResponseEntity<>("Пользователь уже существует", HttpStatus.BAD_REQUEST);
+            else {
+                userService.register(email, password);
+                return new ResponseEntity<>("Успешная регистрация", HttpStatus.CREATED);
+            }
         } catch (AddressException e) {
             return new ResponseEntity<>("Укажите почту в формате имя@доменное.имя", HttpStatus.BAD_REQUEST);
         }

@@ -1,6 +1,6 @@
-package logic;
+package logic.repos;
 
-import models.User;
+import logic.models.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,5 +8,7 @@ import org.springframework.stereotype.Repository;
 
     boolean existsByEmail(String email);
 
-    User getByEmailAndPassword(String email, String password);
+    long removeByEmailEqualsAndPasswordEquals(User user);
+
+    User getByEmail(String email);
 }

@@ -1,4 +1,4 @@
-package models;
+package logic.models;
 
 import lombok.Data;
 import javax.persistence.*;
@@ -21,6 +21,6 @@ public class User implements Serializable {
     public User(String email, String password) {
         this.email = email;
         this.password = password;
-        points = new ArrayList<>();
+        this.points = new ArrayList<>();
     }
 }

@@ -1,4 +1,4 @@
-package logic;
+package logic.filters;
 
 import org.springframework.stereotype.Component;
 
