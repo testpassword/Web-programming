@@ -8,6 +8,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+/**
+ * Сервисный слой, управляющий сущностью User.
+ */
 @Service
 public class UserService {
 
@@ -44,9 +47,22 @@ public class UserService {
         }
     }
 
-    public void delete(String email) {
-        System.out.println("Удаляем пользователя " + email);
-        User victim = userRepo.getByEmail(email);
-        long result = userRepo.removeByEmailEqualsAndPasswordEquals(victim);
+    public void remove(User victim) {
+        System.out.println("Удаляем пользователя " + victim.getEmail());
+        userRepo.removeByEmailAndPassword(victim.getEmail(), victim.getPassword());
+        try {
+            SimpleMailMessage msg = new SimpleMailMessage();
+            msg.setTo(victim.getEmail());
+            msg.setSubject("Аккаунт удалён");
+            msg.setText("Вы удалили аккаунт " + victim.getEmail() + " на сайте web4.");
+            postman.send(msg);
+        } catch (MailSendException e) {
+            System.out.println("Не удалось отправить email; время попытки истекло");
+        }
+    }
+
+    public void updateUser(User updatable) {
+        System.out.println("Применяем изменения пользователя " + updatable.getEmail());
+        userRepo.save(updatable);
     }
 }

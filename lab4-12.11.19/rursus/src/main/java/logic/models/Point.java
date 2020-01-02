@@ -6,8 +6,10 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-@Data
-@Embeddable
+/**
+ * Представляет сущность точки из/в бд.
+ */
+@Data @Embeddable @Table(name = "points")
 public class Point implements Serializable {
 
     @Transient private static final long serialVersionUID = 4L;

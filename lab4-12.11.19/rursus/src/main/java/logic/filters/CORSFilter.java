@@ -6,6 +6,9 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Открывает доступ к контроллерам для запросов с любого url-а.
+ */
 @Component
 public class CORSFilter implements Filter {
 

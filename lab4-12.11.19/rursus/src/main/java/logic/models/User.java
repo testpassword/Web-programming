@@ -3,12 +3,12 @@ package logic.models;
 import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-@Data
-@Entity
-@Table(name = "users")
+/**
+ * Представляет сущность пользователя из/в бд.
+ */
+@Data @Entity @Table(name = "users")
 public class User implements Serializable {
 
     @Transient private static final long serialVersionUID = 4L;

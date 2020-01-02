@@ -1,5 +1,8 @@
 package logic.security;
 
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.SignatureAlgorithm;
+import logic.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -7,17 +10,19 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
-import io.jsonwebtoken.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 import java.util.function.Function;
 
+/**
+ * Класс, обсулживающий JsonWebToken-ы.
+ */
 @Component
-public class JwtUtil {
+public class JWTUtil {
 
     private final String KEY = "liquid";
     private static final long TOKEN_VALIDITY = 604800000; //1 неделя
-    @Autowired UserDetailsService userDetails;
+    @Autowired UserDetailsServiceImpl userDetails;
 
     @Bean public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -38,7 +43,6 @@ public class JwtUtil {
             return false;
         } else return true;
     }
-
 
     private boolean isTokenExpired(String token) {
         final Date expiration = getExpirationDate(token);

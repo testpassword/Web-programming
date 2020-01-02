@@ -21,6 +21,8 @@ https://stackoverflow.com/questions/50548335/javamail-maven-error
 http://dolszewski.com/spring/spring-boot-application-properties-file/
 https://o7planning.org/ru/11145/spring-email-tutorial
 https://www.youtube.com/watch?v=WsYrDu7xkEw
+https://www.youtube.com/watch?v=yRnSUDx3Y8k&t=3788s
 http://developerkiselev.blogspot.com/2016/11/restcontroller-vs-controller.html
 https://dzone.com/articles/spring-boot-security-json-web-tokenjwt-hello-world
 https://ru.wikibooks.org/wiki/Spring_Security/%D0%A2%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D0%BE%D0%B1%D0%B7%D0%BE%D1%80_Spring_Security
+https://habr.com/ru/post/203318/
