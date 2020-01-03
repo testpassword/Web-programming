@@ -10,6 +10,8 @@ import java.io.IOException;
 
 /**
  * Фильтрует запросы на наличие jwt.
+ * @author Артемий Кульбако
+ * @version 1.0
  */
 public class JWTFilter extends GenericFilterBean {
 

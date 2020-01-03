@@ -16,6 +16,8 @@ import java.util.function.Function;
 
 /**
  * Класс, обсулживающий JsonWebToken-ы.
+ * @author Артемий Кульбако
+ * @version 1.0
  */
 @Component
 public class JWTUtil {
@@ -51,7 +53,7 @@ public class JWTUtil {
 
     public String resolveToken(HttpServletRequest req) {
         String bearerToken = req.getHeader("Authorization");
-        if (bearerToken != null && bearerToken.startsWith("Bearer_")) {
+        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7);
         } else return null;
     }

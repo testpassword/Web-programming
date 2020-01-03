@@ -8,6 +8,8 @@ import java.io.IOException;
 
 /**
  * Открывает доступ к контроллерам для запросов с любого url-а.
+ * @author Артемий Кульбако
+ * @version 1.0
  */
 @Component
 public class CORSFilter implements Filter {

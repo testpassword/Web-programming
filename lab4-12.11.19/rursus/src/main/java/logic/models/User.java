@@ -7,6 +7,8 @@ import java.util.*;
 
 /**
  * Представляет сущность пользователя из/в бд.
+ * @author Артемий Кульбако
+ * @version 1.0
  */
 @Data @Entity @Table(name = "users")
 public class User implements Serializable {

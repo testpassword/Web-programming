@@ -17,7 +17,7 @@ export default new VueRouter({
             path: "/app",
             component: Validator,
             beforeEnter: (to, from, next) => {
-                if (localStorage.getItem("email") !== null && localStorage.getItem("password") !== null) next();
+                if (localStorage.getItem("jwt")) next();
                 else {
                     alert("Доступ неавторизованным пользователям запрещён");
                     next({path: "/login"});

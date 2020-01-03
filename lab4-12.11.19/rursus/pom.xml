@@ -10,7 +10,7 @@
     </parent>
     <groupId>pugalol</groupId>
     <artifactId>rursus</artifactId>
-    <version>0.1.0-DEV</version>
+    <version>0.9.0-DEV</version>
     <name>rursus</name>
     <description>Backend for Lab4</description>
 
@@ -31,11 +31,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
-            <version>5.2.2.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

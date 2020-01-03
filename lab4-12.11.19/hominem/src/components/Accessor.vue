@@ -58,9 +58,8 @@
                       email: this.user.email,
                       password: this.user.password
                   }).then(response => {
-                      if (response.status === 200) {
-                          localStorage.setItem("email", this.user.email);
-                          localStorage.setItem("password", this.user.password);
+                      if (response.status === 202) {
+                          localStorage.setItem("jwt", response.data);
                           this.$router.push({path: "/app"});
                       }
                   }).catch(error => {
@@ -74,9 +73,9 @@
                   this.$axios.put("user", {
                       email: this.user.email,
                       password: this.user.password
-                  }).then((response) => {if (response.status === 200) this.login();
+                  }).then((response) => {if (response.status === 201) this.login();
                   }).catch(error => {
-                      this.notificationParams.message = `${error.response.status}: ${error.response.statusText}`;
+                      this.notificationParams.message = `${error.response.status}: ${error.response.data}`;
                       this.notificationParams.isHidden = false;
                   });
               } else this.notificationParams.isHidden = false;
@@ -86,6 +85,7 @@
             setInterval(this.clock, 1000);
             this.clock();
         }
+        //TODO: удаление аккаунта
     }
 </script>
 

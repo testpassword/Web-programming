@@ -102,7 +102,7 @@
                     this.point.x = ((position.x - 150) / 125 * this.point.r).toFixed(6);
                     this.point.y = ((150 - position.y) / 125 * this.point.r).toFixed(6);
                 }
-                this.sendPoint();
+                this.addPoint();
                 this.loadPoints();
                 this.redrawGraph();
 
@@ -114,13 +114,11 @@
                     };
                 }
             },
-            sendPoint: function() {
+            addPoint: function() {
                 this.$axios.put("point", {
-                    user: localStorage.getItem("email"),
-                    password: localStorage.getItem("password"),
-                    x: this.point.x,
-                    y: this.point.y,
-                    r: this.point.r
+                    point: this.point
+                }, {
+                    headers: {Authorization: "Bearer " + localStorage.getItem("jwt")}
                 }).catch(error => {
                     this.tableNotification.message = `${error.response.status}: ${error.response.statusText}`;
                     this.tableNotification.isError = true;
@@ -154,9 +152,8 @@
                 }
             },
             loadPoints: function () {
-                this.$axios.post("point", {
-                    user: localStorage.getItem("user"),
-                    password: localStorage.getItem("password")
+                this.$axios.get("point", {
+                    headers: {Authorization: "Bearer " + localStorage.getItem("jwt")}
                 }).then(response => {
                     this.points = JSON.stringify(response.data.points);
                 }).catch(error => {
@@ -167,8 +164,7 @@
             },
             deletePoints: function () {
                 this.$axios.delete("point", {
-                    user: localStorage.getItem("user"),
-                    password: localStorage.getItem("password")
+                    headers: {Authorization: "Bearer " + localStorage.getItem("jwt")}
                 }).then(response => {
                     this.tableNotification.message = JSON.stringify(response.data.result);
                     this.tableNotification.isHidden = false;

@@ -8,6 +8,8 @@ import java.util.Date;
 
 /**
  * Представляет сущность точки из/в бд.
+ * @author Артемий Кульбако
+ * @version 1.0
  */
 @Data @Embeddable @Table(name = "points")
 public class Point implements Serializable {

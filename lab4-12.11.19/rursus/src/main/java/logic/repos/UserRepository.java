@@ -6,8 +6,10 @@ import org.springframework.stereotype.Repository;
 
 /**
  * CRUD-репозиторий для сущности User.
+ * @author Артемий Кульбако
+ * @version 1.0
  */
-@Repository public interface UserRepository extends CrudRepository<User, Long> {
+@Repository public interface UserRepository extends CrudRepository<User, String> {
 
     boolean existsByEmail(String email);
 

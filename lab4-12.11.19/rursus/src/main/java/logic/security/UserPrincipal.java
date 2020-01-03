@@ -8,6 +8,8 @@ import java.util.*;
 
 /**
  * Предоставляет необходимую информацию для построения объекта Authentication из источников данных системы безопасности.
+ * @author Артемий Кульбако
+ * @version 1.0
  */
 public class UserPrincipal implements UserDetails {
 

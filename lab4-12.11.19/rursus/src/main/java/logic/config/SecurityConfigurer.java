@@ -11,9 +11,11 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 
 /**
  * Отвечает за доступ к различным REST-контроллерам.
+ * @author Артемий Кульбако
+ * @version 1.0
  */
 @Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     @Autowired private JWTUtil jwtUtil;
 

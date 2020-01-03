@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 /**
  * Реализация интерфейса UserDetailsService для манипуляциями сущностью User с точки зрения Spring Security.
+ * @author Артемий Кульбако
+ * @version 1.0
  */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {

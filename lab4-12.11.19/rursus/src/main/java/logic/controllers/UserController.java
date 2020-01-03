@@ -1,22 +1,24 @@
 package logic.controllers;
 
 import logic.models.User;
+import logic.requests.UserDTO;
 import logic.security.JWTUtil;
 import logic.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.security.authentication.*;
 import org.springframework.web.bind.annotation.*;
-import javax.mail.internet.*;
+import javax.validation.Valid;
 import java.util.*;
 
 /**
  * Обрабатывает запросы к url-у /user.
+ * @author Артемий Кульбако
+ * @version 1.2
  */
 @RestController @RequestMapping(path = "user")
 public class UserController {
 
-    //TODO: валидация запросов
     private final AuthenticationManager authManager;
     private final JWTUtil jwtUtil;
     private final UserService userService;
@@ -28,43 +30,38 @@ public class UserController {
     }
 
     @PostMapping
-    private ResponseEntity<String> login(@RequestBody Map<String, String> req) {
-            String email = req.get("email");
-            String password = req.get("password");
-            User user = userService.findByEmail(email);
-            if (user != null) {
-                authManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
-                String token = jwtUtil.generateToken(email, new ArrayList<String>(){{add("USER");}});
-                return new ResponseEntity<>(token, HttpStatus.ACCEPTED);
-            } else return new ResponseEntity<>("Указанного сочетания почты и пароля не существует", HttpStatus.UNAUTHORIZED);
+    private ResponseEntity<String> login(@Valid @RequestBody UserDTO req) {
+        String email = req.getEmail();
+        String password = req.getPassword();
+        User user = userService.findByEmail(email);
+        if (user != null) {
+            authManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
+            String token = jwtUtil.generateToken(email, new ArrayList<String>(){{add("USER");}});
+            return new ResponseEntity<>(token, HttpStatus.ACCEPTED);
+        } else return new ResponseEntity<>("Указанного сочетания почты и пароля не существует", HttpStatus.NO_CONTENT);
     }
 
     @PutMapping
-    private ResponseEntity<String> register(@RequestBody Map<String, String> req) {
-        String email = req.get("email");
-        String password = req.get("password");
-        try {
-            new InternetAddress(email).validate();
-            User user = userService.findByEmail(email);
-            if (user != null) return new ResponseEntity<>("Пользователь уже существует", HttpStatus.BAD_REQUEST);
-            else {
-                userService.register(email, password);
-                return new ResponseEntity<>("Успешная регистрация", HttpStatus.CREATED);
-            }
-        } catch (AddressException e) {
-            return new ResponseEntity<>("Укажите почту в формате имя@доменное.имя", HttpStatus.BAD_REQUEST);
+    private ResponseEntity<String> register(@Valid @RequestBody UserDTO req) {
+        String email = req.getEmail();
+        String password = req.getPassword();
+        User user = userService.findByEmail(email);
+        if (user != null) return new ResponseEntity<>("Пользователь уже существует", HttpStatus.BAD_REQUEST);
+        else {
+            userService.register(email, password);
+            return new ResponseEntity<>("Успешная регистрация", HttpStatus.CREATED);
         }
     }
 
     @DeleteMapping
-    private ResponseEntity<String> remove(@RequestBody Map<String, String> req) {
-        String email = req.get("email");
-        String password = req.get("password");
-        authManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
+    private ResponseEntity<String> remove(@Valid @RequestBody UserDTO req) {
+        String email = req.getEmail();
+        String password = req.getPassword();
         User user = userService.findByEmail(email);
         if (user != null) {
+            authManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
             userService.remove(user);
-            return new ResponseEntity<>("Вы удалили свой аккаунт", HttpStatus.ACCEPTED);
-        } else return new ResponseEntity<>("Указанного сочетания почты и пароля не существует", HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>("Вы удалили свой аккаунт", HttpStatus.OK);
+        } else return new ResponseEntity<>("Указанного сочетания почты и пароля не существует", HttpStatus.NO_CONTENT);
     }
 }

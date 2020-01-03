@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * Точка входа в приложение на базе Spring Framework.
+ * @author Артемий Кульбако
+ * @version 1.0
  */
 @SpringBootApplication
 public class RursusApplication {

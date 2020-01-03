@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 /**
  * Сервисный слой, управляющий сущностью User.
+ * @author Артемий Кульбако
+ * @version 1.0
  */
 @Service
 public class UserService {

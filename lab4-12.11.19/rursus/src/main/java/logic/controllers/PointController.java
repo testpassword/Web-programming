@@ -2,17 +2,19 @@ package logic.controllers;
 
 import logic.models.Point;
 import logic.models.User;
+import logic.requests.PointDTO;
 import logic.security.JWTUtil;
 import logic.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
+import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Обрабатывает запросы к url-у /point.
+ * @author Артемий Кульбако
+ * @version 1.2
  */
 @RestController @RequestMapping(path = "point")
 public class PointController {
@@ -26,27 +28,31 @@ public class PointController {
         this.userService = userService;
     }
 
+    /* В приведённых ниже методах для идентификации пользователя используется jwt. Он имеет вид 'Bearer hash'. Для корректной
+    работы с ним, необходимо после получения его из заголовка, отрезать часть 'Bearer '. */
+
     @PutMapping
-    private ResponseEntity<String> addPoint(@RequestBody Map<String, String> req) {
-        //Получить пользователя и добавить точку
-        String token = req.get("token");
-        Point p = new Point(Double.parseDouble(req.get("x")), Double.parseDouble(req.get("y")), Double.parseDouble(req.get("r")));
-        String email = jwtUtil.getUsername(token);
-        User modifiedUser = userService.findByEmail(email);
+    private ResponseEntity<String> addPoint(@Valid @RequestBody PointDTO req, @RequestHeader("Authorization") String token) {
+        User modifiedUser = userService.findByEmail(jwtUtil.getUsername(token.substring(7)));
+        /* Так-как проверка попадании точки в одз и создания временной метки находится в конструкторе, а @RequestBody
+        работает через аксессоры, то необходимо сконструировать новую точку из данных запроса. */
+        Point incompletePoint = req.getPoint();
+        Point p = new Point(incompletePoint.getX(), incompletePoint.getY(), incompletePoint.getR());
         modifiedUser.getPoints().add(p);
         userService.updateUser(modifiedUser);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PostMapping
-    private ResponseEntity<String> loadPoints(@RequestBody Map<String, String> req) {
-        //Получить пользователя и вернуть точки
-        return new ResponseEntity<>(HttpStatus.CHECKPOINT);
+    @GetMapping
+    private ResponseEntity<List<Point>> loadPoints(@RequestHeader("Authorization") String token) {
+        return new ResponseEntity<>(userService.findByEmail(jwtUtil.getUsername(token.substring(7))).getPoints(), HttpStatus.CHECKPOINT);
     }
 
     @DeleteMapping
-    private ResponseEntity<String> clearPoints(@RequestBody Map<String, String> req) {
-        //Получить пользователя и удалить все точки
-        return new ResponseEntity<>(HttpStatus.CHECKPOINT);
+    private ResponseEntity<String> clearPoints(@RequestHeader("Authorization") String token) {
+        User modifiedUser = userService.findByEmail(jwtUtil.getUsername(token.substring(7)));
+        modifiedUser.getPoints().clear();
+        userService.updateUser(modifiedUser);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
