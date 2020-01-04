@@ -86,13 +86,13 @@
                     y: null,
                     r: 4 //Изначально задано макс. значение для отрисовки графика в макс. масштабе
                 },
-                points: null
+                points: new Array(0)
             }
         },
         methods: {
             validate: function (event) {
                 if (event === null) {
-                    if (this.point.x === null || this.point.y === null || this.point.r === null) {
+                    if (this.point.x === null || this.point.y === null) {
                         this.tableNotification.message = "Не все поля заполнены";
                         this.tableNotification.isError = true;
                         return;
@@ -120,7 +120,7 @@
                 }, {
                     headers: {Authorization: "Bearer " + localStorage.getItem("jwt")}
                 }).catch(error => {
-                    this.tableNotification.message = `${error.response.status}: ${error.response.statusText}`;
+                    this.tableNotification.message = error.response.statusText;
                     this.tableNotification.isError = true;
                     this.tableNotification.isHidden = false;
                 });
@@ -138,26 +138,26 @@
                 triangle.setAttribute("points", `150,150 150,${150 + 30 * r} ${150 - 30 * r},150`);
                 let k = (r !== 4) ? ((4 - r) * 14) : 0;
                 path.setAttribute("d", `M 150 150 L ${150 + r * 30} 150 C ${150 + r * 30} ${210 - k} ${210 - k} ${150 + r * 30} 150 ${150 + r * 30} Z`);
-                if (this.points !== null) {
+                if (this.points.length !== 0) {
                     let oldPoints = document.querySelectorAll("circle");
                     oldPoints.forEach(oldPoint => oldPoint.parentNode.removeChild(oldPoint));
-                    this.points.forEach(function (item) {
+                    this.points.forEach(item => {
                         let newPoint = document.createElementNS("http://www.w3.org/2000/svg", "circle");
                         newPoint.setAttribute("r", "5");
                         newPoint.setAttribute("cx", `${item.x / r * 125 + 150}`);
                         newPoint.setAttribute("cy", `${150 - item.y / r * 125}`);
                         newPoint.setAttribute("fill", item.status === "true" ? "green" : "red");
                         svg.appendChild(newPoint);
-                    })
-                }
+                    });
+                } else this.tableNotification.isHidden = false;
             },
             loadPoints: function () {
                 this.$axios.get("point", {
                     headers: {Authorization: "Bearer " + localStorage.getItem("jwt")}
                 }).then(response => {
-                    this.points = JSON.stringify(response.data.points);
+                    this.points = JSON.parse(response.data);
                 }).catch(error => {
-                    this.tableNotification.message = `${error.response.status}: ${error.response.statusText}`;
+                    this.tableNotification.message = error.response.statusText;
                     this.tableNotification.isError = true;
                     this.tableNotification.isHidden = false;
                 });
@@ -166,11 +166,11 @@
                 this.$axios.delete("point", {
                     headers: {Authorization: "Bearer " + localStorage.getItem("jwt")}
                 }).then(response => {
-                    this.tableNotification.message = JSON.stringify(response.data.result);
+                    this.tableNotification.message = response.data;
                     this.tableNotification.isHidden = false;
                     this.tableNotification.isError = false;
                 }).catch(error => {
-                    this.tableNotification.message = `${error.response.status}: ${error.response.statusText}`;
+                    this.tableNotification.message = error.response.statusText;
                     this.notificationParams.isError = true;
                     this.tableNotification.isHidden = false;
                 });

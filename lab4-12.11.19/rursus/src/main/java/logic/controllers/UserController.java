@@ -12,11 +12,11 @@ import javax.validation.Valid;
 import java.util.*;
 
 /**
- * Обрабатывает запросы к url-у /user.
+ * Обрабатывает запросы к url-у /api/user.
  * @author Артемий Кульбако
  * @version 1.2
  */
-@RestController @RequestMapping(path = "user")
+@RestController @RequestMapping(path = "/api/user")
 public class UserController {
 
     private final AuthenticationManager authManager;
@@ -38,7 +38,7 @@ public class UserController {
             authManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
             String token = jwtUtil.generateToken(email, new ArrayList<String>(){{add("USER");}});
             return new ResponseEntity<>(token, HttpStatus.ACCEPTED);
-        } else return new ResponseEntity<>("Указанного сочетания почты и пароля не существует", HttpStatus.NO_CONTENT);
+        } else return new ResponseEntity<>("Указанного сочетания почты и пароля не существует", HttpStatus.NOT_FOUND);
     }
 
     @PutMapping
@@ -62,6 +62,6 @@ public class UserController {
             authManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
             userService.remove(user);
             return new ResponseEntity<>("Вы удалили свой аккаунт", HttpStatus.OK);
-        } else return new ResponseEntity<>("Указанного сочетания почты и пароля не существует", HttpStatus.NO_CONTENT);
+        } else return new ResponseEntity<>("Указанного сочетания почты и пароля не существует", HttpStatus.NOT_FOUND);
     }
 }

@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Created-By: IntelliJ IDEA
+Built-By: pugalol
+Build-Jdk: 1.8.0_232
+Implementation-Title: rursus
+Implementation-Version: 0.9.0-DEV
+Implementation-Vendor-Id: pugalol
+Main-Class: ${start-class}
+

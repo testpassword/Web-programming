@@ -5,11 +5,11 @@
         <div id="controlContainer">
             <div id="login">
                 <label for="loginInput">Введите почту:</label>
-                <input id="loginInput" required class="illuminated animated bordered rounded colored" type="text" placeholder="email" v-model.trim="user.email"/>
+                <input id="loginInput" required class="illuminated animated bordered rounded colored" type="text" placeholder="email" v-model.trim="email"/>
             </div>
             <div id="password">
                 <label for="passwordInput">Введите пароль:</label>
-                <input id="passwordInput" required class="illuminated animated bordered rounded colored" type="password" placeholder="secret_word" v-model.trim="user.password"/>
+                <input id="passwordInput" required class="illuminated animated bordered rounded colored" type="password" placeholder="secret_word" v-model.trim="password"/>
             </div>
             <div>
                 <CheckButton color="blue" :label="regButtonLabel" @click.native="register"/>
@@ -32,11 +32,10 @@
             return {
                 regButtonLabel: "Зарегистрироваться",
                 logButtonLabel: "Войти",
+                delButtonLabel: "Удалить",
                 time: null,
-                user: {
-                    email: "",
-                    password: ""
-                },
+                email: "",
+                password: "",
                 notificationParams: {
                     isHidden: true,
                     isError: true,
@@ -53,33 +52,49 @@
               this.time = `${hours}:${minutes}:${seconds}`;
           },
           login: function () {
-              if (this.user.email.length > 0 && this.user.password.length > 0) {
+              if (this.email.length > 0 && this.password.length > 0 && this.validateEmail()) {
                   this.$axios.post("user", {
-                      email: this.user.email,
-                      password: this.user.password
+                      email: this.email,
+                      password: this.password
                   }).then(response => {
                       if (response.status === 202) {
                           localStorage.setItem("jwt", response.data);
                           this.$router.push({path: "/app"});
                       }
                   }).catch(error => {
-                      this.notificationParams.message = `${error.response.status}: ${error.response.statusText}`;
+                      this.notificationParams.message = error.response.data;
                       this.notificationParams.isHidden = false;
                   });
               } else this.notificationParams.isHidden = false;
           },
           register: function () {
-              if (this.user.email.length > 0 && this.user.password.length > 0) {
+              if (this.email.length > 0 && this.password.length > 0 && this.validateEmail()) {
                   this.$axios.put("user", {
-                      email: this.user.email,
-                      password: this.user.password
-                  }).then((response) => {if (response.status === 201) this.login();
+                      email: this.email,
+                      password: this.password
+                  }).then((response) => {
+                      if (response.status === 201) {
+                          this.notificationParams.message = response.data;
+                          this.notificationParams.isError = false;
+                          this.notificationParams.isHidden = false;
+                          setTimeout(this.login, 2000);
+                      }
                   }).catch(error => {
-                      this.notificationParams.message = `${error.response.status}: ${error.response.data}`;
+                      this.notificationParams.message = error.response.data;
                       this.notificationParams.isHidden = false;
                   });
               } else this.notificationParams.isHidden = false;
-          }
+          },
+          validateEmail: function () {
+              let regExp = new RegExp(/\S+@\S+\.\S+/);
+              let result = regExp.test(String(this.email).toLowerCase());
+              if (result) return true;
+              else {
+                  this.notificationParams.isError = true;
+                  this.notificationParams.isHidden = false;
+                  this.notificationParams.message = "email введён некорректно";
+              }
+            }
         },
         created: function () {
             setInterval(this.clock, 1000);

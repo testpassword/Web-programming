@@ -16,7 +16,7 @@ public class User implements Serializable {
     @Transient private static final long serialVersionUID = 4L;
     @Id @Column(nullable = false) private String email; //так-как пользователи не могут менять почту, то можно использовать как Id
     @Column(nullable = false) private String password;
-    @ElementCollection(fetch = FetchType.LAZY) @CollectionTable(name = "points") private List<Point> points;
+    @ElementCollection(fetch = FetchType.EAGER) @CollectionTable(name = "points") private List<Point> points;
 
     public User() {}
 

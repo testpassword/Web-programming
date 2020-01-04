@@ -28,7 +28,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic().disable().csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeRequests()
-                .antMatchers("/user").permitAll()
+                .antMatchers("/api/user").permitAll()
                 .anyRequest().authenticated()
                 .and().apply(new JWTConfigurer(jwtUtil));
     }

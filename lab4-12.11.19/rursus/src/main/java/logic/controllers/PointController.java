@@ -1,7 +1,6 @@
 package logic.controllers;
 
-import logic.models.Point;
-import logic.models.User;
+import logic.models.*;
 import logic.requests.PointDTO;
 import logic.security.JWTUtil;
 import logic.services.UserService;
@@ -12,11 +11,11 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
- * Обрабатывает запросы к url-у /point.
+ * Обрабатывает запросы к url-у /api/point.
  * @author Артемий Кульбако
  * @version 1.2
  */
-@RestController @RequestMapping(path = "point")
+@RestController @RequestMapping(path = "/api/point")
 public class PointController {
 
     //TODO валидация
@@ -45,7 +44,7 @@ public class PointController {
 
     @GetMapping
     private ResponseEntity<List<Point>> loadPoints(@RequestHeader("Authorization") String token) {
-        return new ResponseEntity<>(userService.findByEmail(jwtUtil.getUsername(token.substring(7))).getPoints(), HttpStatus.CHECKPOINT);
+        return new ResponseEntity<>(userService.findByEmail(jwtUtil.getUsername(token.substring(7))).getPoints(), HttpStatus.OK);
     }
 
     @DeleteMapping
@@ -53,6 +52,6 @@ public class PointController {
         User modifiedUser = userService.findByEmail(jwtUtil.getUsername(token.substring(7)));
         modifiedUser.getPoints().clear();
         userService.updateUser(modifiedUser);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Все ваши точки удалены", HttpStatus.OK);
     }
 }
