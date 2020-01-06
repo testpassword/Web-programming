@@ -9,7 +9,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
- * Сервисный слой, управляющий сущностью User.
+ * Сервисный слой, управляющий сущностью {@code User}.
+ * @see User
  * @author Артемий Кульбако
  * @version 1.0
  */

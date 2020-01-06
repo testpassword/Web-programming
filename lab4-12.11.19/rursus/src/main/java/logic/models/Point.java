@@ -1,13 +1,12 @@
 package logic.models;
 
 import lombok.Data;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Представляет сущность точки из/в бд.
+ * Представляет сущность точки для бд.
  * @author Артемий Кульбако
  * @version 1.0
  */
@@ -16,7 +15,7 @@ public class Point implements Serializable {
 
     @Transient private static final long serialVersionUID = 4L;
     private double x, y, r;
-    private boolean coordsStatus;
+    private boolean status;
     private Date bornDate;
 
     public Point(double x, double y, double r) {
@@ -31,7 +30,7 @@ public class Point implements Serializable {
 
     private void checkCoordinates() {
         //TODO: условие для треугольника
-        this.coordsStatus = (x <= 0 && y >= 0 && x >= -r && y <= r/2) || (x >= 0 && y >= 0 && y <= (x - r/2) * (-2)) ||
+        this.status = (x <= 0 && y >= 0 && x >= -r && y <= r/2) || (x >= 0 && y >= 0 && y <= (x - r/2) * (-2)) ||
                 (x >= 0 && y <= 0 && x * x + y * y <= Math.pow(r, 2));
     }
 
@@ -40,7 +39,7 @@ public class Point implements Serializable {
         return "<tr><td>" + x + "</td>" +
                 "<td>" + y + "</td>" +
                 "<td>" + r + "</td>" +
-                "<td style='color: " + ((coordsStatus) ? "green" : "red") + "'>" + coordsStatus + "</td>" +
+                "<td style='color: " + ((status) ? "green" : "red") + "'>" + status + "</td>" +
                 "<td>" + bornDate + "</td></tr>";
     }
 }

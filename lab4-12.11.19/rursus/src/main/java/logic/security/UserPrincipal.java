@@ -7,7 +7,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.*;
 
 /**
- * Предоставляет необходимую информацию для построения объекта Authentication из источников данных системы безопасности.
+ * Предоставляет необходимую информацию для построения объекта {@code Authentication} из источников данных системы
+ * безопасности с ролями.
+ * @see GrantedAuthority
  * @author Артемий Кульбако
  * @version 1.0
  */

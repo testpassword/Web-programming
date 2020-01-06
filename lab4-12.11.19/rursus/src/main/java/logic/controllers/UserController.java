@@ -38,7 +38,7 @@ public class UserController {
             authManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
             String token = jwtUtil.generateToken(email, new ArrayList<String>(){{add("USER");}});
             return new ResponseEntity<>(token, HttpStatus.ACCEPTED);
-        } else return new ResponseEntity<>("Указанного сочетания почты и пароля не существует", HttpStatus.NOT_FOUND);
+        } else return new ResponseEntity<>("Сочетания почты и пароля не существует", HttpStatus.NOT_FOUND);
     }
 
     @PutMapping

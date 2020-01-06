@@ -10,5 +10,4 @@ new Vue({router, render: h => h(App)}).$mount('#app');
 
 /*
 TODO цвет true/false в таблице
-TODO анимация при клике на график
  */

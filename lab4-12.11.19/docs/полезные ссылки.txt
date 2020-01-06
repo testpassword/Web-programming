@@ -29,3 +29,8 @@ https://habr.com/ru/post/203318/
 https://devcolibri.com/spring-data-jpa-%D0%BF%D0%B8%D1%88%D0%B5%D0%BC-dao-%D0%B8-services-%D1%87%D0%B0%D1%81%D1%82%D1%8C-2/
 https://www.mkyong.com/spring-boot/spring-rest-validation-example/
 https://www.youtube.com/watch?v=vQldMjSJ6-w
+https://www.baeldung.com/spring-validation-message-interpolation
+https://www.developerdrive.com/creating-a-data-table-in-vue-js/
+https://www.fileformat.info/info/unicode/char/2611/index.htm
+https://www.fileformat.info/info/unicode/char/2610/index.htm
+https://stackoverflow.com/questions/624422/how-do-i-document-packages-in-java

@@ -62,8 +62,8 @@ export default {
         width: 75%;
         transform: translate(-50%, 0);
         background-color: ghostwhite;
-        min-height: 630px; /*FWVGA - минимальное разрешение макета*/
-        min-width: 480px;
+        min-height: 1152px; /*минимальное разрешение макета*/
+        min-width: 648px;
     }
 
     a {

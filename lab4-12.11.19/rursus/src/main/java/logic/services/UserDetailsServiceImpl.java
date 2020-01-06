@@ -9,7 +9,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 /**
- * Реализация интерфейса UserDetailsService для манипуляциями сущностью User с точки зрения Spring Security.
+ * Реализация интерфейса UserDetailsService для манипуляциями {@code User} с точки зрения Spring Security.
+ * @see User
  * @author Артемий Кульбако
  * @version 1.0
  */

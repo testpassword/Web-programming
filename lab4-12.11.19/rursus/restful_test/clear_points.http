@@ -1,0 +1,5 @@
+DELETE localhost:8088/api/point
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrdWxiYWtvMjAwMEBtYWlsLnJ1Iiwicm9sZXMiOlsiVVNFUiJdLCJpYXQiOjE1NzgzMDgzODIsImV4cCI6MTU3ODkxMzE4Mn0.0bVB8poPK_vJ786oEX9IHktfOOED3gtcWdvf7BqBu5XG3gNm1JHqrv0bctzk4rNwGp_BUgX85lEGOQ7AG4p43w
+
+###

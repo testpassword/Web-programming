@@ -5,7 +5,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * CRUD-репозиторий для сущности User.
+ * CRUD-репозиторий для {@code User}.
+ * @see User
  * @author Артемий Кульбако
  * @version 1.0
  */

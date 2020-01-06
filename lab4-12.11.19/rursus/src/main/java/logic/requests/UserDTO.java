@@ -1,13 +1,11 @@
 package logic.requests;
 
 import lombok.Data;
-
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 
 /**
- * Объект запроса аутентификации и регистрации согласно шаблону проектирования Data Transfer Object для User-контроллера.
+ * Объект обращения к серверу для {@code UserController}.
  * @see logic.controllers.UserController
  * @author Кульбако Артемий
  * @version 1.0

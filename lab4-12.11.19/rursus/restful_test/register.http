@@ -1,0 +1,9 @@
+PUT localhost:8088/api/user
+Content-Type: application/json
+
+{
+  "email": "test@test.test",
+  "password": "kek"
+}
+
+###

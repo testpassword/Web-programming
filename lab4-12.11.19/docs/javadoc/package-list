@@ -4,5 +4,6 @@ logic.controllers
 logic.filters
 logic.models
 logic.repos
+logic.requests
 logic.security
 logic.services
