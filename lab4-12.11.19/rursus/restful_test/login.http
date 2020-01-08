@@ -2,7 +2,7 @@ POST localhost:8088/api/user
 Content-Type: application/json
 
 {
-  "email": "kulbako2000@mail.ru",
+  "email": "test@test.test",
   "password": "kek"
 }
 

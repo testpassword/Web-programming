@@ -8,13 +8,13 @@ import java.util.*;
 /**
  * Представляет сущность пользователя для бд.
  * @author Артемий Кульбако
- * @version 1.0
+ * @version 1.1
  */
 @Data @Entity @Table(name = "users")
 public class User implements Serializable {
 
     @Transient private static final long serialVersionUID = 4L;
-    @Id @Column(nullable = false) private String email; //так-как пользователи не могут менять почту, то можно использовать как Id
+    @Id private String email;
     @Column(nullable = false) private String password;
     @ElementCollection(fetch = FetchType.EAGER) @CollectionTable(name = "points") private List<Point> points;
 

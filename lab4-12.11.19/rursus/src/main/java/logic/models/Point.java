@@ -8,14 +8,14 @@ import java.util.Date;
 /**
  * Представляет сущность точки для бд.
  * @author Артемий Кульбако
- * @version 1.0
+ * @version 1.1
  */
 @Data @Embeddable @Table(name = "points")
 public class Point implements Serializable {
 
     @Transient private static final long serialVersionUID = 4L;
-    private double x, y, r;
-    private boolean status;
+    @Column(nullable = false) private double x, y, r;
+    @Column(nullable = false) private boolean status;
     private Date bornDate;
 
     public Point(double x, double y, double r) {
@@ -29,8 +29,7 @@ public class Point implements Serializable {
     public Point() {}
 
     private void checkCoordinates() {
-        //TODO: условие для треугольника
-        this.status = (x <= 0 && y >= 0 && x >= -r && y <= r/2) || (x >= 0 && y >= 0 && y <= (x - r/2) * (-2)) ||
+        this.status = (x <= 0 && y >= 0 && x >= -r && y <= r/2) || ((y >= -x - r) && x <= 0 && y <= 0) ||
                 (x >= 0 && y <= 0 && x * x + y * y <= Math.pow(r, 2));
     }
 

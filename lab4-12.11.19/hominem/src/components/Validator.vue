@@ -78,7 +78,7 @@
                     <td>{{ point.y }}</td>
                     <td>{{ point.r }}</td>
                     <td>{{ (point.status) ? "\u2611" : "\u2610" }}</td>
-                    <td>{{ new Date(Date.parse(point.bornDate)) }}</td>
+                    <td>{{ new Date(Date.parse(point.bornDate)).toLocaleString() }}</td>
                 </tr>
                 </tbody>
             </table>
@@ -110,10 +110,11 @@
         },
         methods: {
             validateFromButton: function () {
-                if ((this.point.x < -4 && this.point.x > 4) || this.point.y <= -5 && this.point.y >= 3) {
+                if ((this.point.x >= -4 && this.point.x <= 4) && this.point.y > -5 && this.point.y < 3) this.addPoint();
+                else {
                     this.errorTableNotification.message = "Данные введены некорректно";
                     this.errorTableNotification.isVisible = true;
-                } else this.addPoint();
+                }
             },
             validateFromGraph: function () {
                 let position = getMousePosition(document.getElementById("graph"), event);
