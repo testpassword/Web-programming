@@ -1,6 +1,6 @@
 PUT localhost:8088/api/point
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QHRlc3QudGVzdCIsInJvbGVzIjpbIlVTRVIiXSwiaWF0IjoxNTc4NDgxOTc4LCJleHAiOjE1NzkwODY3Nzh9.lEyedsAsthp1z_fbLZrVhFrzitYY4GMujAaUyXE7ym9u0aiKKKkFdovBTeN6Uls_-IAEu2wGcm-f6dqrbqAPYA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QHRlc3QudGVzdCIsInJvbGVzIjpbIlVTRVIiXSwiaWF0IjoxNTc4NTk4MTEyLCJleHAiOjE1NzkyMDI5MTJ9.UTqUnpidr6iFSjdoB_9O-Dph268uYDInYaB6Gt-4km8ogs-Z3aA4cn8H2j3L2qolcBIdOUwgm-PVCmUlji1UvA
 
 {
 	"x": "1",

@@ -4,6 +4,7 @@ import logic.models.*;
 import logic.requests.PointDTO;
 import logic.security.JWTUtil;
 import logic.services.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ import java.util.List;
  * @author Артемий Кульбако
  * @version 1.2
  */
-@RestController @RequestMapping(path = "/api/point")
+@Slf4j @RestController @RequestMapping(path = "/api/point")
 public class PointController {
 
     //TODO валидация
@@ -37,14 +38,18 @@ public class PointController {
     @PutMapping
     private ResponseEntity<String> addPoint(@Valid @RequestBody PointDTO data, HttpServletRequest req) {
         User modifiedUser = userService.findByEmail(jwtUtil.getUsername(jwtUtil.resolveToken(req)));
-        modifiedUser.getPoints().add(new Point(data.getX(), data.getY(), data.getR()));
+        Point p = new Point(data.getX(), data.getY(), data.getR());
+        modifiedUser.getPoints().add(p);
         userService.updateUser(modifiedUser);
+        log.info("Пользователь " + modifiedUser.getEmail() + " добавил точку " + p.toString());
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping
     private ResponseEntity<List<Point>> loadPoints(HttpServletRequest req) {
-        return new ResponseEntity<>(userService.findByEmail(jwtUtil.getUsername(jwtUtil.resolveToken(req))).getPoints(), HttpStatus.OK);
+        User user = userService.findByEmail(jwtUtil.getUsername(jwtUtil.resolveToken(req)));
+        log.info("Пользователь " + user.getEmail() + " загрузил точки");
+        return new ResponseEntity<>(user.getPoints(), HttpStatus.OK);
     }
 
     @DeleteMapping
@@ -52,6 +57,7 @@ public class PointController {
         User modifiedUser = userService.findByEmail(jwtUtil.getUsername(jwtUtil.resolveToken(req)));
         modifiedUser.getPoints().clear();
         userService.updateUser(modifiedUser);
+        log.info("Пользователь " + modifiedUser.getEmail() + " очистил коллекцию точек");
         return new ResponseEntity<>("Все ваши точки удалены", HttpStatus.OK);
     }
 }

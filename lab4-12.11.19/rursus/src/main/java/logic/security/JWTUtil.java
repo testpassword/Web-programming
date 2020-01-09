@@ -3,12 +3,11 @@ package logic.security;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.SignatureAlgorithm;
 import logic.services.UserDetailsServiceImpl;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.*;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
@@ -17,20 +16,23 @@ import java.util.function.Function;
 /**
  * Класс, обсулживающий JsonWebToken-ы.
  * @author Артемий Кульбако
- * @version 1.0
+ * @version 1.1
  */
 @Component
 public class JWTUtil {
 
     private final String KEY = "liquid";
     private static final long TOKEN_VALIDITY = 604800000; //1 неделя
-    @Autowired UserDetailsServiceImpl userDetails;
+    private final UserDetailsServiceImpl userDetails;
+    private final Logger logger;
 
-    @Bean public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    @Autowired public JWTUtil(UserDetailsServiceImpl userDetails, Logger logger) {
+        this.userDetails = userDetails;
+        this.logger = logger;
     }
 
     public String generateToken(String username, List<String> roles) {
+        logger.info("Генерируем токен для " + username);
         Claims claims = Jwts.claims().setSubject(username);
         claims.put("roles", roles);
         Date now = new Date();
@@ -41,7 +43,7 @@ public class JWTUtil {
     public boolean validateToken(String token) {
         Jws<Claims> claims = Jwts.parser().setSigningKey(KEY).parseClaimsJws(token);
         if (claims.getBody().getExpiration().before(new Date())) {
-            System.out.println("Токен невалиден");
+            logger.info("Токен невалиден");
             return false;
         } else return true;
     }
@@ -52,6 +54,7 @@ public class JWTUtil {
     }
 
     public String resolveToken(HttpServletRequest req) {
+        logger.info("Проверяем запрос " + req + " на наличие токена");
         String bearerToken = req.getHeader("Authorization");
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7);

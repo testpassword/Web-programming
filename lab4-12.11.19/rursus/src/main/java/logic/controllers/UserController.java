@@ -4,6 +4,7 @@ import logic.models.User;
 import logic.requests.UserDTO;
 import logic.security.JWTUtil;
 import logic.services.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.security.authentication.*;
@@ -16,7 +17,7 @@ import java.util.*;
  * @author Артемий Кульбако
  * @version 1.2
  */
-@RestController @RequestMapping(path = "/api/user")
+@Slf4j @RestController @RequestMapping(path = "/api/user")
 public class UserController {
 
     private final AuthenticationManager authManager;
@@ -33,6 +34,7 @@ public class UserController {
     private ResponseEntity<String> login(@Valid @RequestBody UserDTO req) {
         String email = req.getEmail();
         String password = req.getPassword();
+        log.info("Авторизация от пользователя " + email);
         User user = userService.findByEmail(email);
         if (user != null) {
             authManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
@@ -45,6 +47,7 @@ public class UserController {
     private ResponseEntity<String> register(@Valid @RequestBody UserDTO req) {
         String email = req.getEmail();
         String password = req.getPassword();
+        log.info("Регистрация от пользователя " + email);
         User user = userService.findByEmail(email);
         if (user != null) return new ResponseEntity<>("Пользователь уже существует", HttpStatus.BAD_REQUEST);
         else {
@@ -57,6 +60,7 @@ public class UserController {
     private ResponseEntity<String> remove(@Valid @RequestBody UserDTO req) {
         String email = req.getEmail();
         String password = req.getPassword();
+        log.info("Удаление пользователя " + email);
         User user = userService.findByEmail(email);
         if (user != null) {
             authManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));

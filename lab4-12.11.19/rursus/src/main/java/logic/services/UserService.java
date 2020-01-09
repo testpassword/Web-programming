@@ -2,6 +2,7 @@ package logic.services;
 
 import logic.models.User;
 import logic.repos.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.*;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -12,9 +13,9 @@ import org.springframework.stereotype.Service;
  * Сервисный слой, управляющий сущностью {@code User}.
  * @see User
  * @author Артемий Кульбако
- * @version 1.0
+ * @version 1.1
  */
-@Service
+@Service @Slf4j
 public class UserService {
 
     //TODO: валидация запросов
@@ -30,28 +31,28 @@ public class UserService {
     }
 
     public User findByEmail(String email) {
-        System.out.println("Получаем пользователя " + email);
+        log.info("Получаем пользователя " + email);
         return userRepo.getByEmail(email);
     }
 
     public void register(String email, String password) {
-        System.out.println("Создаём пользователя " + email);
+        log.info("Создаём пользователя " + email);
         User newbie = new User(email, encoder.encode(password));
         userRepo.save(newbie);
         try {
-            System.out.println("Отправляем почту");
+            log.info("Отправляем почту");
             SimpleMailMessage msg = new SimpleMailMessage();
             msg.setTo(email);
             msg.setSubject("Успешная регистрация");
             msg.setText("Вы зарегистрировались на сайте web4. Ваш пароль: " + password);
             postman.send(msg);
         } catch (MailSendException e) {
-            System.out.println("Не удалось отправить email; время попытки истекло");
+            log.error("Не удалось отправить email; время попытки истекло");
         }
     }
 
     public void remove(User victim) {
-        System.out.println("Удаляем пользователя " + victim.getEmail());
+        log.info("Удаляем пользователя " + victim.getEmail());
         userRepo.removeByEmailAndPassword(victim.getEmail(), victim.getPassword());
         try {
             SimpleMailMessage msg = new SimpleMailMessage();
@@ -60,12 +61,12 @@ public class UserService {
             msg.setText("Вы удалили аккаунт " + victim.getEmail() + " на сайте web4.");
             postman.send(msg);
         } catch (MailSendException e) {
-            System.out.println("Не удалось отправить email; время попытки истекло");
+            log.error("Не удалось отправить email; время попытки истекло");
         }
     }
 
     public void updateUser(User updatable) {
-        System.out.println("Применяем изменения пользователя " + updatable.getEmail());
+        log.info("Применяем изменения пользователя " + updatable.getEmail());
         userRepo.save(updatable);
     }
 }

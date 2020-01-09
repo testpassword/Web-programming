@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * Представляет сущность точки для бд.
  * @author Артемий Кульбако
- * @version 1.1
+ * @version 1.2
  */
 @Data @Embeddable @Table(name = "points")
 public class Point implements Serializable {
@@ -33,8 +33,8 @@ public class Point implements Serializable {
                 (x >= 0 && y <= 0 && x * x + y * y <= Math.pow(r, 2));
     }
 
-    @Override
-    public String toString() {
+    @Deprecated
+    public String toHtmlMarkup() {
         return "<tr><td>" + x + "</td>" +
                 "<td>" + y + "</td>" +
                 "<td>" + r + "</td>" +
