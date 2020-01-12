@@ -56,7 +56,7 @@
                     }).then(response => {
                         if (response.status === 202) {
                             localStorage.setItem("jwt", response.data);
-                            this.$router.push({path: "/app"});
+                            this.$router.push({name: "app-page"});
                         }
                     }).catch(error => this.axiosErrorsHandler(error));
                 }

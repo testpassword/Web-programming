@@ -193,7 +193,7 @@
                 });
             },
             logout: function () {
-                this.$router.push({path: "/login"}, () => localStorage.clear());
+                this.$router.push({name: "auth-page"}, () => localStorage.clear());
             }
         },
         mounted: function () {

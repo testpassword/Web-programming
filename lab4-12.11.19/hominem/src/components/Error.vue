@@ -1,16 +1,18 @@
 <template>
     <div id="content">
-        <h1 id="404">404</h1>
-        <h2>Ничего не найдено</h2>
-        <p>Страница, которую вы запрашиваете, отсутствует, проверьте url-адрес.<br/>
-            <router-link to="/login" class="illuminated">Вернуться на домашную страницу</router-link>
-        </p>
+        <h1>{{ errorCode }}</h1>
+        <h2>{{ errorMessage }}</h2>
+        <router-link to="/login" class="illuminated">Вернуться на домашную страницу</router-link>
     </div>
 </template>
 
 <script>
     export default {
-        name: "NotFoundError"
+        name: "NotFoundError",
+        props: {
+            errorCode: String,
+            errorMessage: String
+        }
     }
 </script>
 
