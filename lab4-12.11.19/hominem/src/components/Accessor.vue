@@ -14,6 +14,7 @@
             <div>
                 <CheckButton color="blue" label="Зарегистрироваться" @click.native="register"/>
                 <CheckButton color="red" label="Войти" @click.native="login"/>
+                <CheckButton color="yellow" label="Удалить" @click.native="remove"/>
             </div>
         </div>
         <hr/>
@@ -54,11 +55,9 @@
                         email: this.email,
                         password: this.password
                     }).then(response => {
-                        if (response.status === 202) {
-                            localStorage.setItem("jwt", response.data);
-                            this.$router.push({name: "app-page"});
-                        }
-                    }).catch(error => this.axiosErrorsHandler(error));
+                        localStorage.setItem("jwt", response.data);
+                        this.$router.push({name: "app-page"});
+                    }).catch(error => this.defaultAxiosErrorHandler(error));
                 }
             },
             register: function () {
@@ -67,16 +66,26 @@
                         email: this.email,
                         password: this.password
                     }).then((response) => {
-                        if (response.status === 201) {
-                            this.notificationParams.message = response.data;
-                            this.notificationParams.isError = false;
-                            this.notificationParams.isVisible = true;
-                            setTimeout(this.login, 1000);
-                        }
-                    }).catch(error => this.axiosErrorsHandler(error));
+                        this.notificationParams.message = response.data;
+                        this.notificationParams.isError = false;
+                        this.notificationParams.isVisible = true;
+                        setTimeout(this.login, 1000);
+                    }).catch(error => this.defaultAxiosErrorHandler(error));
                 }
             },
-            axiosErrorsHandler: function (error) {
+            remove: function () {
+                if (this.validateForm()) {
+                    this.$axios.post("user/del", {
+                        email: this.email,
+                        password: this.password
+                    }).then((response) => {
+                        this.notificationParams.message = response.data;
+                        this.notificationParams.isError = false;
+                        this.notificationParams.isVisible = true;
+                    }).catch(error => this.defaultAxiosErrorHandler(error))
+                }
+            },
+            defaultAxiosErrorHandler: function (error) {
                 this.notificationParams.message = error.response.data;
                 this.notificationParams.isVisible = true;
                 this.notificationParams.isError = true;

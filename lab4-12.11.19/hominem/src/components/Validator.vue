@@ -1,6 +1,6 @@
 <template>
     <div id="content">
-        <Notification message="Валидация введёных значений" :is-error="false" :is-hidden="false"/>
+        <Notification message="Валидация введёных значений" :is-error="false" :is-visible="true"/>
         <hr/>
         <div id="wrapper">
             <div id="controlContainer">
@@ -151,6 +151,7 @@
                 }).then(response => {
                     this.points = response.data;
                     this.redrawGraph();
+                    this.errorTableNotification.isVisible = false;
                 }).catch(error => {
                     this.errorTableNotification.message = error.response.statusText;
                     this.errorTableNotification.isVisible = true;

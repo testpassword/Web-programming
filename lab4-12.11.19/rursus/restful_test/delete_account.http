@@ -1,0 +1,9 @@
+POST localhost:8088/api/user/del
+Content-Type: application/json
+
+{
+  "email": "test@test.test",
+  "password": "kek"
+}
+
+###

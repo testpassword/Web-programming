@@ -62,8 +62,8 @@ export default {
         width: 75%;
         transform: translate(-50%, 0);
         background-color: ghostwhite;
-        min-height: 1152px; /*минимальное разрешение макета*/
-        min-width: 648px;
+        min-height: 1280px; /*минимальное разрешение макета*/
+        min-width: 720px;
     }
 
     a {

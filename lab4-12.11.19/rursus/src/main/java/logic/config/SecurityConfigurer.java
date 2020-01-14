@@ -12,7 +12,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 /**
  * Отвечает за доступ к различным REST-контроллерам.
  * @author Артемий Кульбако
- * @version 1.0
+ * @version 1.1
  */
 @Configuration
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
@@ -29,6 +29,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
         http.httpBasic().disable().csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeRequests()
                 .antMatchers("/api/user").permitAll()
+                .antMatchers("/api/user/*").permitAll()
                 .anyRequest().authenticated()
                 .and().apply(new JWTConfigurer(jwtUtil));
     }

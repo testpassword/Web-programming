@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * @version 1.0
  */
 @Component
-public class ApplicationConfigurer {
+public class ApplicationBeansProvider {
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {

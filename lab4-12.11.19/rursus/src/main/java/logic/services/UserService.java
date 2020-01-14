@@ -8,12 +8,13 @@ import org.springframework.mail.*;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Сервисный слой, управляющий сущностью {@code User}.
  * @see User
  * @author Артемий Кульбако
- * @version 1.1
+ * @version 1.2
  */
 @Service @Slf4j
 public class UserService {
@@ -30,11 +31,13 @@ public class UserService {
         this.encoder = encoder;
     }
 
+    @Transactional
     public User findByEmail(String email) {
         log.info("Получаем пользователя " + email);
         return userRepo.getByEmail(email);
     }
 
+    @Transactional
     public void register(String email, String password) {
         log.info("Создаём пользователя " + email);
         User newbie = new User(email, encoder.encode(password));
@@ -51,9 +54,10 @@ public class UserService {
         }
     }
 
+    @Transactional
     public void remove(User victim) {
         log.info("Удаляем пользователя " + victim.getEmail());
-        userRepo.removeByEmailAndPassword(victim.getEmail(), victim.getPassword());
+        userRepo.deleteByEmail(victim.getEmail());
         try {
             SimpleMailMessage msg = new SimpleMailMessage();
             msg.setTo(victim.getEmail());

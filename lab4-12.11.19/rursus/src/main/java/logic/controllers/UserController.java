@@ -56,14 +56,13 @@ public class UserController {
         }
     }
 
-    @DeleteMapping
+    @PostMapping(path = "/del")
     private ResponseEntity<String> remove(@Valid @RequestBody UserDTO req) {
         String email = req.getEmail();
         String password = req.getPassword();
         log.info("Удаление пользователя " + email);
         User user = userService.findByEmail(email);
         if (user != null) {
-            authManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
             userService.remove(user);
             return new ResponseEntity<>("Вы удалили свой аккаунт", HttpStatus.OK);
         } else return new ResponseEntity<>("Указанного сочетания почты и пароля не существует", HttpStatus.NOT_FOUND);

@@ -8,13 +8,13 @@ import org.springframework.stereotype.Repository;
  * CRUD-репозиторий для {@code User}.
  * @see User
  * @author Артемий Кульбако
- * @version 1.0
+ * @version 1.1
  */
 @Repository public interface UserRepository extends CrudRepository<User, String> {
 
     boolean existsByEmail(String email);
 
-    long removeByEmailAndPassword(String email, String password);
+    long deleteByEmail(String email);
 
     User getByEmail(String email);
 }
