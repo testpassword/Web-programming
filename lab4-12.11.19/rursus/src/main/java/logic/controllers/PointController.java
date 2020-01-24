@@ -19,8 +19,7 @@ import java.util.List;
  */
 @Slf4j @RestController @RequestMapping(path = "/api/point")
 public class PointController {
-
-    //TODO валидация
+    
     private final UserService userService;
     private final JWTUtil jwtUtil;
 
